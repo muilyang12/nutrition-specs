@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { useFoodCategoriesStore } from "../stores/useFoodCategories";
 import { foodApi } from "../apis/food";
 
 export default function FoodCategorySelect() {
   const [, setSearchParams] = useSearchParams();
 
-  const [foodCategories, setFoodCategories] = useState([]);
+  const { foodCategories, setFoodCategories } = useFoodCategoriesStore();
+
   useEffect(() => {
     foodApi.getFoodCategories().then(({ categories }) => {
       setFoodCategories(
