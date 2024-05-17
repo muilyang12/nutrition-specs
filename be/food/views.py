@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from .models import FoodCategory, Product, Nutrition
 
 
-def food_category():
+def food_category(request):
     categories = FoodCategory.objects.all().values()
 
     return JsonResponse({"categories": list(categories)})
