@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from .models import FoodCategory, Product, Nutrition
 
-# Create your views here.
+
+def food_category():
+    categories = FoodCategory.objects.all().values()
+
+    return JsonResponse({"categories": list(categories)})
+
+
+def product(request):
+    food_category = request.GET.get("food-category")
+    products = list(Product.objects.filter(food_category=food_category).values())
+
+    return JsonResponse({"products": products})
+
+
+def nutrition(request):
+    product_ids = request.GET.getlist("product")
+    nutrition_data = list(Nutrition.objects.filter(product__in=product_ids).values())
+
+    return JsonResponse({"nutritionData": nutrition_data})
