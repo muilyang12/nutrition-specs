@@ -1,3 +1,6 @@
 # BE
 /be/**/*.pyc
 /be/db.sqlite3
+
+#FE
+/fe/node_modules/**
