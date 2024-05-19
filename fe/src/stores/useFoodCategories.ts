@@ -1,6 +1,17 @@
 import { create } from "zustand";
+import { FoodCategoryRs } from "../apis/food.define";
 
-export const useFoodCategoriesStore = create((set) => ({
+interface FoodCategories extends FoodCategoryRs {
+  label: string;
+}
+
+interface FoodCategoriesStore {
+  foodCategories: FoodCategories[];
+  setFoodCategories: (newFoodCategories: FoodCategories[]) => void;
+}
+
+export const useFoodCategoriesStore = create<FoodCategoriesStore>((set) => ({
   foodCategories: [],
-  setFoodCategories: (newFoodCategories) => set({ foodCategories: newFoodCategories }),
+  setFoodCategories: (newFoodCategories: FoodCategories[]) =>
+    set({ foodCategories: newFoodCategories }),
 }));

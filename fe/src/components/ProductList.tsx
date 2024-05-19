@@ -6,13 +6,14 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { useFoodCategoriesStore } from "../stores/useFoodCategories";
 import ProductDetail from "./ProductDetail";
 import { foodApi } from "../apis/food";
+import { ProductRs } from "../apis/food.define";
 
 export default function ProductList() {
   const [searchParams] = useSearchParams();
 
   const { foodCategories } = useFoodCategoriesStore();
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductRs[]>([]);
 
   useEffect(() => {
     if (searchParams.size === 0 || foodCategories.length === 0) return;
@@ -25,7 +26,7 @@ export default function ProductList() {
 
     if (!categoryId) return;
 
-    foodApi.getProducts(categoryId).then((data) => setProducts(data.products));
+    foodApi.getProducts(categoryId).then((data) => setProducts(data));
   }, [searchParams, foodCategories]);
 
   if (searchParams.size === 0 || foodCategories.length === 0)
