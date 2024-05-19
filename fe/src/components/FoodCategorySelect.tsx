@@ -19,7 +19,11 @@ export default function FoodCategorySelect() {
 
   const handleChangeValue = (_event: SyntheticEvent, value: FoodCategoryRs | null) => {
     if (value) setSearchParams({ "food-category": value.category_name });
-    else setSearchParams((prev) => prev.delete("food-category"));
+    else
+      setSearchParams((prev) => {
+        prev.delete("food-category");
+        return prev;
+      });
   };
 
   return (
