@@ -4,6 +4,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { useFoodCategoriesStore } from "../stores/useFoodCategories";
+import ProductDetail from "./ProductDetail";
 import { foodApi } from "../apis/food";
 
 export default function ProductList() {
@@ -40,7 +41,9 @@ export default function ProductList() {
             >
               {`${product.brand_name} - ${product.product_name}`}
             </AccordionSummary>
-            <AccordionDetails>{`${product.brand_name} - ${product.product_name}`}</AccordionDetails>
+            <AccordionDetails>
+              <ProductDetail productId={product.id} />
+            </AccordionDetails>
           </Accordion>
         ))}
       </>
