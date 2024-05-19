@@ -17,6 +17,6 @@ def product(request):
 
 def nutrition(request):
     product_ids = request.GET.getlist("product")
-    nutrition_data = list(Nutrition.objects.filter(product__in=product_ids).values())
+    nutritions = list(Nutrition.objects.filter(product__in=product_ids).values())
 
-    return JsonResponse({"nutritionData": nutrition_data})
+    return JsonResponse({"nutritions": nutritions})
