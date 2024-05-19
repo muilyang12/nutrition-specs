@@ -1,7 +1,7 @@
 from django.db import models
+from django.db.models import Index
 
 
-# Create your models here.
 class FoodCategory(models.Model):
     category_name = models.CharField(max_length=100, unique=True)
 
@@ -16,17 +16,27 @@ class Product(models.Model):
     brand_name = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
 
+    class Meta:
+        indexes = [
+            Index(fields=["food_category"]),
+        ]
+
     def __str__(self):
         return f"{self.brand_name} - {self.product_name}"
 
 
 class Nutrition(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
     serving_size = models.FloatField()
     calory = models.FloatField()
     carbohydrate = models.FloatField()
     protein = models.FloatField()
     fat = models.FloatField()
+
+    class Meta:
+        indexes = [
+            Index(fields=["product"]),
+        ]
 
     def __str__(self):
         return f"{self.product.product_name} - {self.calory} kcal"
