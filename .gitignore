@@ -4,3 +4,4 @@
 
 #FE
 /fe/node_modules/**
+/fe/dist/**
