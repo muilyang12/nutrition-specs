@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ["*"] if isProd else []
 # Application definition
 
 INSTALLED_APPS = [
-    "polls",
     "food",
     "django.contrib.admin",
     "django.contrib.auth",
