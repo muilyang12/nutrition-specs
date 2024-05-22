@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { foodApi } from "../apis/food";
-import { NutritionRs } from "../apis/food.define";
+import { foodApi } from "@apis/food";
+import { NutritionRs } from "@apis/food.define";
 
 interface Props {
   productId: number;

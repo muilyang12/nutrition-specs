@@ -4,4 +4,6 @@
 
 #FE
 /fe/node_modules/**
+/fe/.next/**
 /fe/dist/**
+/fe/next-env.d.ts

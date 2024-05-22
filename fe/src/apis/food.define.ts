@@ -1,6 +1,7 @@
 export interface FoodCategoryRs {
   id: number;
   category_name: string;
+  category_key: string;
 }
 
 export interface ProductRs {

@@ -1,13 +1,18 @@
+"use client";
+
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, SyntheticEvent } from "react";
-import { useSearchParams } from "react-router-dom";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { useFoodCategoriesStore } from "../stores/useFoodCategories";
-import { foodApi } from "../apis/food";
-import { FoodCategoryRs } from "../apis/food.define";
+import { useFoodCategoriesStore } from "@stores/useFoodCategories";
+import { FoodCategoryPageParams } from "@defines/params.define";
+import { foodApi } from "@apis/food";
+import { FoodCategoryRs } from "@apis/food.define";
 
 export default function FoodCategorySelect() {
-  const [, setSearchParams] = useSearchParams();
+  const router = useRouter();
+  const params = useParams<FoodCategoryPageParams>();
+  const selectedFoodCategoryKey = params.foodCategory;
 
   const { foodCategories, setFoodCategories } = useFoodCategoriesStore();
 
@@ -18,12 +23,7 @@ export default function FoodCategorySelect() {
   }, []);
 
   const handleChangeValue = (_event: SyntheticEvent, value: FoodCategoryRs | null) => {
-    if (value) setSearchParams({ "food-category": value.category_name });
-    else
-      setSearchParams((prev) => {
-        prev.delete("food-category");
-        return prev;
-      });
+    if (value) router.push("/" + value.category_key);
   };
 
   return (
@@ -34,6 +34,7 @@ export default function FoodCategorySelect() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="음식 카테고리" />}
       onChange={handleChangeValue}
+      autoHighlight
     />
   );
 }
