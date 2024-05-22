@@ -24,12 +24,12 @@ SECRET_KEY = "django-insecure-k42pd-)0q%%8&crxov&=hd@1j@$@bvzj$alb2mphs98u)q&-se
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-isProd = os.getenv('IS_PROD', 'False') == 'True'
-print('Running production mode' if isProd else 'Running development mode')
+isProd = os.getenv("IS_PROD", "False") == "True"
+print("Running production mode" if isProd else "Running development mode")
 
 DEBUG = False if isProd else True
 
-ALLOWED_HOSTS = ["localhost"] if isProd else []
+ALLOWED_HOSTS = ["*"] if isProd else []
 
 # Application definition
 
@@ -64,11 +64,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:4173",
-    "http://localhost"
-]
+CORS_ALLOWED_ORIGINS = ["http://www.whatgodsays.net"] if isProd else ["*"]
+
+CORS_ALLOW_ALL_ORIGINS = False if isProd else True
 
 ROOT_URLCONF = "config.urls"
 

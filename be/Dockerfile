@@ -11,6 +11,6 @@ COPY . .
 ENV IS_PROD=True
 ENV PYTHONUNBUFFERED=1
 
-EXPOSE 8000
+EXPOSE 80
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "config.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "config.wsgi:application"]
