@@ -4,9 +4,10 @@ from django.db.models import Index
 
 class FoodCategory(models.Model):
     category_name = models.CharField(max_length=100, unique=True)
+    category_key = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return self.category_name
+        return f"{self.category_key} - {self.category_name}"
 
 
 class Product(models.Model):
