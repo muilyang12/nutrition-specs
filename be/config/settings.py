@@ -63,7 +63,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://www.whatgodsays.net"] if isProd else []
+CORS_ALLOWED_ORIGINS = ["https://www.whatgodsays.net"] if isProd else []
 
 CORS_ALLOW_ALL_ORIGINS = False if isProd else True
 
