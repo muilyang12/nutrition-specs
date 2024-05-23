@@ -1,10 +1,9 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, SyntheticEvent } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { useFoodCategoriesStore } from "@stores/useFoodCategories";
 import { FoodCategoryPageParams } from "@defines/params.define";
 import { foodApi } from "@apis/food";
 import { FoodCategoryRs } from "@apis/food.define";
@@ -14,11 +13,11 @@ export default function FoodCategorySelect() {
   const params = useParams<FoodCategoryPageParams>();
   const selectedFoodCategoryKey = params.foodCategory;
 
-  const { foodCategories, setFoodCategories } = useFoodCategoriesStore();
+  const [options, setOptions] = useState<FoodCategoryRs[]>([]);
 
   useEffect(() => {
     foodApi.getFoodCategories().then((result) => {
-      setFoodCategories(result.map((category) => ({ ...category, label: category.category_name })));
+      setOptions(result.map((category) => ({ ...category })));
     });
   }, []);
 
@@ -30,10 +29,11 @@ export default function FoodCategorySelect() {
     <Autocomplete<FoodCategoryRs>
       disablePortal
       id="food-category-select"
-      options={foodCategories}
-      sx={{ width: 300 }}
+      options={options}
+      getOptionLabel={(option) => option.category_name}
       renderInput={(params) => <TextField {...params} label="음식 카테고리" />}
       onChange={handleChangeValue}
+      sx={{ width: 300 }}
       autoHighlight
     />
   );
