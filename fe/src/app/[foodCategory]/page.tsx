@@ -10,7 +10,7 @@ interface PathParams {
 export default async function FoodCategoryPage({ params }: PathParams) {
   return (
     <>
-      <FoodCategoryView />
+      <FoodCategoryView selectedFoodCategoryKey={params.foodCategory} />
     </>
   );
 }

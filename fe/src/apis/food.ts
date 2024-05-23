@@ -4,8 +4,11 @@ import { FoodCategoryRs, NutritionRs, ProductRs } from "./food.define";
 export const foodApi = {
   getFoodCategories: async () =>
     (await axiosInstance.get<FoodCategoryRs[]>("food/food-category/")).data,
-  getProducts: async (foodCategoryId: number) =>
-    (await axiosInstance.get<ProductRs[]>(`food/product/?food-category=${foodCategoryId}`)).data,
-  getNutritions: async (productId: number) =>
-    (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?product=${productId}`)).data,
+  getProducts: async (foodCategoryKey: string) =>
+    (await axiosInstance.get<ProductRs[]>(`food/product/?category-key=${foodCategoryKey}`)).data,
+  getNutritions: async (productIds: number[]) => {
+    const queries = productIds.map((id) => `product=${id}`).join("&");
+
+    return (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?${queries}`)).data;
+  },
 };

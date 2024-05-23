@@ -1,44 +1,30 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { useFoodCategoriesStore } from "@stores/useFoodCategories";
-import { FoodCategoryPageParams } from "@defines/params.define";
 import ProductDetail from "./ProductDetail";
-import { ProductRs } from "@apis/food.define";
+import { NutritionRs, ProductRs } from "@apis/food.define";
 import { foodApi } from "@apis/food";
 
-export default function ProductList() {
-  const params = useParams<FoodCategoryPageParams>();
-  const selectedFoodCategoryKey = params.foodCategory;
+interface Props {
+  selectedFoodCategoryKey?: string;
+}
 
-  const { foodCategories } = useFoodCategoriesStore();
+export default async function ProductList(props: Props) {
+  const { selectedFoodCategoryKey } = props;
 
-  const [products, setProducts] = useState<ProductRs[]>([]);
+  if (!selectedFoodCategoryKey) return <>음식 카테고리를 선택해주세요.</>;
 
-  useEffect(() => {
-    if (!selectedFoodCategoryKey || foodCategories.length === 0) return;
-
-    setProducts([]);
-
-    const categoryId = foodCategories.find(
-      (category) => category.category_key === selectedFoodCategoryKey
-    )?.id;
-
-    if (!categoryId) return;
-
-    foodApi.getProducts(categoryId).then((data) => setProducts(data));
-  }, [params, foodCategories]);
-
-  if (!selectedFoodCategoryKey || foodCategories.length === 0)
-    return <>음식 카테고리를 선택해주세요.</>;
+  const products = await foodApi.getProducts(selectedFoodCategoryKey);
+  const productIds = products.map((product) => product.id);
+  const nutritions = await foodApi.getNutritions(productIds);
+  const productsAndNutritions: [ProductRs, NutritionRs][] = products.map((product, index) => [
+    product,
+    nutritions[index],
+  ]);
 
   return (
     <>
-      {products.map((product) => (
+      {productsAndNutritions.map(([product, nutrition]) => (
         <Accordion key={`${product.brand_name} - ${product.product_name}`}>
           <AccordionSummary
             aria-controls="panel1-content"
@@ -47,7 +33,7 @@ export default function ProductList() {
             {`${product.brand_name} - ${product.product_name}`}
           </AccordionSummary>
           <AccordionDetails>
-            <ProductDetail productId={product.id} />
+            <ProductDetail nutrition={nutrition} />
           </AccordionDetails>
         </Accordion>
       ))}

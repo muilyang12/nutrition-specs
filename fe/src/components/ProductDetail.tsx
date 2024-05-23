@@ -1,25 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { foodApi } from "@apis/food";
 import { NutritionRs } from "@apis/food.define";
 
 interface Props {
-  productId: number;
+  nutrition: NutritionRs;
 }
 
 export default function ProductDetail(props: Props) {
-  const { productId } = props;
-
-  const [nutrition, setNutrition] = useState<NutritionRs>();
-
-  useEffect(() => {
-    if (!productId) return;
-
-    foodApi.getNutritions(productId).then((data) => setNutrition(data[0]));
-  }, [productId]);
-
-  if (!nutrition) return <></>;
+  const { nutrition } = props;
 
   return (
     <>
