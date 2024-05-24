@@ -1,47 +1,46 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-
+import requests
 import re
 
+from bs4 import BeautifulSoup
 
-def get_product_data(driver, searchString: str):
+from . import constants
+
+
+def get_product_data(searchString: str, headers):
     product_data = []
 
-    driver.get(
-        f"https://www.coupang.com/np/search?component=&q={searchString}&channel=user"
-    )
+    url = f"https://www.coupang.com/np/search?q={searchString}"
 
-    wait = WebDriverWait(driver, 10)
+    response = requests.get(url, headers=headers)
 
-    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".search-product")))
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, "html.parser")
 
-    products = driver.find_elements(By.CSS_SELECTOR, ".search-product")
+        products = soup.select(".search-product")
 
-    for product in products:
-        try:
-            a_tag = product.find_element(By.TAG_NAME, "a")
-            name_tag = product.find_element(By.CSS_SELECTOR, "div.name")
-            rating_tag = product.find_element(By.CSS_SELECTOR, "em.rating")
-            rating_count_tag = product.find_element(
-                By.CSS_SELECTOR, "span.rating-total-count"
-            )
+        for product in products:
+            a_tag = product.select_one("a")
+            name_tag = product.select_one("div.name")
+            rating_tag = product.select_one("em.rating")
+            rating_count_tag = product.select_one("span.rating-total-count")
 
-            href = a_tag.get_attribute("href")
-            url = href.split("?")[0]
+            if a_tag:
+                href = a_tag.get("href")
+                url = (constants.COUPANG_DOMAIN + href.split("?")[0]) if href else None
+            else:
+                url = None
 
             product_data.append(
                 {
                     "url": url,
-                    "name": name_tag.text,
-                    "rating": rating_tag.text,
-                    "rating_count": int(
-                        re.search(r"\d+", rating_count_tag.text).group()
+                    "name": name_tag.text.strip() if name_tag else None,
+                    "rating": rating_tag.text.strip() if rating_tag else None,
+                    "rating_count": (
+                        int(re.search(r"\d+", rating_count_tag.text.strip()).group())
+                        if rating_count_tag
+                        else None
                     ),
                 }
             )
-
-        except:
-            continue
 
     return product_data
