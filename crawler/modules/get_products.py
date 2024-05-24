@@ -24,11 +24,21 @@ def get_products(searchString: str, headers):
             rating_tag = product.select_one("em.rating")
             rating_count_tag = product.select_one("span.rating-total-count")
 
+            url = None
+            productId = None
+            itemId = None
+            vendorItemId = None
+
             if a_tag:
                 href = a_tag.get("href")
-                url = (constants.COUPANG_DOMAIN + href.split("?")[0]) if href else None
-            else:
-                url = None
+                url = (constants.COUPANG_DOMAIN + href) if href else None
+
+                pattern = re.compile(r"products/(\d+)\?itemId=(\d+)&vendorItemId=(\d+)")
+                match = pattern.search(url)
+                if match:
+                    productId = match.group(1)
+                    itemId = match.group(2)
+                    vendorItemId = match.group(3)
 
             product_data.append(
                 {
@@ -40,6 +50,9 @@ def get_products(searchString: str, headers):
                         if rating_count_tag
                         else None
                     ),
+                    "productId": productId,
+                    "itemId": itemId,
+                    "vendorItemId": vendorItemId,
                 }
             )
 
