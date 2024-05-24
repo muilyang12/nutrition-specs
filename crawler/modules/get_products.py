@@ -1,22 +1,22 @@
-import requests
 import re
 
 from bs4 import BeautifulSoup
 
 from . import constants
+from .coupang_get_with_headers import coupang_get_with_headers
 
 
-def get_products(searchString: str, headers):
+def get_products(searchString: str):
     product_data = []
 
-    url = f"https://www.coupang.com/np/search?q={searchString}"
-
-    response = requests.get(url, headers=headers)
+    response = coupang_get_with_headers(
+        f"https://www.coupang.com/np/search?q={searchString}"
+    )
 
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, "html.parser")
 
-        products = soup.select(".search-product")
+        products = soup.select(".search-product")[:3]
 
         for product in products:
             a_tag = product.select_one("a")

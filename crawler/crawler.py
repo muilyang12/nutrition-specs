@@ -1,13 +1,12 @@
 import os
-import requests
 import json
 
 from modules import (
     get_products,
-    constants,
+    coupang_get_with_headers,
 )
 
-products = get_products(searchString="두유", headers=constants.COUPANG_HEADERS)
+products = get_products(searchString="두유")
 
 for product in products:
     name, productId, itemId, vendorItemId = (
@@ -17,9 +16,8 @@ for product in products:
         product["vendorItemId"],
     )
 
-    response = requests.get(
-        f"https://www.coupang.com/vp/products/{productId}/items/{itemId}/vendoritems/{vendorItemId}",
-        headers=constants.COUPANG_HEADERS,
+    response = coupang_get_with_headers(
+        f"https://www.coupang.com/vp/products/{productId}/items/{itemId}/vendoritems/{vendorItemId}"
     )
     data = response.json()
 
