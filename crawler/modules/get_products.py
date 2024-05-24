@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from . import constants
 
 
-def get_product_data(searchString: str, headers):
+def get_products(searchString: str, headers):
     product_data = []
 
     url = f"https://www.coupang.com/np/search?q={searchString}"
