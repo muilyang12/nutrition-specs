@@ -4,14 +4,10 @@ import json
 
 from modules import (
     get_products,
-    extract_headers,
     constants,
 )
 
-
-headers = extract_headers(constants.CURL_COMMAND)
-
-products = get_products(searchString="두유", headers=headers)
+products = get_products(searchString="두유", headers=constants.COUPANG_HEADERS)
 
 for product in products:
     name, productId, itemId, vendorItemId = (
@@ -23,7 +19,7 @@ for product in products:
 
     response = requests.get(
         f"https://www.coupang.com/vp/products/{productId}/items/{itemId}/vendoritems/{vendorItemId}",
-        headers=headers,
+        headers=constants.COUPANG_HEADERS,
     )
     data = response.json()
 

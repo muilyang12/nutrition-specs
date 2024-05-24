@@ -1,3 +1,5 @@
+from . import extract_headers
+
 COUPANG_DOMAIN = "https://www.coupang.com"
 
 CURL_COMMAND = """
@@ -18,3 +20,5 @@ curl "https://www.coupang.com/" ^
   -H "upgrade-insecure-requests: 1" ^
   -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
 """
+
+COUPANG_HEADERS = extract_headers(CURL_COMMAND)
