@@ -3,3 +3,4 @@ from .get_products import get_products
 from .coupang_get_with_headers import coupang_get_with_headers
 from .save_product_details import save_product_details
 from .find_text_position_with_tesseract import find_text_position_with_tesseract
+from .save_nutrition_facts import save_nutrition_facts
