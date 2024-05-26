@@ -40,15 +40,12 @@ def find_text_position_with_tesseract(image_url: str, search_texts: List[str]):
                     top_max = max(int(positions[0][3]), int(positions[-1][3]))
 
                     current_text_positions.append(
-                        [
-                            searched_text,
-                            {
-                                "left": left_min,
-                                "bottom": bottom_min,
-                                "right": right_max,
-                                "top": top_max,
-                            },
-                        ]
+                        {
+                            "left": left_min,
+                            "bottom": bottom_min,
+                            "right": right_max,
+                            "top": top_max,
+                        },
                     )
 
         text_positions[search_text] = current_text_positions
