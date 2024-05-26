@@ -2,6 +2,7 @@ from modules import (
     get_products,
     get_product_details,
     save_text_data,
+    save_coupang_content_images,
 )
 
 products = get_products(searchString="두유")
@@ -16,3 +17,4 @@ for product in products:
         data={"details": details},
         type="json",
     )
+    save_coupang_content_images(save_dir=f"./data/{product_name}/", details=details)
