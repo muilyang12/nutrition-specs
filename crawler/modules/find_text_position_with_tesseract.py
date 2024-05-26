@@ -9,8 +9,8 @@ from . import constants
 pytesseract.pytesseract.tesseract_cmd = constants.GOOGLE_TESSERACT_LOCATION
 
 
-def find_text_position_with_tesseract(image_url: str, search_texts: List[str]):
-    image = Image.open(image_url)
+def find_text_position_with_tesseract(image_path: str, search_texts: List[str]):
+    image = Image.open(image_path)
     alphabet_boxes = pytesseract.image_to_boxes(image, lang="kor")
     alphabet_lines = alphabet_boxes.splitlines()
 
