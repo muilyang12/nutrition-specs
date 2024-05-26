@@ -3,6 +3,7 @@ from modules import (
     get_product_details,
     save_text_data,
     save_coupang_content_images,
+    save_nutrition_facts,
 )
 
 products = get_products(searchString="두유")
