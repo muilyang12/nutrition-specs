@@ -1,5 +1,6 @@
 import os
 
+from . import constants
 from .find_text_position_with_tesseract import find_text_position_with_tesseract
 from .crop_image import crop_image
 
@@ -8,7 +9,7 @@ def save_nutrition_facts(dir_path):
     image_extensions = ["jpg", "jpeg", "png", "gif", "bmp"]
 
     for file_name in os.listdir(dir_path):
-        if not file_name.split(".")[-1] in image_extensions:
+        if not file_name.split(".")[-1] in constants.IMAGE_EXTENSIONS:
             continue
 
         image_path = os.path.join(dir_path, file_name)
