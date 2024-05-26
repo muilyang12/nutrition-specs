@@ -22,8 +22,6 @@ def save_coupang_content_images(save_dir: str, details):
                 with open(image_path, "wb") as file:
                     file.write(response.content)
 
-                print(image_path)
-
         else:
             file_path = os.path.join(save_dir, "weird_content_type.txt")
 
