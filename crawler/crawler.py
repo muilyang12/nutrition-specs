@@ -1,9 +1,18 @@
 from modules import (
     get_products,
-    save_product_details,
+    get_product_details,
+    save_text_data,
 )
 
 products = get_products(searchString="두유")
 
 for product in products:
-    save_product_details(product=product)
+    product_name = product["name"]
+
+    details = get_product_details(product=product)
+    save_text_data(
+        save_dir=f"./data/{product_name}/",
+        file_name="details.json",
+        data={"details": details},
+        type="json",
+    )
