@@ -4,5 +4,4 @@ from .coupang_get_with_headers import coupang_get_with_headers
 from .get_product_details import get_product_details
 from .save_text_data import save_text_data
 from .save_coupang_content_images import save_coupang_content_images
-from .find_text_position_with_tesseract import find_text_position_with_tesseract
 from .save_nutrition_facts import save_nutrition_facts

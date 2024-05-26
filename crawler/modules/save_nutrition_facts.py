@@ -1,21 +1,39 @@
 import os
 
-from PIL import Image
+from .find_text_position_with_tesseract import find_text_position_with_tesseract
+from .crop_image import crop_image
 
 
-# top의 경우 위에서부터의 위치, bottom의 경우 아래에서부터 위치를 의미.
-def save_nutrition_facts(image_path: str, new_file_name: str, top, bottom, left, right):
-    image = Image.open(image_path)
+def save_nutrition_facts(dir_path):
+    image_extensions = ["jpg", "jpeg", "png", "gif", "bmp"]
 
-    width, height = image.size
+    for file_name in os.listdir(dir_path):
+        if not file_name.split(".")[-1] in image_extensions:
+            continue
 
-    crop_box = (left, top, width - right, height - bottom)
-    cropped_image = image.crop(crop_box)
+        image_path = os.path.join(dir_path, file_name)
+        search_targets = ["영양정보"]
+        text_positions = find_text_position_with_tesseract(image_path, search_targets)
 
-    directory, _ = os.path.split(image_path)
+        for target in search_targets:
+            if not text_positions[target]:
+                continue
 
-    new_directory = os.path.join(directory, "nutrition-facts")
-    os.makedirs(new_directory, exist_ok=True)
-    save_path = os.path.join(new_directory, new_file_name)
+            positions = text_positions[target]
 
-    cropped_image.save(save_path)
+            for position in positions:
+                left, top, right, bottom = (
+                    position["left"],
+                    position["top"],
+                    position["right"],
+                    position["bottom"],
+                )
+
+                crop_image(
+                    image_path=f"{dir_path}/{file_name}",
+                    save_as="nutrition-facts.jpg",
+                    top=top - 50,
+                    bottom=bottom - 300,
+                    left=0,
+                    right=0,
+                )

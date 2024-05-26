@@ -18,3 +18,5 @@ for product in products:
         type="json",
     )
     save_coupang_content_images(save_dir=f"./data/{product_name}/", details=details)
+
+    save_nutrition_facts(dir_path=f"./data/{product_name}/")
