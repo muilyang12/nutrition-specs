@@ -2,8 +2,13 @@
 /be/**/*.pyc
 /be/db.sqlite3
 
-#FE
+# FE
 /fe/node_modules/**
 /fe/.next/**
 /fe/dist/**
 /fe/next-env.d.ts
+
+# Crawler
+/crawler/**/*.pyc
+/crawler/venv/
+/crawler/data/
