@@ -10,8 +10,8 @@ pytesseract.pytesseract.tesseract_cmd = constants.GOOGLE_TESSERACT_LOCATION
 
 
 def find_text_position_with_tesseract(image_url: str, search_texts: List[str]):
-    img = Image.open(image_url)
-    alphabet_boxes = pytesseract.image_to_boxes(img, lang="kor")
+    image = Image.open(image_url)
+    alphabet_boxes = pytesseract.image_to_boxes(image, lang="kor")
     alphabet_lines = alphabet_boxes.splitlines()
 
     text_positions = {}
@@ -39,12 +39,15 @@ def find_text_position_with_tesseract(image_url: str, search_texts: List[str]):
                     right_max = max(int(positions[0][2]), int(positions[-1][2]))
                     top_max = max(int(positions[0][3]), int(positions[-1][3]))
 
+                    width, height = image.size
+
+                    # top의 경우 위에서부터의 위치, bottom의 경우 아래에서부터 위치를 의미.
                     current_text_positions.append(
                         {
-                            "left": left_min,
+                            "top": height - top_max,
                             "bottom": bottom_min,
-                            "right": right_max,
-                            "top": top_max,
+                            "left": left_min,
+                            "right": width - right_max,
                         },
                     )
 
