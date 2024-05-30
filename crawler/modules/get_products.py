@@ -6,11 +6,11 @@ from . import constants
 from .coupang_get_with_headers import coupang_get_with_headers
 
 
-def get_products(searchString: str):
+def get_products(search_tring: str):
     product_data = []
 
     response = coupang_get_with_headers(
-        f"https://www.coupang.com/np/search?q={searchString}"
+        f"https://www.coupang.com/np/search?q={search_tring}"
     )
 
     if response.status_code == 200:

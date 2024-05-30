@@ -6,7 +6,7 @@ from modules import (
     save_nutrition_facts,
 )
 
-products = get_products(searchString="두유")
+products = get_products(search_tring="두유")
 
 for product in products:
     product_name = product["name"]
