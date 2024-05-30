@@ -35,7 +35,7 @@ def save_nutrition_facts(dir_path):
 
                 crop_image(
                     image_path=f"{dir_path}/{file_name}",
-                    save_as="nutrition-facts.jpg",
+                    save_as=f"nutrition-facts-{save_count_per_dir}.jpg",
                     top=top - 50,
                     bottom=bottom - 300,
                     left=0,
