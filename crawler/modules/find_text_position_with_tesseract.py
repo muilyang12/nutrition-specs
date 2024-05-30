@@ -23,33 +23,37 @@ def find_text_position_with_tesseract(image_path: str, search_texts: List[str]):
             line = alphabet_lines[i]
             alphabet = line.split(" ")[0]
 
-            if alphabet == search_text[0]:
-                searched_text = ""
-                positions = []
+            if alphabet != search_text[0]:
+                continue
 
-                for line in alphabet_lines[i : i + len(search_text)]:
-                    alphabet, left, bottom, right, top, _ = line.split(" ")
+            searched_text = ""
+            positions = []
 
-                    searched_text += alphabet
-                    positions.append([left, bottom, right, top])
+            for line in alphabet_lines[i : i + len(search_text)]:
+                alphabet, left, bottom, right, top, _ = line.split(" ")
 
-                if search_text == searched_text:
-                    left_min = min(int(positions[0][0]), int(positions[-1][0]))
-                    bottom_min = min(int(positions[0][1]), int(positions[-1][1]))
-                    right_max = max(int(positions[0][2]), int(positions[-1][2]))
-                    top_max = max(int(positions[0][3]), int(positions[-1][3]))
+                searched_text += alphabet
+                positions.append([left, bottom, right, top])
 
-                    width, height = image.size
+            if search_text != searched_text:
+                continue
 
-                    # top의 경우 위에서부터의 위치, bottom의 경우 아래에서부터 위치를 의미.
-                    current_text_positions.append(
-                        {
-                            "top": height - top_max,
-                            "bottom": bottom_min,
-                            "left": left_min,
-                            "right": width - right_max,
-                        },
-                    )
+            left_min = min(int(positions[0][0]), int(positions[-1][0]))
+            bottom_min = min(int(positions[0][1]), int(positions[-1][1]))
+            right_max = max(int(positions[0][2]), int(positions[-1][2]))
+            top_max = max(int(positions[0][3]), int(positions[-1][3]))
+
+            width, height = image.size
+
+            # top의 경우 위에서부터의 위치, bottom의 경우 아래에서부터 위치를 의미.
+            current_text_positions.append(
+                {
+                    "top": height - top_max,
+                    "bottom": bottom_min,
+                    "left": left_min,
+                    "right": width - right_max,
+                },
+            )
 
         text_positions[search_text] = current_text_positions
 
