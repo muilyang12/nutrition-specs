@@ -1,1 +1,1 @@
-from .get_preprocessed_image import get_preprocessed_image
+from .compare_pillow_images import compare_pillow_images
