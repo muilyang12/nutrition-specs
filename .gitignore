@@ -12,3 +12,4 @@
 /crawler/**/*.pyc
 /crawler/venv/
 /crawler/data/
+/crawler/for-research/
