@@ -1,1 +1,2 @@
 from .find_text_position_with_paddle import find_text_position_with_paddle
+from .find_text_position_with_tesseract import find_text_position_with_tesseract
