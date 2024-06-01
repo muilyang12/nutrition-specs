@@ -3,7 +3,7 @@ from typing import List
 import pytesseract
 from PIL import Image
 
-from . import constants
+from .. import constants
 
 
 pytesseract.pytesseract.tesseract_cmd = constants.GOOGLE_TESSERACT_LOCATION
