@@ -1,6 +1,4 @@
-from .extract_headers import extract_headers
 from .get_products import get_products
-from .coupang_get_with_headers import coupang_get_with_headers
 from .get_product_details import get_product_details
 from .save_text_data import save_text_data
 from .save_coupang_content_images import save_coupang_content_images

@@ -1,4 +1,4 @@
-from . import extract_headers
+from .coupang_api import extract_headers
 
 COUPANG_DOMAIN = "https://www.coupang.com"
 
