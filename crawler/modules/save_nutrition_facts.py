@@ -2,7 +2,7 @@ import os
 
 from . import constants
 from .text_position import find_text_position_with_tesseract
-from .crop_image import crop_image
+from .image import crop_image
 from .error_handling import save_all_texts_with_tesseract
 
 
