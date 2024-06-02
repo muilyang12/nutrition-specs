@@ -27,8 +27,8 @@ def get_preprocessed_image2(image_path: str) -> None:
     _, simple_thresh_image3 = cv.threshold(gray_image, 147, 255, cv.THRESH_BINARY)
 
     cv.imshow("Simple Thresholding - Threshold 107", simple_thresh_image1)
-    cv.imshow("Simple Thresholding - Threshold 127", simple_thresh_image1)
-    cv.imshow("Simple Thresholding - Threshold 147", simple_thresh_image1)
+    cv.imshow("Simple Thresholding - Threshold 127", simple_thresh_image2)
+    cv.imshow("Simple Thresholding - Threshold 147", simple_thresh_image3)
 
     # Otsu's Binarization
     _, otsu_thresh_image = cv.threshold(
