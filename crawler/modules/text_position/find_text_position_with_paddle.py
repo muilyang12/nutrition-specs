@@ -10,7 +10,7 @@ def find_text_position_with_paddle(image_path: str, search_texts: List[str]):
     for text in search_texts:
         text_positions[text] = []
 
-    paddle_ocr = PaddleOCR(lang="korean", use_angle_cls=False)
+    paddle_ocr = PaddleOCR(lang="korean", use_angle_cls=False, show_log=False)
     result = paddle_ocr.ocr(image_path, cls=False)
     ocr_result = result[0]
 
