@@ -26,8 +26,6 @@ def find_text_position_with_paddle(image_path: str, search_texts: List[str]):
 
         left_top, right_top, right_bottom, left_bottom = position
 
-        print(text, left_top, right_top, right_bottom, left_bottom)
-
         # top의 경우 위에서부터의 위치, bottom의 경우 아래에서부터 위치를 의미.
         text_positions[text].append(
             {
