@@ -12,6 +12,8 @@ def get_preprocessed_image1(image_path: str, threshold: int = 128) -> Image.Imag
     return gray_image.point(lambda x: 0 if x < threshold else 255, "1")
 
 
+# OpenCV Image Thresholding
+# https://docs.opencv.org/4.6.0/d7/d4d/tutorial_py_thresholding.html
 def get_preprocessed_image2(image_path: str) -> None:
     image = cv2.imread(image_path)
     cv2.imshow("Original", image)
