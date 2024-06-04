@@ -4,12 +4,12 @@ from rest_framework.exceptions import ValidationError
 from . import models, serializers
 
 
-class FoodCategoryViewSet(viewsets.ModelViewSet):
+class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.FoodCategory.objects.all()
     serializer_class = serializers.FoodCategorySerializer
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
 
@@ -37,7 +37,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response(data)
 
 
-class NutritionViewSet(viewsets.ModelViewSet):
+class NutritionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Nutrition.objects.all()
     serializer_class = serializers.NutritionSerializer
 
