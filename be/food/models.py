@@ -16,6 +16,7 @@ class Product(models.Model):
     )
     brand_name = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
+    coupang_url = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
         indexes = [
