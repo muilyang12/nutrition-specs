@@ -27,7 +27,7 @@ class Product(models.Model):
 
 
 class Nutrition(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     serving_size = models.FloatField()
     calory = models.FloatField()
     carbohydrate = models.FloatField()
