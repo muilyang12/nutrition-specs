@@ -28,11 +28,19 @@ class Product(models.Model):
 
 class Nutrition(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    serving_size = models.FloatField()
-    calory = models.FloatField()
-    carbohydrate = models.FloatField()
-    protein = models.FloatField()
-    fat = models.FloatField()
+    serving_size = models.FloatField(null=True)
+    serving_unit = models.CharField(max_length=10, null=True)
+    calories = models.FloatField(null=True)
+    total_carbohydrate = models.FloatField(null=True)
+    dietary_fiber = models.FloatField(null=True)
+    sugars = models.FloatField(null=True)
+    total_fat = models.FloatField(null=True)
+    saturated_fat = models.FloatField(null=True)
+    trans_fat = models.FloatField(null=True)
+    cholesterol = models.FloatField(null=True)
+    protein = models.FloatField(null=True)
+    sodium = models.FloatField(null=True)
+    calcium = models.FloatField(null=True)
 
     class Meta:
         indexes = [
