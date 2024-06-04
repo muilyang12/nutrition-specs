@@ -7,6 +7,14 @@ interface PathParams {
   };
 }
 
+export async function generateMetadata({ params }: PathParams) {
+  const foodCategory = await foodApi.getFoodCategoryByCategoryKey(params.foodCategory);
+
+  return {
+    title: `NutriInsights - Comparing ${foodCategory.category_name}`,
+  };
+}
+
 export default async function FoodCategoryPage({ params }: PathParams) {
   return (
     <>
