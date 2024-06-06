@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import PrintServiceName from "@components/PrintServiceName";
 
 export const metadata = {
   title: "NutriInsights",
@@ -10,6 +11,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <main>{children}</main>
+
+        <PrintServiceName />
       </body>
     </html>
   );
