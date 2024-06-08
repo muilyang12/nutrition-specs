@@ -16,7 +16,7 @@ class Product(models.Model):
     )
     brand_name = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
-    coupang_url = models.CharField(max_length=200, null=True, blank=True)
+    coupang_url = models.CharField(max_length=300, null=True, blank=True)
 
     class Meta:
         indexes = [
@@ -51,4 +51,4 @@ class Nutrition(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.product.product_name} - {self.calory} kcal"
+        return f"{self.product.product_name} - {self.calories} kcal"
