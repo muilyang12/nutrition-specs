@@ -11,7 +11,7 @@ class FoodCategorySerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
-        fields = ["id", "food_category", "brand_name", "product_name"]
+        fields = ["id", "food_category", "brand_name", "product_name", "coupang_url"]
 
 
 class NutritionSerializer(serializers.ModelSerializer):
@@ -21,8 +21,16 @@ class NutritionSerializer(serializers.ModelSerializer):
             "id",
             "product",
             "serving_size",
-            "calory",
-            "carbohydrate",
+            "serving_unit",
+            "calories",
+            "total_carbohydrate",
+            "dietary_fiber",
+            "sugars",
+            "total_fat",
+            "saturated_fat",
+            "trans_fat",
+            "cholesterol",
             "protein",
-            "fat",
+            "sodium",
+            "calcium",
         ]
