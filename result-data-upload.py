@@ -2,6 +2,11 @@ import csv
 import requests
 from collections import defaultdict
 
+
+def get_value(value):
+    return value if value != "-" else None
+
+
 with open("result-data.csv", "r", encoding="utf-8") as f:
     reader = csv.reader(f)
     next(reader)
@@ -28,7 +33,7 @@ with open("result-data.csv", "r", encoding="utf-8") as f:
                 "food_category": enrolled_categories[category_key],
                 "brand_name": brand_name,
                 "product_name": product_name,
-                "coupang_url": coupang_url,
+                "coupang_url": get_value(coupang_url),
             },
         ).json()
 
@@ -56,20 +61,20 @@ with open("result-data.csv", "r", encoding="utf-8") as f:
             url="http://127.0.0.1:8000/food/nutrition/",
             data={
                 "product": product_id,
-                "serving_size": serving_size,
-                "serving_unit": serving_unit,
-                "calories": calories,
-                "total_carbohydrate": total_carbohydrate,
-                "sugars": sugars,
-                "sugar_alcohols": sugar_alcohols,
-                "dietary_fiber": dietary_fiber,
-                "allulose": allulose,
-                "total_fat": total_fat,
-                "saturated_fat": saturated_fat,
-                "trans_fat": trans_fat,
-                "cholesterol": cholesterol,
-                "protein": protein,
-                "sodium": sodium,
-                "calcium": calcium,
+                "serving_size": get_value(serving_size),
+                "serving_unit": get_value(serving_unit),
+                "calories": get_value(calories),
+                "total_carbohydrate": get_value(total_carbohydrate),
+                "sugars": get_value(sugars),
+                "sugar_alcohols": get_value(sugar_alcohols),
+                "dietary_fiber": get_value(dietary_fiber),
+                "allulose": get_value(allulose),
+                "total_fat": get_value(total_fat),
+                "saturated_fat": get_value(saturated_fat),
+                "trans_fat": get_value(trans_fat),
+                "cholesterol": get_value(cholesterol),
+                "protein": get_value(protein),
+                "sodium": get_value(sodium),
+                "calcium": get_value(calcium),
             },
         )
