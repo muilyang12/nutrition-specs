@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Index
 
 
 class FoodCategory(models.Model):
@@ -33,7 +32,13 @@ class Product(models.Model):
 
     class Meta:
         indexes = [
-            Index(fields=["food_category"]),
+            models.Index(fields=["food_category"]),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["brand_name", "product_name"],
+                name="unique_brand_product_name_pair",
+            )
         ]
 
     def __str__(self):
