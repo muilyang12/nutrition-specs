@@ -65,7 +65,7 @@ class Nutrition(models.Model):
 
     class Meta:
         indexes = [
-            Index(fields=["product"]),
+            models.Index(fields=["product"]),
         ]
 
     def __str__(self):
