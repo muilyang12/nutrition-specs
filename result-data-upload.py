@@ -25,7 +25,7 @@ with open("result-data.csv", "r", encoding="utf-8") as f:
         product_res = requests.post(
             url="http://127.0.0.1:8000/food/product/",
             data={
-                "food-category": enrolled_categories[category_key],
+                "food_category": enrolled_categories[category_key],
                 "brand_name": brand_name,
                 "product_name": product_name,
                 "coupang_url": coupang_url,
