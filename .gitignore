@@ -13,3 +13,6 @@
 /crawler/venv/
 /crawler/data/
 /crawler/for-research/
+
+# Result data
+result-data.csv
