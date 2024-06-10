@@ -60,6 +60,7 @@ with open("result-data.csv", "r", encoding="utf-8") as f:
             protein,
             sodium,
             calcium,
+            status,
         ) = line[5:]
 
         requests.post(
