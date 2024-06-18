@@ -9,6 +9,8 @@ from modules import (
 
 window = application.open_ui()
 
+application.bind_events(window)
+
 products = get_products(search_tring="두유")
 
 window.mainloop()
