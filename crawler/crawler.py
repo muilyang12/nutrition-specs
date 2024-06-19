@@ -1,6 +1,5 @@
 from modules import (
     application,
-    get_products,
     # get_product_details,
     # save_text_data,
     # save_coupang_content_images,
@@ -10,8 +9,6 @@ from modules import (
 window = application.open_ui()
 
 application.bind_events(window)
-
-products = get_products(search_tring="두유")
 
 window.mainloop()
 
