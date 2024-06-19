@@ -1,7 +1,5 @@
-from modules import application
+from modules.CrawlerApp import CrawlerApp
 
-window = application.open_ui()
+crawlerApp = CrawlerApp()
 
-application.bind_events(window)
-
-window.mainloop()
+crawlerApp.start()
