@@ -35,7 +35,7 @@ def open_ui():
     tree = ttk.Treeview(window, columns=columns, show="headings")
 
     tree.heading("category_name", text="Category Name")
-    tree.heading("category_key", text="Category Name")
+    tree.heading("category_key", text="Category Key")
     tree.heading("brand_name", text="Brand Name")
     tree.heading("product_name", text="Product Name")
     tree.heading("url", text="URL")
