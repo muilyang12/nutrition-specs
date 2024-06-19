@@ -47,14 +47,16 @@ def on_click_search_core(query_entry, name_entry, key_entry, tree):
 
         details = get_product_details(product=product)
         save_text_data(
-            save_dir=f"./data/{product_name}/",
+            save_dir=f"./data/{category_name}/{product_name}/",
             file_name="details.json",
             data={"details": details},
             type="json",
         )
-        save_coupang_content_images(save_dir=f"./data/{product_name}/", details=details)
+        save_coupang_content_images(
+            save_dir=f"./data/{category_name}/{product_name}/", details=details
+        )
 
-        save_nutrition_facts(dir_path=f"./data/{product_name}/")
+        save_nutrition_facts(dir_path=f"./data/{category_name}/{product_name}/")
 
     query_entry.delete(0, tk.END)
     key_entry.delete(0, tk.END)
