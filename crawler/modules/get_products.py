@@ -39,10 +39,19 @@ def get_products(search_tring: str):
                     itemId = match.group(2)
                     vendorItemId = match.group(3)
 
+            if name_tag:
+                name_tag_value = name_tag.text.replace(",", "")
+                splited_space = name_tag_value.split(" ")
+                splited_space.pop()
+
+                brand_name = splited_space.pop(0).strip("[]")
+                product_name = " ".join(splited_space)
+
             product_data.append(
                 {
                     "url": url,
-                    "name": name_tag.text.strip() if name_tag else None,
+                    "brand_name": brand_name,
+                    "product_name": product_name,
                     "rating": rating_tag.text.strip() if rating_tag else None,
                     "rating_count": (
                         int(re.search(r"\d+", rating_count_tag.text.strip()).group())
@@ -54,5 +63,7 @@ def get_products(search_tring: str):
                     "vendorItemId": vendorItemId,
                 }
             )
+
+    # print(product_data)
 
     return product_data

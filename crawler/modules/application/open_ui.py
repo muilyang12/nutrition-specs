@@ -19,7 +19,8 @@ def on_click_search(query_entry, key_entry, tree):
             "",
             tk.END,
             values=(
-                product["name"],
+                product["brand_name"],
+                product["product_name"],
                 product["url"],
             ),
         )
@@ -34,7 +35,7 @@ def on_treeview_dbclick(event, tree):
     if not item:
         return
 
-    url = tree.item(item, "values")[1]
+    url = tree.item(item, "values")[2]
     webbrowser.open(url)
 
 
@@ -60,12 +61,15 @@ def open_ui():
     )
     query_button.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
-    columns = ("name", "url")
+    columns = ("brand_name", "product_name", "url")
     tree = ttk.Treeview(window, columns=columns, show="headings")
-    tree.heading("name", text="Name")
+
+    tree.heading("brand_name", text="Brand Name")
+    tree.heading("product_name", text="Product Name")
     tree.heading("url", text="URL")
 
-    tree.column("name", stretch=tk.YES)
+    tree.column("brand_name", stretch=tk.YES)
+    tree.column("product_name", stretch=tk.YES)
     tree.column("url", stretch=tk.YES)
 
     tree.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
