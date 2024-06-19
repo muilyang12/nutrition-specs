@@ -60,4 +60,5 @@ def on_click_search_core(query_entry, name_entry, key_entry, tree):
         save_nutrition_facts(dir_path=f"./data/{category_name}/{product_name}/")
 
     query_entry.delete(0, tk.END)
+    name_entry.delete(0, tk.END)
     key_entry.delete(0, tk.END)
