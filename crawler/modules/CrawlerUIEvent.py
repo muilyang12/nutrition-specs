@@ -34,9 +34,6 @@ class CrawlerUIEvent:
         if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
             return
 
-        for i in self.ui.tree.get_children():
-            self.ui.tree.delete(i)
-
         products = get_products(search_tring=query)
 
         for product in products:
@@ -66,7 +63,7 @@ class CrawlerUIEvent:
                 save_dir=f"./data/{category_name}/{product_name}/", details=details
             )
 
-            save_nutrition_facts(dir_path=f"./data/{category_name}/{product_name}/")
+            # save_nutrition_facts(dir_path=f"./data/{category_name}/{product_name}/")
 
         self.ui.query_entry.delete(0, tk.END)
         self.ui.name_entry.delete(0, tk.END)
