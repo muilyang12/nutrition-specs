@@ -64,6 +64,4 @@ def get_products(search_tring: str):
                 }
             )
 
-    # print(product_data)
-
     return product_data
