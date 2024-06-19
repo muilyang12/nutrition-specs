@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import webbrowser
 
 from ..get_products import get_products
 
@@ -8,11 +9,7 @@ def on_click_search(query_entry, key_entry, tree):
     if len(query_entry.get()) == 0 or len(key_entry.get()) == 0:
         return
 
-    products = get_products(search_tring="두유")
-    print(products)
-
-    print(query_entry.get())
-    print(key_entry.get())
+    products = get_products(search_tring=query_entry.get())
 
     for i in tree.get_children():
         tree.delete(i)
@@ -29,6 +26,16 @@ def on_click_search(query_entry, key_entry, tree):
 
     query_entry.delete(0, tk.END)
     key_entry.delete(0, tk.END)
+
+
+def on_treeview_dbclick(event, tree):
+    item = tree.identify("item", event.x, event.y)
+
+    if not item:
+        return
+
+    url = tree.item(item, "values")[1]
+    webbrowser.open(url)
 
 
 def open_ui():
@@ -62,5 +69,7 @@ def open_ui():
     tree.column("url", stretch=tk.YES)
 
     tree.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+
+    tree.bind("<Double-Button-1>", lambda event: on_treeview_dbclick(event, tree))
 
     return window
