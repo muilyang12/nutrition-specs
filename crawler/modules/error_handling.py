@@ -5,7 +5,7 @@ from PIL import Image
 from paddleocr import PaddleOCR
 
 from . import constants
-from .save_text_data import save_text_data
+from .common import save_text_data
 
 
 pytesseract.pytesseract.tesseract_cmd = constants.GOOGLE_TESSERACT_LOCATION
