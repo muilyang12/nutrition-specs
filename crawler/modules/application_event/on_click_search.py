@@ -1,13 +1,13 @@
 import tkinter as tk
 import threading
 
-from .. import (
+from ..coupang_data import (
     get_products,
     get_product_details,
-    save_text_data,
     save_coupang_content_images,
     save_nutrition_facts,
 )
+from ..common import save_text_data
 
 
 def on_click_search(query_entry, name_entry, key_entry, tree):

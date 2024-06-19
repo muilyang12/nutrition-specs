@@ -2,7 +2,7 @@ import os
 from io import BytesIO
 from PIL import Image
 
-from .coupang_api import coupang_get_with_headers
+from ..coupang_api import coupang_get_with_headers
 
 
 def save_coupang_content_images(save_dir: str, details):

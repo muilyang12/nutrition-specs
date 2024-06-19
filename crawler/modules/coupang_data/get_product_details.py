@@ -1,4 +1,4 @@
-from .coupang_api import coupang_get_with_headers
+from ..coupang_api import coupang_get_with_headers
 
 
 def get_product_details(product):

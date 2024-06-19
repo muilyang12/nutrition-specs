@@ -2,7 +2,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-from .coupang_api import coupang_get_with_headers, constants
+from ..coupang_api import coupang_get_with_headers, constants
 
 
 def get_products(search_tring: str):
