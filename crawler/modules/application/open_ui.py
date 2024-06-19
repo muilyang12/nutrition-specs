@@ -31,19 +31,28 @@ def open_ui():
     )
     query_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
-    columns = ("category_name", "category_key", "brand_name", "product_name", "url")
+    columns = (
+        "category_name",
+        "category_key",
+        "brand_name",
+        "product_name",
+        "nutrition_facts",
+        "url",
+    )
     tree = ttk.Treeview(window, columns=columns, show="headings")
 
     tree.heading("category_name", text="Category Name")
     tree.heading("category_key", text="Category Key")
     tree.heading("brand_name", text="Brand Name")
     tree.heading("product_name", text="Product Name")
+    tree.heading("nutrition_facts", text="Nutrition Facts")
     tree.heading("url", text="URL")
 
     tree.column("category_name", stretch=tk.YES)
     tree.column("category_key", stretch=tk.YES)
     tree.column("brand_name", stretch=tk.YES)
     tree.column("product_name", stretch=tk.YES)
+    tree.column("nutrition_facts", stretch=tk.YES)
     tree.column("url", stretch=tk.YES)
 
     tree.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")

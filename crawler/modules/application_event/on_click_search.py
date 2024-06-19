@@ -39,6 +39,7 @@ def on_click_search_core(query_entry, name_entry, key_entry, tree):
                 category_key,
                 product["brand_name"],
                 product["product_name"],
+                "-",
                 product["url"],
             ),
         )
