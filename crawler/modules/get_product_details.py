@@ -2,8 +2,7 @@ from .coupang_api import coupang_get_with_headers
 
 
 def get_product_details(product):
-    name, productId, itemId, vendorItemId = (
-        product["name"],
+    productId, itemId, vendorItemId = (
         product["productId"],
         product["itemId"],
         product["vendorItemId"],
