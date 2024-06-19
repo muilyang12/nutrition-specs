@@ -1,4 +1,5 @@
 import tkinter as tk
+import threading
 
 from .. import (
     get_products,
@@ -10,6 +11,13 @@ from .. import (
 
 
 def on_click_search(query_entry, key_entry, tree):
+    thread = threading.Thread(
+        target=on_click_search_core, args=(query_entry, key_entry, tree)
+    )
+    thread.start()
+
+
+def on_click_search_core(query_entry, key_entry, tree):
     if len(query_entry.get()) == 0 or len(key_entry.get()) == 0:
         return
 
