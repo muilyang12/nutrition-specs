@@ -24,8 +24,8 @@ class CrawlerUI:
         self.key_entry = tk.Entry(self.window)
         self.key_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        self.query_button = tk.Button(self.window, text="Search")
-        self.query_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        self.search_button = tk.Button(self.window, text="Search")
+        self.search_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
         columns = (
             "category_name",
