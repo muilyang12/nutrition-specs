@@ -48,12 +48,12 @@ def open_ui():
     tree.heading("nutrition_facts", text="Nutrition Facts")
     tree.heading("url", text="URL")
 
-    tree.column("category_name", stretch=tk.YES)
-    tree.column("category_key", stretch=tk.YES)
-    tree.column("brand_name", stretch=tk.YES)
-    tree.column("product_name", stretch=tk.YES)
-    tree.column("nutrition_facts", stretch=tk.YES)
-    tree.column("url", stretch=tk.YES)
+    tree.column("category_name", width=100, stretch=tk.YES)
+    tree.column("category_key", width=100, stretch=tk.YES)
+    tree.column("brand_name", width=100, stretch=tk.YES)
+    tree.column("product_name", width=200, stretch=tk.YES)
+    tree.column("nutrition_facts", width=100, stretch=tk.YES)
+    tree.column("url", width=100, stretch=tk.YES)
 
     tree.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
