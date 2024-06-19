@@ -35,7 +35,7 @@ def save_all_texts_with_paddles(dir_path: str):
 
         image_path = os.path.join(dir_path, file_name)
 
-        paddle_ocr = PaddleOCR(lang="korean", use_angle_cls=False)
+        paddle_ocr = PaddleOCR(lang="korean", use_angle_cls=False, show_log=False)
         result = paddle_ocr.ocr(image_path, cls=False)
         ocr_result = result[0]
 

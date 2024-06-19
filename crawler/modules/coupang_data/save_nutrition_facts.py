@@ -3,7 +3,7 @@ import os
 from .. import constants
 from ..text_position import find_text_position_with_paddle
 from ..image import crop_image
-from ..error_handling import save_all_texts_with_tesseract
+from ..error_handling import save_all_texts_with_paddles
 
 
 def save_nutrition_facts(dir_path):
@@ -54,4 +54,4 @@ def save_nutrition_facts(dir_path):
 
     # 영양 데이터를 하나도 못 찾은 경우
     if save_count_per_dir == 0:
-        save_all_texts_with_tesseract(dir_path)
+        save_all_texts_with_paddles(dir_path)
