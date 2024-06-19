@@ -14,30 +14,39 @@ def open_ui():
     query_entry = tk.Entry(window)
     query_entry.grid(row=0, column=1, padx=10, pady=10)
 
+    name_label = tk.Label(window, text="Category Name")
+    name_label.grid(row=1, column=0, padx=10, pady=10)
+    name_entry = tk.Entry(window)
+    name_entry.grid(row=1, column=1, padx=10, pady=10)
+
     key_label = tk.Label(window, text="Category Key")
-    key_label.grid(row=1, column=0, padx=10, pady=10)
+    key_label.grid(row=2, column=0, padx=10, pady=10)
     key_entry = tk.Entry(window)
-    key_entry.grid(row=1, column=1, padx=10, pady=10)
+    key_entry.grid(row=2, column=1, padx=10, pady=10)
 
     query_button = tk.Button(
         window,
         text="Search",
-        command=lambda: on_click_search(query_entry, key_entry, tree),
+        command=lambda: on_click_search(query_entry, name_entry, key_entry, tree),
     )
-    query_button.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+    query_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
-    columns = ("brand_name", "product_name", "url")
+    columns = ("category_name", "category_key", "brand_name", "product_name", "url")
     tree = ttk.Treeview(window, columns=columns, show="headings")
 
+    tree.heading("category_name", text="Category Name")
+    tree.heading("category_key", text="Category Name")
     tree.heading("brand_name", text="Brand Name")
     tree.heading("product_name", text="Product Name")
     tree.heading("url", text="URL")
 
+    tree.column("category_name", stretch=tk.YES)
+    tree.column("category_key", stretch=tk.YES)
     tree.column("brand_name", stretch=tk.YES)
     tree.column("product_name", stretch=tk.YES)
     tree.column("url", stretch=tk.YES)
 
-    tree.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+    tree.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
     tree.bind("<Double-Button-1>", lambda event: on_dbclick_treeview(event, tree))
 

@@ -10,27 +10,33 @@ from .. import (
 )
 
 
-def on_click_search(query_entry, key_entry, tree):
+def on_click_search(query_entry, name_entry, key_entry, tree):
     thread = threading.Thread(
-        target=on_click_search_core, args=(query_entry, key_entry, tree)
+        target=on_click_search_core, args=(query_entry, name_entry, key_entry, tree)
     )
     thread.start()
 
 
-def on_click_search_core(query_entry, key_entry, tree):
-    if len(query_entry.get()) == 0 or len(key_entry.get()) == 0:
+def on_click_search_core(query_entry, name_entry, key_entry, tree):
+    query = query_entry.get()
+    category_name = name_entry.get()
+    category_key = key_entry.get()
+
+    if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
         return
 
     for i in tree.get_children():
         tree.delete(i)
 
-    products = get_products(search_tring=query_entry.get())
+    products = get_products(search_tring=query)
 
     for product in products:
         tree.insert(
             "",
             tk.END,
             values=(
+                category_name,
+                category_key,
                 product["brand_name"],
                 product["product_name"],
                 product["url"],
