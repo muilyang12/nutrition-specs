@@ -21,14 +21,14 @@ def save_coupang_content_images(save_dir: str, details):
                 response = coupang_get_with_headers(image_url)
                 image_data = response.content
 
-                if len(image_data) < 2 * 1024 * 1024:
+                if len(image_data) < 1024 * 1024:
                     image_name = f"{index}.{image_extension}"
                     image_path = os.path.join(save_dir, image_name)
 
                     with open(image_path, "wb") as file:
                         file.write(image_data)
 
-                else:
+                elif len(image_data) < 2 * 1024 * 1024:
                     image = Image.open(BytesIO(image_data))
                     width, height = image.size
 
@@ -41,6 +41,23 @@ def save_coupang_content_images(save_dir: str, details):
 
                     upper_half.save(image_path1)
                     lower_half.save(image_path2)
+
+                else:
+                    image = Image.open(BytesIO(image_data))
+                    width, height = image.size
+
+                    height_third = height // 3
+                    top_part = image.crop((0, 0, width, height_third))
+                    middle_part = image.crop((0, height_third, width, 2 * height_third))
+                    bottom_part = image.crop((0, 2 * height_third, width, height))
+
+                    image_path1 = os.path.join(save_dir, f"{index}-1.{image_extension}")
+                    image_path2 = os.path.join(save_dir, f"{index}-2.{image_extension}")
+                    image_path3 = os.path.join(save_dir, f"{index}-3.{image_extension}")
+
+                    top_part.save(image_path1)
+                    middle_part.save(image_path2)
+                    bottom_part.save(image_path3)
 
         else:
             file_path = os.path.join(save_dir, "weird_content_type.txt")
