@@ -19,7 +19,7 @@ class CrawlerUIEvent:
         self.window = window
         self.ui = ui
 
-        self.ui.query_button.config(command=self.on_click_search)
+        self.ui.search_button.config(command=self.on_click_search)
         self.ui.tree.bind("<Double-Button-1>", self.on_dbclick_treeview)
 
     def on_click_search(self):
