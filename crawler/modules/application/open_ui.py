@@ -4,7 +4,7 @@ from tkinter import ttk
 from ..get_products import get_products
 
 
-def search(query_entry, key_entry, tree):
+def on_click_search(query_entry, key_entry, tree):
     if len(query_entry.get()) == 0 or len(key_entry.get()) == 0:
         return
 
@@ -47,7 +47,9 @@ def open_ui():
     key_entry.grid(row=1, column=1, padx=10, pady=10)
 
     query_button = tk.Button(
-        window, text="Search", command=lambda: search(query_entry, key_entry, tree)
+        window,
+        text="Search",
+        command=lambda: on_click_search(query_entry, key_entry, tree),
     )
     query_button.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
