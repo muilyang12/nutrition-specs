@@ -15,7 +15,7 @@ def get_products(search_tring: str):
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, "html.parser")
 
-        products = soup.select(".search-product")[:3]
+        products = soup.select(".search-product")
 
         for product in products:
             a_tag = product.select_one("a")
