@@ -27,9 +27,9 @@ class CrawlerUIEvent:
         thread.start()
 
     def on_click_search_core(self):
-        query = self.ui.query_entry.get()
-        category_name = self.ui.name_entry.get()
-        category_key = self.ui.key_entry.get()
+        query = self.ui.query_entry.get().strip()
+        category_name = self.ui.name_entry.get().strip()
+        category_key = self.ui.key_entry.get().strip()
 
         if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
             return

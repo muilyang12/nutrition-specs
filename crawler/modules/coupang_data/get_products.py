@@ -40,7 +40,7 @@ def get_products(search_tring: str):
                     vendorItemId = match.group(3)
 
             if name_tag:
-                name_tag_value = name_tag.text.replace(",", "")
+                name_tag_value = name_tag.text.strip().replace(",", "")
                 splited_space = name_tag_value.split(" ")
                 splited_space.pop()
 
