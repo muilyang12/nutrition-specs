@@ -1,7 +1,3 @@
-import tkinter as tk
-from PIL import ImageGrab
-
-
 class CrawlerKeyEvent:
     def __init__(self, app):
         self.app = app

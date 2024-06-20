@@ -1,8 +1,9 @@
-import tkinter as tk
-from tkinter import messagebox
 import threading
 import webbrowser
 import os
+import tkinter as tk
+from tkinter import messagebox
+
 from PIL import Image
 
 from . import constants
