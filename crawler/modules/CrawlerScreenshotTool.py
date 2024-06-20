@@ -1,5 +1,6 @@
 import tkinter as tk
 from pynput import keyboard
+from PIL import ImageGrab
 
 
 class CrawlerScreenshotTool:
