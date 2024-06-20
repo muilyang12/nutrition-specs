@@ -17,7 +17,7 @@ def save_coupang_content_images(save_dir: str, details):
             index += 1
 
             for description in item["vendorItemContentDescriptions"]:
-                if not "<img " in description["content"]:
+                if "<img " in description["content"]:
                     soup = BeautifulSoup(description["content"], "html.parser")
                     img_tag = soup.find("img")
                     image_url = img_tag["src"]
