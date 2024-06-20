@@ -27,6 +27,16 @@ class CrawlerUI:
         self.search_button = tk.Button(self.window, text="Search")
         self.search_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
+        self.manual_collect_button = tk.Button(self.window, text="Manual Collecting")
+        self.manual_collect_button.grid(row=4, column=0, columnspan=1, padx=10, pady=10)
+
+        self.semi_auto_collect_button = tk.Button(
+            self.window, text="Semi-Auto Collecting"
+        )
+        self.semi_auto_collect_button.grid(
+            row=4, column=1, columnspan=1, padx=10, pady=10
+        )
+
         self.columns = (
             "category_name",
             "category_key",
@@ -46,4 +56,4 @@ class CrawlerUI:
             else:
                 self.tree.column(col, width=100, stretch=tk.YES)
 
-        self.tree.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+        self.tree.grid(row=5, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")

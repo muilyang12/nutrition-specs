@@ -20,6 +20,8 @@ class CrawlerUIEvent:
         self.ui = ui
 
         self.ui.search_button.config(command=self.on_click_search)
+        self.ui.manual_collect_button.config(command=self.on_click_manual_collect)
+        self.ui.semi_auto_collect_button.config(command=self.on_click_semi_auto_collect)
         self.ui.tree.bind("<Double-Button-1>", self.on_dbclick_treeview)
 
     def on_click_search(self):
@@ -64,11 +66,25 @@ class CrawlerUIEvent:
                 details=details,
             )
 
-            # save_nutrition_facts(dir_path=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/")
-
         self.ui.query_entry.delete(0, tk.END)
         self.ui.name_entry.delete(0, tk.END)
         self.ui.key_entry.delete(0, tk.END)
+
+    def on_click_manual_collect(self):
+        children = self.ui.tree.get_children()
+
+    def on_click_semi_auto_collect(self):
+        children = self.ui.tree.get_children()
+
+        for child in children:
+            item = self.ui.tree.item(child)
+            values = item["values"]
+            category_name = values[self.ui.column_index["category_name"]]
+            product_name = values[self.ui.column_index["product_name"]]
+
+            save_nutrition_facts(
+                dir_path=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/"
+            )
 
     def on_dbclick_treeview(self, event):
         item = self.ui.tree.identify("item", event.x, event.y)
