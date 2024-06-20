@@ -27,7 +27,7 @@ class CrawlerUI:
         self.search_button = tk.Button(self.window, text="Search")
         self.search_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
-        columns = (
+        self.columns = (
             "category_name",
             "category_key",
             "brand_name",
@@ -35,10 +35,15 @@ class CrawlerUI:
             "nutrition_facts",
             "url",
         )
-        self.tree = ttk.Treeview(self.window, columns=columns, show="headings")
+        self.column_index = {col: idx for idx, col in enumerate(self.columns)}
+        self.tree = ttk.Treeview(self.window, columns=self.columns, show="headings")
 
-        for col in columns:
+        for col in self.columns:
             self.tree.heading(col, text=col.replace("_", " ").title())
-            self.tree.column(col, width=100, stretch=tk.YES)
+
+            if col == "product_name":
+                self.tree.column(col, width=200, stretch=tk.YES)
+            else:
+                self.tree.column(col, width=100, stretch=tk.YES)
 
         self.tree.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")

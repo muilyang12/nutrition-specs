@@ -88,8 +88,8 @@ class CrawlerUIEvent:
         elif column == "#5":
             print(values)
 
-            category_name = values[0]
-            product_name = values[3]
+            category_name = values[self.ui.column_index["category_name"]]
+            product_name = values[self.ui.column_index["product_name"]]
 
             nutrition_image_path = (
                 f"./data/{category_name}/{product_name}/nutrition-facts-1.jpg"
