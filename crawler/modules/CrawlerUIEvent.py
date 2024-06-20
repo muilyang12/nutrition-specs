@@ -5,6 +5,8 @@ import webbrowser
 import os
 from PIL import Image
 
+from . import constants
+
 from .coupang_data import (
     get_products,
     get_product_details,
@@ -47,6 +49,7 @@ class CrawlerUIEvent:
                     category_key,
                     product["brand_name"],
                     product["product_name"],
+                    "Manual Collect",
                     "-",
                     product["url"],
                 ),
@@ -100,6 +103,20 @@ class CrawlerUIEvent:
             url = values[5]
 
             webbrowser.open(url)
+
+        elif column == f"#{self.ui.column_index['start_manual_collect'] + 1}":
+            print("start_manual_collect", values)
+
+            category_name = values[self.ui.column_index["category_name"]]
+            product_name = values[self.ui.column_index["product_name"]]
+
+            for file_name in os.listdir(f"./data/{category_name}/{product_name}/"):
+                if not file_name.split(".")[-1] in constants.IMAGE_EXTENSIONS:
+                    continue
+
+                image_path = f"./data/{category_name}/{product_name}/{file_name}"
+                img = Image.open(image_path)
+                img.show()
 
         elif column == f"#{self.ui.column_index['nutrition_facts'] + 1}":
             print(values)

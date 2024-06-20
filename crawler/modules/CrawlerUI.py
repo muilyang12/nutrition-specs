@@ -42,6 +42,7 @@ class CrawlerUI:
             "category_key",
             "brand_name",
             "product_name",
+            "start_manual_collect",
             "nutrition_facts",
             "url",
         )
