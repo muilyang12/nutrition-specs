@@ -96,12 +96,12 @@ class CrawlerUIEvent:
 
         values = self.ui.tree.item(item, "values")
 
-        if column == f"#{self.ui.column_index['url']}":
+        if column == f"#{self.ui.column_index['url'] + 1}":
             url = values[5]
 
             webbrowser.open(url)
 
-        elif column == f"#{self.ui.column_index['nutrition_facts']}":
+        elif column == f"#{self.ui.column_index['nutrition_facts'] + 1}":
             print(values)
 
             category_name = values[self.ui.column_index["category_name"]]
