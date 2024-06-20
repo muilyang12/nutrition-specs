@@ -11,7 +11,7 @@ from .coupang_data import (
     save_coupang_content_images,
     save_nutrition_facts,
 )
-from .common import save_text_data
+from .common import save_text_data, replace_invalid_chars_for_directory
 
 
 class CrawlerUIEvent:
@@ -54,16 +54,17 @@ class CrawlerUIEvent:
 
             details = get_product_details(product=product)
             save_text_data(
-                save_dir=f"./data/{category_name}/{product_name}/",
+                save_dir=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/",
                 file_name="details.json",
                 data={"details": details},
                 type="json",
             )
             save_coupang_content_images(
-                save_dir=f"./data/{category_name}/{product_name}/", details=details
+                save_dir=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/",
+                details=details,
             )
 
-            # save_nutrition_facts(dir_path=f"./data/{category_name}/{product_name}/")
+            # save_nutrition_facts(dir_path=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/")
 
         self.ui.query_entry.delete(0, tk.END)
         self.ui.name_entry.delete(0, tk.END)
