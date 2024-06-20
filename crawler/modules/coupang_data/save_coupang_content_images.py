@@ -1,6 +1,8 @@
 import os
 from io import BytesIO
+
 from PIL import Image
+from bs4 import BeautifulSoup
 
 from ..coupang_api import coupang_get_with_headers
 
@@ -15,7 +17,12 @@ def save_coupang_content_images(save_dir: str, details):
             index += 1
 
             for description in item["vendorItemContentDescriptions"]:
-                image_url = "https:" + description["content"]
+                if not "<img " in description["content"]:
+                    soup = BeautifulSoup(description["content"], "html.parser")
+                    img_tag = soup.find("img")
+                    image_url = img_tag["src"]
+                else:
+                    image_url = "https:" + description["content"]
                 image_extension = image_url.split("/")[-1].split(".")[-1]
 
                 response = coupang_get_with_headers(image_url)
