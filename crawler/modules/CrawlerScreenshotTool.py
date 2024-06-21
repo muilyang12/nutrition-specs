@@ -48,8 +48,8 @@ class CrawlerScreenshotTool:
 
         screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
 
-        screenshot.show()
         self.copy_to_clipboard(screenshot)
+        screenshot.show()
         # self.data_registrar.register_data()
 
         self.clicked_coordinates = []
