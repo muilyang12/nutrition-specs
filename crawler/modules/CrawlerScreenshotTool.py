@@ -1,6 +1,9 @@
 import tkinter as tk
+from io import BytesIO
+
 from pynput import keyboard
 from PIL import ImageGrab
+import win32clipboard
 
 from .CrawlerDataRegistrar import CrawlerDataRegistrar
 
@@ -44,9 +47,20 @@ class CrawlerScreenshotTool:
         y_end = max(start[1], end[1]) * DEVICE_PIXEL_RATIO
 
         screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
-        self.result_screenshot = screenshot
 
-        self.result_screenshot.show()
+        screenshot.show()
+        self.copy_to_clipboard(screenshot)
         # self.data_registrar.register_data()
 
         self.clicked_coordinates = []
+
+    def copy_to_clipboard(self, screenshot):
+        output = BytesIO()
+        screenshot.save(output, "BMP")
+        data = output.getvalue()[14:]  # BMP 파일 헤더 부분 제거
+        output.close()
+
+        win32clipboard.OpenClipboard()
+        win32clipboard.EmptyClipboard()
+        win32clipboard.SetClipboardData(win32clipboard.CF_DIB, data)
+        win32clipboard.CloseClipboard()
