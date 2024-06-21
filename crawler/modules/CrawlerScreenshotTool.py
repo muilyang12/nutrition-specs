@@ -9,7 +9,7 @@ class CrawlerScreenshotTool:
     def __init__(self, app):
         self.app = app
 
-        self.data_registrar = CrawlerDataRegistrar()
+        self.data_registrar = CrawlerDataRegistrar(app=self.app)
         self.result_screenshot = None
 
         with keyboard.GlobalHotKeys(
@@ -45,20 +45,6 @@ class CrawlerScreenshotTool:
             self.result_screenshot = screenshot
 
             self.result_screenshot.show()
-            # self.register_data()
+            # self.data_registrar.register_data()
 
             self.clicked_coordinates = []
-
-    def register_data(self):
-        category_data = {}
-        product_data = {}
-        nutrition_data = {}
-
-        self.data_registrar.register_food_category(data=category_data)
-        self.data_registrar.register_product(data=product_data)
-        self.data_registrar.register_nutrition(
-            file_name="", screenshot=self.result_screenshot, data=nutrition_data
-        )
-
-        self.result_screenshot = None
-        self.app.selected_product_values = None

@@ -1,4 +1,5 @@
 import io
+import csv
 
 import requests
 import boto3
@@ -8,16 +9,22 @@ class CrawlerDataRegistrar:
     LOCAL_DOMAIN = "http://127.0.0.1:8000/"
     S3_DOMAIN = ""
 
-    def register_food_category(self, data):
-        return requests.post(f"{self.LOCAL_DOMAIN}/food/food-category", json=data)
+    def __init__(self, app):
+        self.app = app
 
-    def register_product(self, data):
-        return requests.post(f"{self.LOCAL_DOMAIN}/food/product", json=data)
+    def register_data(self):
+        values = self.app.selected_product_values
+        row = [
+            values[self.app.ui.column_index["category_key"]],
+            values[self.app.ui.column_index["category_name"]],
+            values[self.app.ui.column_index["brand_name"]],
+            values[self.app.ui.column_index["product_name"]],
+            values[self.app.ui.column_index["url"]],
+        ]
 
-    def register_nutrition(self, file_name, screenshot, data):
-        self.upload_nutrition_facts_image(file_name, screenshot)
-
-        return requests.post(f"{self.LOCAL_DOMAIN}/food/nutrition", json=data)
+        with open("../result-data.csv", mode="a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(row)
 
     def upload_nutrition_facts_image(self, file_name, screenshot):
         with io.BytesIO() as output:
