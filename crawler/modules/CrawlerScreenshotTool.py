@@ -6,8 +6,9 @@ from .CrawlerDataRegistrar import CrawlerDataRegistrar
 
 
 class CrawlerScreenshotTool:
-    def __init__(self, window):
-        self.window = window
+    def __init__(self, app):
+        self.app = app
+
         self.data_registrar = CrawlerDataRegistrar()
         self.result_screenshot = None
 
@@ -17,7 +18,7 @@ class CrawlerScreenshotTool:
             h.join()
 
     def start_screenshot_mode(self, event):
-        overlay = tk.Toplevel(self.window)
+        overlay = tk.Toplevel(self.app.window)
         overlay.attributes("-fullscreen", True)
         overlay.attributes("-alpha", 0.3)
         overlay.attributes("-topmost", True)

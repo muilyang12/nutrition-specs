@@ -12,10 +12,10 @@ class CrawlerApp:
         self.window.title("Crawler")
         self.window.geometry("1000x600")
 
-        self.screenshot_tool = CrawlerScreenshotTool(self.window)
+        self.screenshot_tool = CrawlerScreenshotTool(app=self)
 
         self.ui = CrawlerUI(self.window)
-        self.ui_event = CrawlerUIEvent(self.window, self.ui)
+        self.ui_event = CrawlerUIEvent(app=self)
 
         self.key_event = CrawlerKeyEvent(self)
 
