@@ -19,5 +19,7 @@ class CrawlerApp:
 
         self.key_event = CrawlerKeyEvent(app=self)
 
+        self.selected_product_values = None
+
     def start(self):
         self.window.mainloop()

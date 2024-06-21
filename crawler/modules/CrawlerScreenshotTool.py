@@ -61,3 +61,4 @@ class CrawlerScreenshotTool:
         )
 
         self.result_screenshot = None
+        self.app.selected_product_values = None

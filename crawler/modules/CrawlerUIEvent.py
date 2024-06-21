@@ -109,6 +109,8 @@ class CrawlerUIEvent:
         elif column == f"#{self.app.ui.column_index['start_manual_collect'] + 1}":
             print("start_manual_collect", values)
 
+            self.app.selected_product_values = values
+
             category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
 
