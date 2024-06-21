@@ -17,7 +17,7 @@ class CrawlerApp:
         self.ui = CrawlerUI(self.window)
         self.ui_event = CrawlerUIEvent(app=self)
 
-        self.key_event = CrawlerKeyEvent(self)
+        self.key_event = CrawlerKeyEvent(app=self)
 
     def start(self):
         self.window.mainloop()
