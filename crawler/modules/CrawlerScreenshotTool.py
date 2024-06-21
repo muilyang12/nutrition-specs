@@ -2,10 +2,14 @@ import tkinter as tk
 from pynput import keyboard
 from PIL import ImageGrab
 
+from .CrawlerDataRegistrar import CrawlerDataRegistrar
+
 
 class CrawlerScreenshotTool:
     def __init__(self, window):
         self.window = window
+        self.data_registrar = CrawlerDataRegistrar()
+        self.result_screenshot = None
 
         with keyboard.GlobalHotKeys(
             {"<ctrl>+<shift>+s": self.start_screenshot_mode}
@@ -37,6 +41,22 @@ class CrawlerScreenshotTool:
             y_end = max(start[1], end[1]) * DEVICE_PIXEL_RATIO
 
             screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
-            screenshot.show()
+            self.result_screenshot = screenshot
+
+            self.result_screenshot.show()
+            # self.register_data()
 
             self.clicked_coordinates = []
+
+    def register_data(self):
+        category_data = {}
+        product_data = {}
+        nutrition_data = {}
+
+        self.data_registrar.register_food_category(data=category_data)
+        self.data_registrar.register_product(data=product_data)
+        self.data_registrar.register_nutrition(
+            file_name="", screenshot=self.result_screenshot, data=nutrition_data
+        )
+
+        self.result_screenshot = None
