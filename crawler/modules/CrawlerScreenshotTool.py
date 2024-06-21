@@ -31,20 +31,22 @@ class CrawlerScreenshotTool:
 
         self.clicked_coordinates.append((event.x_root, event.y_root))
 
-        if len(self.clicked_coordinates) == 2:
-            event.widget.unbind("<Button-1>")
-            event.widget.destroy()
+        if len(self.clicked_coordinates) < 2:
+            return
 
-            start, end = self.clicked_coordinates
-            x_start = min(start[0], end[0]) * DEVICE_PIXEL_RATIO
-            y_start = min(start[1], end[1]) * DEVICE_PIXEL_RATIO
-            x_end = max(start[0], end[0]) * DEVICE_PIXEL_RATIO
-            y_end = max(start[1], end[1]) * DEVICE_PIXEL_RATIO
+        event.widget.unbind("<Button-1>")
+        event.widget.destroy()
 
-            screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
-            self.result_screenshot = screenshot
+        start, end = self.clicked_coordinates
+        x_start = min(start[0], end[0]) * DEVICE_PIXEL_RATIO
+        y_start = min(start[1], end[1]) * DEVICE_PIXEL_RATIO
+        x_end = max(start[0], end[0]) * DEVICE_PIXEL_RATIO
+        y_end = max(start[1], end[1]) * DEVICE_PIXEL_RATIO
 
-            self.result_screenshot.show()
-            # self.data_registrar.register_data()
+        screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
+        self.result_screenshot = screenshot
 
-            self.clicked_coordinates = []
+        self.result_screenshot.show()
+        # self.data_registrar.register_data()
+
+        self.clicked_coordinates = []
