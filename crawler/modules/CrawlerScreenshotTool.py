@@ -16,7 +16,9 @@ class CrawlerScreenshotTool:
         self.result_screenshot = None
 
         with keyboard.GlobalHotKeys(
-            {"<ctrl>+<shift>+s": self.start_screenshot_mode}
+            {
+                "<ctrl>+<shift>+s": self.start_screenshot_mode,
+            }
         ) as h:
             h.join()
 
