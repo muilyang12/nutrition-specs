@@ -1,16 +1,23 @@
 import io
 import csv
 
-import requests
 import boto3
+from pynput import keyboard
+import win32clipboard
 
 
 class CrawlerDataRegistrarTool:
-    LOCAL_DOMAIN = "http://127.0.0.1:8000/"
     S3_DOMAIN = ""
 
     def __init__(self, app):
         self.app = app
+
+        with keyboard.GlobalHotKeys(
+            {
+                "<ctrl>+<shift>+r": self.register_data,
+            }
+        ) as h:
+            h.join()
 
     def register_data(self):
         values = self.app.selected_product_values
@@ -21,6 +28,25 @@ class CrawlerDataRegistrarTool:
             values[self.app.ui.column_index["product_name"]],
             values[self.app.ui.column_index["url"]],
         ]
+
+        win32clipboard.OpenClipboard()
+        try:
+            clipboard_data = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
+        except TypeError:
+            clipboard_data = win32clipboard.GetClipboardData(
+                win32clipboard.CF_UNICODETEXT
+            )
+        except:
+            print("There is an issue with the clipboard data format.")
+        win32clipboard.CloseClipboard()
+
+        clipboard_values = clipboard_data.split(",")
+
+        # 값의 개수 확인
+        if len(clipboard_values) != 15:
+            print("There is an issue with the clipboard data format.")
+        else:
+            row.append(clipboard_values)
 
         with open("../result-data.csv", mode="a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)

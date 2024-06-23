@@ -52,7 +52,6 @@ class CrawlerScreenshotTool:
 
         self.copy_to_clipboard(screenshot)
         screenshot.show()
-        # self.data_registrar.register_data()
 
         self.clicked_coordinates = []
 
