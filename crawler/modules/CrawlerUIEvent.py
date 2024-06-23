@@ -102,7 +102,7 @@ class CrawlerUIEvent:
         values = self.app.ui.tree.item(item, "values")
 
         if column == f"#{self.app.ui.column_index['url'] + 1}":
-            url = values[5]
+            url = values[self.app.ui.column_index["url"]]
 
             webbrowser.open(url)
 
