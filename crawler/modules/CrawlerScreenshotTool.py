@@ -5,14 +5,14 @@ from pynput import keyboard
 from PIL import ImageGrab
 import win32clipboard
 
-from .CrawlerDataRegistrar import CrawlerDataRegistrar
+from .CrawlerDataRegistrarTool import CrawlerDataRegistrarTool
 
 
 class CrawlerScreenshotTool:
     def __init__(self, app):
         self.app = app
 
-        self.data_registrar = CrawlerDataRegistrar(app=self.app)
+        self.data_registrar = CrawlerDataRegistrarTool(app=self.app)
         self.result_screenshot = None
 
         with keyboard.GlobalHotKeys(

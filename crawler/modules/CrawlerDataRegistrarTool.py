@@ -5,7 +5,7 @@ import requests
 import boto3
 
 
-class CrawlerDataRegistrar:
+class CrawlerDataRegistrarTool:
     LOCAL_DOMAIN = "http://127.0.0.1:8000/"
     S3_DOMAIN = ""
 
