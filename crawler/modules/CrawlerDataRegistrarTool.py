@@ -45,7 +45,10 @@ class CrawlerDataRegistrarTool:
                     self.app.current_category_id = category["id"]
 
                 if self.app.current_category_id == None:
-                    self.crawler_api.register_food_category(category_key, category_name)
+                    res = self.crawler_api.register_food_category(
+                        category_key, category_name
+                    )
+                    self.app.current_category_id = res["id"]
 
                     self.app.categories = self.app.crawler_api.get_food_categories()
 
