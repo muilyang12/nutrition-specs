@@ -85,7 +85,7 @@ class CrawlerDataRegistrarTool:
 
         category_name = values[self.app.ui.column_index["category_name"]]
 
-        s3_key = get_path(category_name, self.app.target_product_id)
+        s3_key = get_path(category_name, f"{self.app.target_product_id}.png")
 
         with io.BytesIO() as output:
             screenshot.save(output, format="PNG")
