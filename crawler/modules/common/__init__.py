@@ -1,2 +1,2 @@
 from .save_text_data import save_text_data
-from .replace_invalid_chars_for_directory import replace_invalid_chars_for_directory
+from .get_path import get_path

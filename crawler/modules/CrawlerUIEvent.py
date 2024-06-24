@@ -14,7 +14,7 @@ from .coupang_data import (
     save_coupang_content_images,
     save_nutrition_facts,
 )
-from .common import save_text_data, replace_invalid_chars_for_directory
+from .common import save_text_data, get_path
 
 
 class CrawlerUIEvent:
@@ -61,13 +61,13 @@ class CrawlerUIEvent:
 
             details = get_product_details(product=product)
             save_text_data(
-                save_dir=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/",
+                save_dir=get_path("data", category_name, product_name),
                 file_name="details.json",
                 data={"details": details},
                 type="json",
             )
             save_coupang_content_images(
-                save_dir=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/",
+                save_dir=get_path("data", category_name, product_name),
                 details=details,
             )
 
@@ -87,9 +87,7 @@ class CrawlerUIEvent:
             category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
 
-            save_nutrition_facts(
-                dir_path=f"./data/{category_name}/{replace_invalid_chars_for_directory(product_name)}/"
-            )
+            save_nutrition_facts(dir_path=get_path("data", category_name, product_name))
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)
@@ -114,11 +112,11 @@ class CrawlerUIEvent:
             category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
 
-            for file_name in os.listdir(f"./data/{category_name}/{product_name}/"):
+            for file_name in os.listdir(get_path("data", category_name, product_name)):
                 if not file_name.split(".")[-1] in constants.IMAGE_EXTENSIONS:
                     continue
 
-                image_path = f"./data/{category_name}/{product_name}/{file_name}"
+                image_path = get_path("data", category_name, product_name, file_name)
                 img = Image.open(image_path)
                 img.show()
 
@@ -128,8 +126,8 @@ class CrawlerUIEvent:
             category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
 
-            nutrition_image_path = (
-                f"./data/{category_name}/{product_name}/nutrition-facts-1.jpg"
+            nutrition_image_path = get_path(
+                "data", category_name, product_name, "nutrition-facts-1.jpg"
             )
 
             if os.path.exists(nutrition_image_path):
