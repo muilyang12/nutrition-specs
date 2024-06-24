@@ -47,7 +47,7 @@ class CrawlerScreenshotTool:
         self.overlay.bind("<Button-1>", self.on_overlay_click)
 
     def on_overlay_click(self, event):
-        DEVICE_PIXEL_RATIO = 1.65
+        DEVICE_PIXEL_RATIO = 1.5
 
         self.clicked_coordinates.append((event.x_root, event.y_root))
 
