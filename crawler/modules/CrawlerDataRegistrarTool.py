@@ -5,6 +5,7 @@ import boto3
 from pynput import keyboard
 import win32clipboard
 
+from .CrawlerApi import CrawlerApi
 from .common import get_path
 
 
@@ -15,6 +16,8 @@ class CrawlerDataRegistrarTool:
     def __init__(self, app):
         self.app = app
         self.nutrition_facts_s3_url = None
+
+        self.crawler_api = CrawlerApi()
 
         self.shift_pressed = False
         self.listener = keyboard.Listener(
@@ -28,6 +31,24 @@ class CrawlerDataRegistrarTool:
         try:
             if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
                 self.shift_pressed = True
+
+            # Ctrl + Shift + 1
+            elif key.vk == 49 and self.shift_pressed:
+                if self.app.current_category_id:
+                    return
+
+                category_key, category_name = self.app.current_category
+                for category in self.app.categories:
+                    if category_key != category["category_key"]:
+                        continue
+
+                    self.app.current_category_id = category["id"]
+
+                if self.app.current_category_id == None:
+                    self.crawler_api.register_food_category(category_key, category_name)
+
+                    self.app.categories = self.app.crawler_api.get_food_categories()
+
             # Ctrl + R
             elif key.char == "\x12" and self.shift_pressed:
                 self.register_data()
