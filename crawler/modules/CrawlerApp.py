@@ -24,5 +24,8 @@ class CrawlerApp:
 
         self.selected_product_values = None
 
+        self.categories = self.crawler_api.get_food_categories()
+        self.current_category_id = None
+
     def start(self):
         self.window.mainloop()

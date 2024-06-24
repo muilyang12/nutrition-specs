@@ -38,6 +38,25 @@ class CrawlerUIEvent:
         category_name = self.app.ui.name_entry.get().strip()
         category_key = self.app.ui.key_entry.get().strip()
 
+        item = next(
+            (
+                item
+                for item in self.app.categories
+                if item["category_key"] == category_key
+            ),
+            None,
+        )
+
+        if item:
+            self.app.current_category_id = item["id"]
+        else:
+            category_res = self.app.crawler_api.register_food_category(
+                category_key, category_name
+            )
+            self.app.current_category_id = category_res["id"]
+
+            self.categories = self.crawler_api.get_food_categories()
+
         if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
             return
 
