@@ -1,6 +1,7 @@
 import threading
 import webbrowser
 import os
+import time
 import tkinter as tk
 from tkinter import messagebox
 
