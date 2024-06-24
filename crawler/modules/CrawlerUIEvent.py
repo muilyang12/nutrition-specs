@@ -122,6 +122,8 @@ class CrawlerUIEvent:
                 img.show()
                 opened_image_count += 1
 
+                time.sleep(0.3)
+
             if opened_image_count == 0:
                 print("No image files found.")
 
