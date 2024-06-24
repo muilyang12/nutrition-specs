@@ -26,3 +26,9 @@ class CrawlerApi:
                 "coupang_url": coupang_url,
             },
         ).json()
+
+    def register_nutrition(self, data):
+        return requests.post(
+            url=f"{CrawlerApi.BE_DOMAIN}/food/nutrition/",
+            data=data,
+        ).json()
