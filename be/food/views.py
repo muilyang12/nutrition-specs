@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError
 from . import models, serializers
 
 
-class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+class FoodCategoryViewSet(viewsets.ModelViewSet):
     queryset = models.FoodCategory.objects.all()
     serializer_class = serializers.FoodCategorySerializer
 
@@ -23,7 +23,7 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
 
@@ -51,7 +51,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(data)
 
 
-class NutritionViewSet(viewsets.ReadOnlyModelViewSet):
+class NutritionViewSet(viewsets.ModelViewSet):
     queryset = models.Nutrition.objects.all()
     serializer_class = serializers.NutritionSerializer
 
