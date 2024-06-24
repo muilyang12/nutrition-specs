@@ -17,8 +17,6 @@ class CrawlerDataRegistrarTool:
         self.app = app
         self.nutrition_facts_s3_url = None
 
-        self.crawler_api = CrawlerApi()
-
         self.shift_pressed = False
         self.listener = keyboard.Listener(
             on_press=self.on_press, on_release=self.on_release
@@ -56,7 +54,7 @@ class CrawlerDataRegistrarTool:
             return
 
         category_key, category_name = self.app.current_category
-        res = self.crawler_api.register_food_category(category_key, category_name)
+        res = self.app.crawler_api.register_food_category(category_key, category_name)
         self.app.current_category_id = res["id"]
 
         self.app.categories = self.app.crawler_api.get_food_categories()
@@ -71,7 +69,7 @@ class CrawlerDataRegistrarTool:
         product_name = values[self.app.ui.column_index["product_name"]]
         coupang_url = values[self.app.ui.column_index["url"]]
 
-        res = self.crawler_api.register_product(
+        res = self.app.crawler_api.register_product(
             food_category=self.app.current_category_id,
             brand_name=brand_name,
             product_name=product_name,
