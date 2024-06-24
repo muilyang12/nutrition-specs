@@ -112,6 +112,7 @@ class CrawlerUIEvent:
             category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
 
+            opened_image_count = 0
             for file_name in os.listdir(get_path("data", category_name, product_name)):
                 if not file_name.split(".")[-1] in constants.IMAGE_EXTENSIONS:
                     continue
@@ -119,6 +120,10 @@ class CrawlerUIEvent:
                 image_path = get_path("data", category_name, product_name, file_name)
                 img = Image.open(image_path)
                 img.show()
+                opened_image_count += 1
+
+            if opened_image_count == 0:
+                print("No image files found.")
 
         elif column == f"#{self.app.ui.column_index['nutrition_facts'] + 1}":
             print(values)
