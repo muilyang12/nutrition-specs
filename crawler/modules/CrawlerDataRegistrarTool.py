@@ -36,6 +36,10 @@ class CrawlerDataRegistrarTool:
             elif key.vk == 49 and self.shift_pressed:
                 self.register_category()
 
+            # Ctrl + Shift + 2
+            elif key.vk == 50 and self.shift_pressed:
+                self.register_product()
+
             # Ctrl + R
             elif key.char == "\x12" and self.shift_pressed:
                 self.register_data()
@@ -56,6 +60,24 @@ class CrawlerDataRegistrarTool:
         self.app.current_category_id = res["id"]
 
         self.app.categories = self.app.crawler_api.get_food_categories()
+
+    def register_product(self):
+        print(self.app.current_category_id)
+
+        focused_item = self.app.ui.tree.focus()
+        values = self.app.ui.tree.item(focused_item, "values")
+
+        brand_name = values[self.app.ui.column_index["brand_name"]]
+        product_name = values[self.app.ui.column_index["product_name"]]
+        coupang_url = values[self.app.ui.column_index["url"]]
+
+        res = self.crawler_api.register_product(
+            food_category=self.app.current_category_id,
+            brand_name=brand_name,
+            product_name=product_name,
+            coupang_url=coupang_url,
+        )
+        self.app.target_product_id = res["id"]
 
     def register_data(self):
         values = self.app.selected_product_values
