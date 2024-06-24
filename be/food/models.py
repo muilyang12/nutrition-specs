@@ -23,7 +23,9 @@ class FoodCategory(models.Model):
 
 
 class Product(models.Model):
-    food_categories = models.ManyToManyField(FoodCategory)
+    food_category = models.ForeignKey(
+        FoodCategory, on_delete=models.SET_NULL, null=True
+    )
     brand_name = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
     coupang_url = models.CharField(max_length=300, null=True, blank=True)
