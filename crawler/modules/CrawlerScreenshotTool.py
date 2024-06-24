@@ -64,6 +64,7 @@ class CrawlerScreenshotTool:
         y_end = max(start[1], end[1]) * DEVICE_PIXEL_RATIO
 
         screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
+        self.data_registrar.upload_nutrition_facts_image(screenshot)
 
         self.copy_to_clipboard(screenshot)
         screenshot.show()

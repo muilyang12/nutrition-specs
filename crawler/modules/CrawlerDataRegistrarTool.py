@@ -5,18 +5,24 @@ import boto3
 from pynput import keyboard
 import win32clipboard
 
+from .common import get_path
+
 
 class CrawlerDataRegistrarTool:
+    BUCKET_NAME = "muilyang12-nutrition-comparison"
     S3_DOMAIN = ""
 
     def __init__(self, app):
         self.app = app
+        self.nutrition_facts_s3_url = None
 
         self.shift_pressed = False
         self.listener = keyboard.Listener(
             on_press=self.on_press, on_release=self.on_release
         )
         self.listener.start()
+
+        self.s3_client = boto3.client("s3")
 
     def on_press(self, key):
         try:
@@ -66,15 +72,24 @@ class CrawlerDataRegistrarTool:
             writer = csv.writer(f)
             writer.writerow(row)
 
-    def upload_nutrition_facts_image(self, file_name, screenshot):
+    def upload_nutrition_facts_image(self, screenshot):
+        values = self.app.selected_product_values
+        category_name = values[self.app.ui.column_index["category_name"]]
+        product_name = values[self.app.ui.column_index["product_name"]]
+
+        s3_key = get_path(category_name, product_name)
+
         with io.BytesIO() as output:
             screenshot.save(output, format="PNG")
             output.seek(0)
 
-            s3 = boto3.client("s3")
-            s3.upload_fileobj(
-                output,
-                self.S3_DOMAIN,
-                file_name,
-                ExtraArgs={"ContentType": "image/png"},
+            self.s3_client.put_object(
+                Bucket=self.BUCKET_NAME,
+                Key=s3_key,
+                Body=output,
+                ContentType="image/png",
+            )
+
+            self.nutrition_facts_s3_url = (
+                f"https://{self.BUCKET_NAME}.s3.amazonaws.com/{s3_key}"
             )
