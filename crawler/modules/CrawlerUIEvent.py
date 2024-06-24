@@ -39,6 +39,7 @@ class CrawlerUIEvent:
         category_key = self.app.ui.key_entry.get().strip()
 
         self.app.current_category = (category_key, category_name)
+        self.app.current_category_id = None
         for category in self.app.categories:
             if category_key != category["category_key"]:
                 continue

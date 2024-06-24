@@ -38,19 +38,12 @@ class CrawlerDataRegistrarTool:
                     return
 
                 category_key, category_name = self.app.current_category
-                for category in self.app.categories:
-                    if category_key != category["category_key"]:
-                        continue
+                res = self.crawler_api.register_food_category(
+                    category_key, category_name
+                )
+                self.app.current_category_id = res["id"]
 
-                    self.app.current_category_id = category["id"]
-
-                if self.app.current_category_id == None:
-                    res = self.crawler_api.register_food_category(
-                        category_key, category_name
-                    )
-                    self.app.current_category_id = res["id"]
-
-                    self.app.categories = self.app.crawler_api.get_food_categories()
+                self.app.categories = self.app.crawler_api.get_food_categories()
 
             # Ctrl + R
             elif key.char == "\x12" and self.shift_pressed:
