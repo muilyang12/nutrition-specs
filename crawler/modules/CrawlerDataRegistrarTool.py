@@ -12,12 +12,26 @@ class CrawlerDataRegistrarTool:
     def __init__(self, app):
         self.app = app
 
-        with keyboard.GlobalHotKeys(
-            {
-                "<ctrl>+<shift>+r": self.register_data,
-            }
-        ) as h:
-            h.join()
+        self.shift_pressed = False
+        self.listener = keyboard.Listener(
+            on_press=self.on_press, on_release=self.on_release
+        )
+        self.listener.start()
+
+    def on_press(self, key):
+        try:
+            if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
+                self.shift_pressed = True
+            # Ctrl + R
+            elif key.char == "\x12" and self.shift_pressed:
+                self.register_data()
+
+        except AttributeError:
+            pass
+
+    def on_release(self, key):
+        if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
+            self.shift_pressed = False
 
     def register_data(self):
         values = self.app.selected_product_values
