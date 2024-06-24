@@ -38,8 +38,7 @@ class CrawlerUIEvent:
         category_name = self.app.ui.name_entry.get().strip()
         category_key = self.app.ui.key_entry.get().strip()
 
-        if not self.app.current_category:
-            self.app.current_category = (category_key, category_name)
+        self.app.current_category = (category_key, category_name)
 
         if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
             return
