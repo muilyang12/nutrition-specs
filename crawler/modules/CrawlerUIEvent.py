@@ -13,7 +13,7 @@ from .coupang_data import (
     get_products,
     get_product_details,
     save_coupang_content_images,
-    save_nutrition_facts,
+    # save_nutrition_facts,
 )
 from .common import save_text_data, get_path
 
@@ -88,7 +88,7 @@ class CrawlerUIEvent:
             category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
 
-            save_nutrition_facts(dir_path=get_path("data", category_name, product_name))
+            # save_nutrition_facts(dir_path=get_path("data", category_name, product_name))
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)
