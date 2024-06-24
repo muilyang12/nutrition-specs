@@ -1,5 +1,6 @@
 import tkinter as tk
 
+from .CrawlerApi import CrawlerApi
 from .CrawlerScreenshotTool import CrawlerScreenshotTool
 from .CrawlerUI import CrawlerUI
 from .CrawlerUIEvent import CrawlerUIEvent
@@ -11,6 +12,8 @@ class CrawlerApp:
         self.window = tk.Tk()
         self.window.title("Crawler")
         self.window.geometry("1000x600")
+
+        self.crawler_api = CrawlerApi()
 
         self.screenshot_tool = CrawlerScreenshotTool(app=self)
 
