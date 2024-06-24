@@ -13,23 +13,38 @@ class CrawlerScreenshotTool:
         self.app = app
 
         self.data_registrar = CrawlerDataRegistrarTool(app=self.app)
+        self.clicked_coordinates = []
         self.result_screenshot = None
 
-        with keyboard.GlobalHotKeys(
-            {
-                "<ctrl>+<shift>+s": self.start_screenshot_mode,
-            }
-        ) as h:
-            h.join()
+        self.shift_pressed = False
+        self.listener = keyboard.Listener(
+            on_press=self.on_press, on_release=self.on_release
+        )
+        self.listener.start()
 
-    def start_screenshot_mode(self, event):
-        overlay = tk.Toplevel(self.app.window)
-        overlay.attributes("-fullscreen", True)
-        overlay.attributes("-alpha", 0.3)
-        overlay.attributes("-topmost", True)
-        overlay.configure(bg="black")
+    def on_press(self, key):
+        try:
+            if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
+                self.shift_pressed = True
+            # Ctrl + Z
+            elif key.char == "\x1A" and self.shift_pressed:
+                self.start_screenshot_mode()
 
-        overlay.bind("<Button-1>", self.on_overlay_click)
+        except AttributeError:
+            pass
+
+    def on_release(self, key):
+        if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
+            self.shift_pressed = False
+
+    def start_screenshot_mode(self):
+        self.overlay = tk.Toplevel(self.app.window)
+        self.overlay.attributes("-fullscreen", True)
+        self.overlay.attributes("-alpha", 0.3)
+        self.overlay.attributes("-topmost", True)
+        self.overlay.configure(bg="black")
+
+        self.overlay.bind("<Button-1>", self.on_overlay_click)
 
     def on_overlay_click(self, event):
         DEVICE_PIXEL_RATIO = 1.65
