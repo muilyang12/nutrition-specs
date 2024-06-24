@@ -79,6 +79,29 @@ class CrawlerDataRegistrarTool:
         )
         self.app.target_product_id = res["id"]
 
+    def upload_nutrition_facts_image(self, screenshot):
+        focused_item = self.app.ui.tree.focus()
+        values = self.app.ui.tree.item(focused_item, "values")
+
+        category_name = values[self.app.ui.column_index["category_name"]]
+
+        s3_key = get_path(category_name, self.app.target_product_id)
+
+        with io.BytesIO() as output:
+            screenshot.save(output, format="PNG")
+            output.seek(0)
+
+            self.s3_client.put_object(
+                Bucket=self.BUCKET_NAME,
+                Key=s3_key,
+                Body=output,
+                ContentType="image/png",
+            )
+
+            nutrition_facts_s3_url = (
+                f"https://{self.BUCKET_NAME}.s3.amazonaws.com/{s3_key}"
+            )
+
     def register_data(self):
         values = self.app.selected_product_values
         row = [
@@ -111,25 +134,3 @@ class CrawlerDataRegistrarTool:
         with open("../result-data.csv", mode="a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(row)
-
-    def upload_nutrition_facts_image(self, screenshot):
-        values = self.app.selected_product_values
-        category_name = values[self.app.ui.column_index["category_name"]]
-        product_name = values[self.app.ui.column_index["product_name"]]
-
-        s3_key = get_path(category_name, product_name)
-
-        with io.BytesIO() as output:
-            screenshot.save(output, format="PNG")
-            output.seek(0)
-
-            self.s3_client.put_object(
-                Bucket=self.BUCKET_NAME,
-                Key=s3_key,
-                Body=output,
-                ContentType="image/png",
-            )
-
-            self.nutrition_facts_s3_url = (
-                f"https://{self.BUCKET_NAME}.s3.amazonaws.com/{s3_key}"
-            )
