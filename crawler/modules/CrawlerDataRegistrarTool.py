@@ -34,16 +34,7 @@ class CrawlerDataRegistrarTool:
 
             # Ctrl + Shift + 1
             elif key.vk == 49 and self.shift_pressed:
-                if self.app.current_category_id:
-                    return
-
-                category_key, category_name = self.app.current_category
-                res = self.crawler_api.register_food_category(
-                    category_key, category_name
-                )
-                self.app.current_category_id = res["id"]
-
-                self.app.categories = self.app.crawler_api.get_food_categories()
+                self.register_category()
 
             # Ctrl + R
             elif key.char == "\x12" and self.shift_pressed:
@@ -55,6 +46,16 @@ class CrawlerDataRegistrarTool:
     def on_release(self, key):
         if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
             self.shift_pressed = False
+
+    def register_category(self):
+        if self.app.current_category_id:
+            return
+
+        category_key, category_name = self.app.current_category
+        res = self.crawler_api.register_food_category(category_key, category_name)
+        self.app.current_category_id = res["id"]
+
+        self.app.categories = self.app.crawler_api.get_food_categories()
 
     def register_data(self):
         values = self.app.selected_product_values
