@@ -5,7 +5,6 @@ import boto3
 from pynput import keyboard
 import win32clipboard
 
-from .CrawlerApi import CrawlerApi
 from .common import get_path
 
 
