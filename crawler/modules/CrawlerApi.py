@@ -20,7 +20,7 @@ class CrawlerApi:
         return requests.post(
             url=f"{CrawlerApi.BE_DOMAIN}/food/product/",
             data={
-                "food_category": food_category,
+                "food_categories": [food_category],
                 "brand_name": brand_name,
                 "product_name": product_name,
                 "coupang_url": coupang_url,
