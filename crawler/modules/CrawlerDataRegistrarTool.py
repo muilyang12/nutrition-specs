@@ -154,7 +154,7 @@ class CrawlerDataRegistrarTool:
                 ContentType="image/png",
             )
 
-            nutrition_facts_s3_url = (
+            self.app.target_nutrition_s3 = (
                 f"https://{self.BUCKET_NAME}.s3.amazonaws.com/{s3_key}"
             )
 

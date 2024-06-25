@@ -28,6 +28,7 @@ class CrawlerApp:
         self.current_category = None
         self.current_category_id = None
         self.target_product_id = None
+        self.target_nutrition_s3 = None
 
     def start(self):
         self.window.mainloop()
