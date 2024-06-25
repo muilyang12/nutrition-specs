@@ -37,6 +37,10 @@ class CrawlerDataRegistrarTool:
             elif key.vk == 50 and self.shift_pressed:
                 self.register_product()
 
+            # Ctrl + Shift + 3
+            elif key.vk == 51 and self.shift_pressed:
+                self.register_nutrition()
+
             # Ctrl + R
             elif key.char == "\x12" and self.shift_pressed:
                 self.register_data()
@@ -75,6 +79,61 @@ class CrawlerDataRegistrarTool:
             coupang_url=coupang_url,
         )
         self.app.target_product_id = res["id"]
+
+    def register_nutrition(self):
+        win32clipboard.OpenClipboard()
+        try:
+            clipboard_data = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
+            clipboard_data = clipboard_data.decode("utf-8")
+        except TypeError:
+            clipboard_data = win32clipboard.GetClipboardData(
+                win32clipboard.CF_UNICODETEXT
+            )
+        except:
+            print("There is an issue with the clipboard data format.")
+        win32clipboard.CloseClipboard()
+
+        clipboard_values = clipboard_data.split(",")
+        (
+            serving_size,
+            serving_unit,
+            calories,
+            total_carbohydrate,
+            sugars,
+            sugar_alcohols,
+            dietary_fiber,
+            allulose,
+            total_fat,
+            saturated_fat,
+            trans_fat,
+            cholesterol,
+            protein,
+            sodium,
+            calcium,
+        ) = clipboard_values
+
+        res = self.app.crawler_api.register_nutrition(
+            data={
+                "product": self.app.target_product_id,
+                "serving_size": serving_size if serving_size != "-" else None,
+                "serving_unit": serving_unit if serving_unit != "-" else None,
+                "calories": calories if calories != "-" else None,
+                "total_carbohydrate": (
+                    total_carbohydrate if total_carbohydrate != "-" else None
+                ),
+                "sugars": sugars if sugars != "-" else None,
+                "sugar_alcohols": sugar_alcohols if sugar_alcohols != "-" else None,
+                "dietary_fiber": dietary_fiber if dietary_fiber != "-" else None,
+                "allulose": allulose if allulose != "-" else None,
+                "total_fat": total_fat if total_fat != "-" else None,
+                "saturated_fat": saturated_fat if saturated_fat != "-" else None,
+                "trans_fat": trans_fat if trans_fat != "-" else None,
+                "cholesterol": cholesterol if cholesterol != "-" else None,
+                "protein": protein if protein != "-" else None,
+                "sodium": sodium if sodium != "-" else None,
+                "calcium": calcium if calcium != "-" else None,
+            }
+        )
 
     def upload_nutrition_facts_image(self, screenshot):
         focused_item = self.app.ui.tree.focus()
