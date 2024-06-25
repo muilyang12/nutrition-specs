@@ -47,21 +47,8 @@ class Product(models.Model):
 
 class Nutrition(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    serving_size = models.FloatField(null=True, blank=True)
-    serving_unit = models.CharField(max_length=10, null=True, blank=True)
-    calories = models.FloatField(null=True, blank=True)
-    total_carbohydrate = models.FloatField(null=True, blank=True)
-    sugars = models.FloatField(null=True, blank=True)
-    sugar_alcohols = models.FloatField(null=True, blank=True)
-    dietary_fiber = models.FloatField(null=True, blank=True)
-    allulose = models.FloatField(null=True, blank=True)
-    total_fat = models.FloatField(null=True, blank=True)
-    saturated_fat = models.FloatField(null=True, blank=True)
-    trans_fat = models.FloatField(null=True, blank=True)
-    cholesterol = models.FloatField(null=True, blank=True)
-    protein = models.FloatField(null=True, blank=True)
-    sodium = models.FloatField(null=True, blank=True)
-    calcium = models.FloatField(null=True, blank=True)
+    s3_url = models.CharField(max_length=300, null=True, blank=True)
+    data = models.JSONField(null=True, blank=True)
 
     class Meta:
         indexes = [
@@ -71,4 +58,4 @@ class Nutrition(models.Model):
     def __str__(self):
         product_name = self.product.product_name if self.product else "None"
 
-        return f"{product_name} - {self.calories} kcal"
+        return f"{product_name}"
