@@ -6,7 +6,7 @@ export interface FoodCategoryRs {
 
 export interface ProductRs {
   id: number;
-  food_category: number;
+  food_categories: number[];
   brand_name: string;
   product_name: string;
 }
