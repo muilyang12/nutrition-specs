@@ -17,7 +17,7 @@ export default function ProductDetail(props: Props) {
         if (key == "serving_size" || key == "serving_unit") return;
 
         return (
-          <div>
+          <div key={nutrition.id}>
             {NUTRITION_KEY_NAME_MAPPER[key as keyof typeof NUTRITION_KEY_NAME_MAPPER]}: {value}
           </div>
         );
