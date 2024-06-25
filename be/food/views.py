@@ -37,14 +37,14 @@ class ProductViewSet(viewsets.ModelViewSet):
         data = None
 
         if category_id:
-            result = self.queryset.filter(food_category_id=category_id)
+            result = self.queryset.filter(food_categories=category_id).distinct()
             serializer = self.get_serializer(result, many=True)
             data = serializer.data
 
         elif category_key:
-            result = self.queryset.select_related("food_category").filter(
-                food_category__category_key=category_key
-            )
+            result = self.queryset.filter(
+                food_categories__category_key=category_key
+            ).distinct()
             serializer = self.get_serializer(result, many=True)
             data = serializer.data
 

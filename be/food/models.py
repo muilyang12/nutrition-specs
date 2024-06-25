@@ -23,17 +23,12 @@ class FoodCategory(models.Model):
 
 
 class Product(models.Model):
-    food_category = models.ForeignKey(
-        FoodCategory, on_delete=models.SET_NULL, null=True
-    )
+    food_categories = models.ManyToManyField(FoodCategory)
     brand_name = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
     coupang_url = models.CharField(max_length=300, null=True, blank=True)
 
     class Meta:
-        indexes = [
-            models.Index(fields=["food_category"]),
-        ]
         constraints = [
             models.UniqueConstraint(
                 fields=["brand_name", "product_name"],
