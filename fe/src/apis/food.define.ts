@@ -14,9 +14,6 @@ export interface ProductRs {
 export interface NutritionRs {
   id: number;
   product: number;
-  serving_size: number;
-  calory: number;
-  carbohydrate: number;
-  protein: number;
-  fat: number;
+  s3_url: string;
+  data: string;
 }

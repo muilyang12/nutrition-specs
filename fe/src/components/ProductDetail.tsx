@@ -9,10 +9,13 @@ export default function ProductDetail(props: Props) {
 
   return (
     <>
-      <div>calory: {nutrition.calory}</div>
-      <div>carbohydrate: {nutrition.carbohydrate}</div>
-      <div>protein: {nutrition.protein}</div>
-      <div>fat: {nutrition.fat}</div>
+      {Object.entries(nutrition.data).map(([key, value]) => (
+        <div>
+          {key}: {value}
+        </div>
+      ))}
+
+      <img src={nutrition.s3_url} />
     </>
   );
 }
