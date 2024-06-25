@@ -56,6 +56,7 @@ class Nutrition(models.Model):
         ]
 
     def __str__(self):
+        brand_name = self.product.brand_name if self.product else "None"
         product_name = self.product.product_name if self.product else "None"
 
-        return f"{product_name}"
+        return f"{brand_name} - {product_name}"
