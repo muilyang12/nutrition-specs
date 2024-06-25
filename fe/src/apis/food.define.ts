@@ -15,5 +15,5 @@ export interface NutritionRs {
   id: number;
   product: number;
   s3_url: string;
-  data: string;
+  data: Record<string, string>;
 }
