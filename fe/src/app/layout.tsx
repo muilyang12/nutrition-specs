@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import PrintServiceName from "@components/PrintServiceName";
+import "./global.css";
 
 export const metadata = {
   title: "NutriInsights",
