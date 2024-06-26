@@ -1,10 +1,7 @@
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import ProductCard from "./product-card/ProductCard";
-import ProductDetail from "./ProductDetail";
 import { NutritionRs, ProductRs } from "@apis/food.define";
 import { foodApi } from "@apis/food";
+import styles from "./ProductList.module.css";
 
 interface Props {
   selectedFoodCategoryKey?: string;
@@ -27,10 +24,10 @@ export default async function ProductList(props: Props) {
   ]);
 
   return (
-    <>
+    <div className={styles.productListWrapper}>
       {productsAndNutritions.map(([product, nutrition]) => (
         <ProductCard product={product} nutrition={nutrition} />
       ))}
-    </>
+    </div>
   );
 }
