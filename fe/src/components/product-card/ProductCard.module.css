@@ -1,5 +1,7 @@
 .productCardWraper {
-    padding: 0 8px;
+    padding: 8px;
+    border-top: 1px solid var(--orange-dark);
+    border-bottom: 1px solid var(--orange-dark);
 
     display: flex;
     gap: 4px;
