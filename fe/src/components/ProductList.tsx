@@ -1,6 +1,7 @@
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import ProductCard from "./product-card/ProductCard";
 import ProductDetail from "./ProductDetail";
 import { NutritionRs, ProductRs } from "@apis/food.define";
 import { foodApi } from "@apis/food";
@@ -28,17 +29,21 @@ export default async function ProductList(props: Props) {
   return (
     <>
       {productsAndNutritions.map(([product, nutrition]) => (
-        <Accordion key={`${product.brand_name} - ${product.product_name}`}>
-          <AccordionSummary
-            aria-controls="panel1-content"
-            id={`${product.brand_name} - ${product.product_name}`}
-          >
-            {`${product.brand_name} - ${product.product_name}`}
-          </AccordionSummary>
-          <AccordionDetails>
-            <ProductDetail nutrition={nutrition} />
-          </AccordionDetails>
-        </Accordion>
+        <>
+          <ProductCard product={product} nutrition={nutrition} />
+
+          <Accordion key={`${product.brand_name} - ${product.product_name}`}>
+            <AccordionSummary
+              aria-controls="panel1-content"
+              id={`${product.brand_name} - ${product.product_name}`}
+            >
+              {`${product.brand_name} - ${product.product_name}`}
+            </AccordionSummary>
+            <AccordionDetails>
+              <ProductDetail nutrition={nutrition} />
+            </AccordionDetails>
+          </Accordion>
+        </>
       ))}
     </>
   );
