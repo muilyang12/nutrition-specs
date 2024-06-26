@@ -1,10 +1,6 @@
 .productCardWraper {
-    display: flex;
-    flex-direction: column;
-}
-
-.upper {
     height: 100px;
+    padding: 0 4px;
 
     display: flex;
     gap: 4px;
@@ -14,22 +10,16 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
-    flex: 2 2 0px;
+    flex: 2
 }
 
-.leftProductName {
-    color: #1c130d;
-    font-size: 1rem;
+.productName {
+    color: var(--black);
+    
+    font-size: 20px;
     font-weight: bold;
     line-height: 1.25;
 
-}
-
-.leftBriefInfo {
-    color: #9c6a49;
-    font-size: 0.875rem;
-    font-weight: normal;
-    line-height: 1.5;
 }
 
 .right {
@@ -37,8 +27,4 @@
     background-color: gray;
     border-radius: 1rem;
     flex: 1;
-}
-
-.nutritionTable {
-    width: 100%;
 }

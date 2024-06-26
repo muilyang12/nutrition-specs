@@ -1,4 +1,5 @@
 import { NutritionRs, ProductRs } from "@apis/food.define";
+import ProductCardTable from "./ProductCardTable";
 import styles from "./ProductCard.module.css";
 
 interface Props {
@@ -11,33 +12,16 @@ export default function ProductCard(props: Props) {
 
   return (
     <div className={styles.productCardWraper}>
-      <div className={styles.upper}>
-        <div className={styles.left}>
-          <p className={styles.leftProductName}>
-            {product.brand_name} - {product.product_name}
-          </p>
+      <div className={styles.left}>
+        <p className={styles.productName}>
+          {product.brand_name} - {product.product_name}
+        </p>
+        <div className={styles.nutritionTable}>
+          <p>{`${nutrition.data.serving_size}${nutrition.data.serving_unit} 당`}</p>
+          <ProductCardTable nutrition={nutrition} />
         </div>
-        <div className={styles.right}></div>
       </div>
-      <div className={styles.nutritionTable}>
-        <p>{`${nutrition.data.serving_size}${nutrition.data.serving_unit} 당`}</p>
-        <table className={styles.table}>
-          <tbody>
-            <tr>
-              <td>탄수화물</td>
-              <td>{`${nutrition.data.total_carbohydrate}g`}</td>
-              <td>당류</td>
-              <td>{`${nutrition.data.sugars}g`}</td>
-            </tr>
-            <tr>
-              <td>단백질</td>
-              <td>{`${nutrition.data.protein}g`}</td>
-              <td>지방</td>
-              <td>{`${nutrition.data.total_fat}g`}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div className={styles.right} />
     </div>
   );
 }
