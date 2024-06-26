@@ -1,6 +1,6 @@
 import { NUTRITION_KEY_NAME_MAPPER } from "@defines/nutrition";
 import { NutritionRs } from "@apis/food.define";
-import styles from "./ProductCard.module.css";
+import styles from "./ProductCardTable.module.css";
 
 interface Props {
   nutrition: NutritionRs;
