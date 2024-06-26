@@ -9,8 +9,6 @@ interface Props {
 export default function ProductCard(props: Props) {
   const { product, nutrition } = props;
 
-  console.log(nutrition.data);
-
   return (
     <div className={styles.productCardWraper}>
       <div className={styles.upper}>
