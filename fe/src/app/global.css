@@ -1,14 +1,24 @@
+:root {
+    --red-light: #e5d4c2;
+    --red-dark: #9c6a49;
+    --black: #1c130d;
+	--white: #ffffff;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+	background-color: var(--red-light);
 }
 
 main {
     width: 100%;
     max-width: 750px;
+    height: 100%;
 
-    height: 100%
+	background-color: var(--white);
 }
 
 /* 
