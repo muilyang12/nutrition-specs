@@ -1,6 +1,6 @@
 :root {
-    --red-light: #e5d4c2;
-    --red-dark: #9c6a49;
+    --orange-light: #e5d4c2;
+    --orange-dark: #9c6a49;
     --black: #1c130d;
 	--white: #ffffff;
 }
@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
 
-	background-color: var(--red-light);
+	background-color: var(--orange-light);
 }
 
 main {
