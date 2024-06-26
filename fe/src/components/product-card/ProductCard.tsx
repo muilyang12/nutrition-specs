@@ -21,7 +21,6 @@ export default function ProductCard(props: Props) {
           <ProductCardTable nutrition={nutrition} />
         </div>
       </div>
-      <div className={styles.right} />
     </div>
   );
 }
