@@ -7,6 +7,9 @@ class CrawlerApi:
     def get_food_categories(self):
         return requests.get(f"{CrawlerApi.BE_DOMAIN}/food/food-category").json()
 
+    def get_brands(self):
+        return requests.get(f"{CrawlerApi.BE_DOMAIN}/food/brand").json()
+
     def register_food_category(self, category_key, category_name):
         return requests.post(
             url=f"{CrawlerApi.BE_DOMAIN}/food/food-category/",
