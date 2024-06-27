@@ -22,16 +22,9 @@ class FoodCategory(models.Model):
         return f"{self.category_key} - {self.category_name}"
 
 
-class Brand(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Product(models.Model):
     food_categories = models.ManyToManyField(FoodCategory)
-    brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
+    brand_name = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
     coupang_url = models.CharField(max_length=300, null=True, blank=True)
 
