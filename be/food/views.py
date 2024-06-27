@@ -23,6 +23,11 @@ class FoodCategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+class BrandViewSet(viewsets.ModelViewSet):
+    queryset = models.Brand.objects.all()
+    serializer_class = serializers.BrandSerializer
+
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
