@@ -69,12 +69,22 @@ class CrawlerDataRegistrarTool:
         values = self.app.ui.tree.item(focused_item, "values")
 
         brand_name = values[self.app.ui.column_index["brand_name"]]
+        brand_id = None
+        for brand in self.app.brands:
+            if brand["name"] != brand_name:
+                continue
+
+            brand_id = brand["id"]
+
         product_name = values[self.app.ui.column_index["product_name"]]
         coupang_url = values[self.app.ui.column_index["url"]]
 
+        if not brand_id:
+            print("Not registered brand name.")
+
         res = self.app.crawler_api.register_product(
             food_category=self.app.current_category_id,
-            brand_name=brand_name,
+            brand=brand_id,
             product_name=product_name,
             coupang_url=coupang_url,
         )

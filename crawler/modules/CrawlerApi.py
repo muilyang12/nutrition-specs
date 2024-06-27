@@ -19,12 +19,12 @@ class CrawlerApi:
             },
         ).json()
 
-    def register_product(self, food_category, brand_name, product_name, coupang_url):
+    def register_product(self, food_category, brand, product_name, coupang_url):
         return requests.post(
             url=f"{CrawlerApi.BE_DOMAIN}/food/product/",
             data={
                 "food_categories": [food_category],
-                "brand_name": brand_name,
+                "brand": brand,
                 "product_name": product_name,
                 "coupang_url": coupang_url,
             },
