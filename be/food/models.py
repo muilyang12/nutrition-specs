@@ -38,7 +38,7 @@ class Product(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["brand_name", "product_name"],
+                fields=["brand", "product_name"],
                 name="unique_brand_product_name_pair",
             )
         ]
