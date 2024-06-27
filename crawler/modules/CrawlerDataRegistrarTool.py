@@ -41,7 +41,7 @@ class CrawlerDataRegistrarTool:
             elif key.vk == 51 and self.shift_pressed:
                 self.register_nutrition()
 
-            # Ctrl + R
+            # Ctrl + Shift + R
             elif key.char == "\x12" and self.shift_pressed:
                 self.register_data()
 

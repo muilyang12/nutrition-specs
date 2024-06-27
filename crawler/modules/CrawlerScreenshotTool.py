@@ -26,7 +26,7 @@ class CrawlerScreenshotTool:
         try:
             if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
                 self.shift_pressed = True
-            # Ctrl + Z
+            # Ctrl + Shift + Z
             elif key.char == "\x1A" and self.shift_pressed:
                 self.start_screenshot_mode()
 
