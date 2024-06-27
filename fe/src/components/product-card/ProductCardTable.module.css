@@ -5,11 +5,12 @@
   }
   
   .table td {
+    width: 25%;
     padding: 8px;
   }
   
   .table td:nth-child(odd) {
     background-color: var(--orange-extra-light);
-    font-weight: 500;
+    font-weight: 700;
   }
   
