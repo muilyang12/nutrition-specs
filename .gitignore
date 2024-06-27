@@ -16,3 +16,6 @@
 
 # Result data
 result-data.csv
+
+# DB Migration
+/db.sqlite3
