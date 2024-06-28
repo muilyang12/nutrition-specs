@@ -17,19 +17,32 @@ def print_table_names():
         print(table[0])
 
 
-def migrate_all_data(table_name):
+def migrate_all_data(table_name, is_with_id_reset=None):
     source_cursor.execute(f"SELECT * FROM {table_name}")
     rows = source_cursor.fetchall()
 
-    for row in rows:
-        placeholders = ", ".join(["?"] * len(row))
-        destination_cursor.execute(
-            f"INSERT INTO {table_name} VALUES ({placeholders})", row
-        )
-        destination_conn.commit()
+    if is_with_id_reset:
+        for index, row in enumerate(rows):
+            temp_list = list(row)
+            temp_list[0] = index + 1
+            new_row = tuple(temp_list)
+
+            placeholders = ", ".join(["?"] * len(new_row))
+            destination_cursor.execute(
+                f"INSERT INTO {table_name} VALUES ({placeholders})", new_row
+            )
+            destination_conn.commit()
+
+    else:
+        for row in rows:
+            placeholders = ", ".join(["?"] * len(row))
+            destination_cursor.execute(
+                f"INSERT INTO {table_name} VALUES ({placeholders})", row
+            )
+            destination_conn.commit()
 
 
-migrate_all_data("food_foodcategory")
+migrate_all_data("food_foodcategory", True)
 
 source_conn.close()
 destination_conn.close()
