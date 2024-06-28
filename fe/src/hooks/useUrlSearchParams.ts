@@ -9,15 +9,43 @@ export function useUrlSearchParams() {
   const setQueryParams = useCallback(
     (params: Record<string, string | undefined>) => {
       const newSearchParams = new URLSearchParams(searchParams.toString());
-      Object.entries(params).map(([key, value]) => {
+      Object.entries(params).forEach(([key, value]) => {
         if (value) newSearchParams.set(key, value);
         else newSearchParams.delete(key);
       });
 
       router.push(pathname + "?" + newSearchParams.toString());
     },
-    [searchParams]
+    [searchParams, pathname, router]
   );
 
-  return { setQueryParams };
+  const appendQueryParams = useCallback(
+    (params: Record<string, string | undefined>) => {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+      Object.entries(params).forEach(([key, value]) => {
+        if (value) newSearchParams.append(key, value);
+      });
+
+      router.push(pathname + "?" + newSearchParams.toString());
+    },
+    [searchParams, pathname, router]
+  );
+
+  const deleteQueryParams = useCallback(
+    (params: string[] | { key: string; value: string }[]) => {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+      params.forEach((param) => {
+        if (typeof param == "string") {
+          newSearchParams.delete(param);
+        } else {
+          newSearchParams.delete(param.key, param.value);
+        }
+      });
+
+      router.push(pathname + "?" + newSearchParams.toString());
+    },
+    [searchParams, pathname, router]
+  );
+
+  return { setQueryParams, appendQueryParams, deleteQueryParams };
 }
