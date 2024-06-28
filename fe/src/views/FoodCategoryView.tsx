@@ -1,4 +1,5 @@
 import FoodCategorySelect from "@components/FoodCategorySelect";
+import BrandFilter from "@components/brand-filter/BrandFilter";
 import ProductList from "@components/ProductList";
 
 interface Props {
@@ -11,6 +12,9 @@ export default function FoodCategoryView(props: Props) {
   return (
     <>
       <FoodCategorySelect />
+
+      <BrandFilter />
+
       <ProductList selectedFoodCategoryKey={selectedFoodCategoryKey} />
     </>
   );
