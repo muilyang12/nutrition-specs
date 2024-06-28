@@ -21,6 +21,7 @@ class FoodCategory(models.Model):
 
 
 class Brand(models.Model):
+    food_categories = models.ManyToManyField(FoodCategory)
     name = models.CharField(max_length=100)
 
     class Meta:

@@ -11,7 +11,7 @@ class FoodCategorySerializer(serializers.ModelSerializer):
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Brand
-        fields = ["id", "name"]
+        fields = ["id", "food_categories", "name"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
