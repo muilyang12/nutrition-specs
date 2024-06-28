@@ -5,7 +5,7 @@ from . import models
 class FoodCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FoodCategory
-        fields = ["id", "category_name", "category_key"]
+        fields = ["id", "category_name", "category_key", "parent_category"]
 
 
 class BrandSerializer(serializers.ModelSerializer):
