@@ -6,10 +6,10 @@
 }
 
 .brandFilter {
-    padding: 4px;
-    border-radius: 4px;
+    padding: 4px 8px;
+    border-radius: 8px;
 
-    background: var(--orange-extra-light);
+    background: var(--orange-light);
 
     cursor: pointer;
 }
