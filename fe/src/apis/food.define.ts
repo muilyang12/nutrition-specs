@@ -1,15 +1,23 @@
+export interface RsWithPagination<Result> {
+  count: number;
+  next: string;
+  previous: string;
+  results: Result[];
+}
+
 export interface FoodCategoryRs {
   id: number;
   category_name: string;
   category_key: string;
 }
 
-export interface ProductRs {
+export interface ProductResult {
   id: number;
   food_categories: number[];
   brand_name: string;
   product_name: string;
 }
+export type ProductRs = RsWithPagination<ProductResult>;
 
 export interface NutritionRs {
   id: number;

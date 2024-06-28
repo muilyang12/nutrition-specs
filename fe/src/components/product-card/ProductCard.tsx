@@ -1,9 +1,9 @@
-import { NutritionRs, ProductRs } from "@apis/food.define";
+import { NutritionRs, ProductResult } from "@apis/food.define";
 import ProductCardTable from "./ProductCardTable";
 import styles from "./ProductCard.module.css";
 
 interface Props {
-  product: ProductRs;
+  product: ProductResult;
   nutrition: NutritionRs;
 }
 

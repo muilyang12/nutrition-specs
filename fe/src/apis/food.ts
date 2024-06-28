@@ -8,7 +8,7 @@ export const foodApi = {
     (await axiosInstance.get<FoodCategoryRs>(`food/food-category/category-key/${categoryKey}/`))
       .data,
   getProducts: async (foodCategoryKey: string) =>
-    (await axiosInstance.get<ProductRs[]>(`food/product/?category-key=${foodCategoryKey}`)).data,
+    (await axiosInstance.get<ProductRs>(`food/product/?category-key=${foodCategoryKey}`)).data,
   getNutritions: async (productIds: number[]) => {
     const queries = productIds.map((id) => `product=${id}`).join("&");
 

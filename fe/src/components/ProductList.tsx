@@ -1,5 +1,5 @@
 import ProductCard from "./product-card/ProductCard";
-import { NutritionRs, ProductRs } from "@apis/food.define";
+import { NutritionRs, ProductResult } from "@apis/food.define";
 import { foodApi } from "@apis/food";
 import styles from "./ProductList.module.css";
 
@@ -12,13 +12,13 @@ export default async function ProductList(props: Props) {
 
   if (!selectedFoodCategoryKey) return <>음식 카테고리를 선택해주세요.</>;
 
-  const products = await foodApi.getProducts(selectedFoodCategoryKey);
+  const products = (await foodApi.getProducts(selectedFoodCategoryKey)).results;
 
   if (products.length === 0) return <>음식 데이터가 존재하지 않습니다.</>;
 
   const productIds = products.map((product) => product.id);
   const nutritions = await foodApi.getNutritions(productIds);
-  const productsAndNutritions: [ProductRs, NutritionRs][] = products.map((product, index) => [
+  const productsAndNutritions: [ProductResult, NutritionRs][] = products.map((product, index) => [
     product,
     nutritions[index],
   ]);
