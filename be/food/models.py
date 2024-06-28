@@ -11,10 +11,8 @@ class FoodCategory(models.Model):
         ]
         constraints = [
             models.UniqueConstraint(
-                fields=["category_name"], name="unique_category_name"
-            ),
-            models.UniqueConstraint(
-                fields=["category_key"], name="unique_category_key"
+                fields=["category_name", "category_key"],
+                name="unique_key_name_pair",
             ),
         ]
 
