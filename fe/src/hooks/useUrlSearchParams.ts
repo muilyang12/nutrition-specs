@@ -14,7 +14,7 @@ export function useUrlSearchParams() {
         else newSearchParams.delete(key);
       });
 
-      router.push(pathname + "?" + params.toString());
+      router.push(pathname + "?" + newSearchParams.toString());
     },
     [searchParams]
   );
