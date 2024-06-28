@@ -16,10 +16,27 @@ export default function BrandFilter() {
     foodApi.getBrands(selectedFoodCategoryKey).then((brands) => setBrands(brands));
   }, []);
 
+  const [selectedFilters, setSelectedFilters] = useState<number[]>([]);
+  const handleBrandClick = (brandId: number) => {
+    setSelectedFilters((prevFilters) => {
+      if (prevFilters.includes(brandId)) {
+        return prevFilters.filter((id) => id !== brandId);
+      } else {
+        return [...prevFilters, brandId];
+      }
+    });
+  };
+
   return (
     <div className={styles.brandFilterWraper}>
       {brands.map((brand) => (
-        <div className={styles.brandFilter} key={brand.id}>
+        <div
+          className={`${styles.brandFilter} ${
+            selectedFilters.includes(brand.id) ? styles.selectedBrandFilter : ""
+          }`}
+          onClick={() => handleBrandClick(brand.id)}
+          key={brand.id}
+        >
           {brand.name}
         </div>
       ))}

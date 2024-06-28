@@ -13,3 +13,8 @@
 
     cursor: pointer;
 }
+
+.selectedBrandFilter {
+    background: var(--orange-dark);
+    color: white;
+}
