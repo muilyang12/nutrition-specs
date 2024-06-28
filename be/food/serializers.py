@@ -15,9 +15,19 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    brand_name = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Product
-        fields = ["id", "food_categories", "brand", "product_name", "coupang_url"]
+        fields = [
+            "id",
+            "brand_name",
+            "product_name",
+            "coupang_url",
+        ]
+
+    def get_brand_name(self, obj):
+        return obj.brand.name if obj.brand else None
 
 
 class NutritionSerializer(serializers.ModelSerializer):
