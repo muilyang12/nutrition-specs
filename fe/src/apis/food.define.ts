@@ -11,6 +11,12 @@ export interface FoodCategoryRs {
   category_key: string;
 }
 
+export interface BrandRs {
+  id: number;
+  food_categories: number[];
+  name: string;
+}
+
 export interface ProductResult {
   id: number;
   food_categories: number[];
