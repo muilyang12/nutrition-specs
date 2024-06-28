@@ -2,8 +2,9 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
-from rest_framework.pagination import PageNumberPagination
+
 from . import models, serializers
+from .pagination import CustomPageNumberPagination
 
 
 class FoodCategoryViewSet(viewsets.ModelViewSet):
@@ -32,7 +33,7 @@ class BrandViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
-    pagination_class = PageNumberPagination
+    pagination_class = CustomPageNumberPagination
 
     def list(self, request, *args, **kwargs):
         category_id = request.query_params.get("food-category")
