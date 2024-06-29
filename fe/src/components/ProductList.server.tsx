@@ -4,7 +4,7 @@ import { ProductsAndNutritions } from "./ProductList.define";
 
 interface Props {
   selectedFoodCategoryKey?: string;
-  initialSelectedBrands?: string;
+  initialSelectedBrands?: string[];
 }
 
 export default async function ProductList(props: Props) {
