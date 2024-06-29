@@ -18,15 +18,17 @@ export default function BrandFilter() {
     foodApi.getBrands(selectedFoodCategoryKey).then((brands) => setBrands(brands));
   }, []);
 
-  const [selectedFilters, setSelectedFilters] = useState<number[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const handleBrandClick = (brand: BrandRs) => {
-    const isSelected = selectedFilters.includes(brand.id);
+    const isSelected = selectedFilters.includes(brand.name);
 
     if (isSelected) deleteQueryParams([{ key: "brand", value: brand.name }]);
     else appendQueryParams({ brand: brand.name });
 
     setSelectedFilters((prevFilters) =>
-      isSelected ? prevFilters.filter((id) => id !== brand.id) : [...prevFilters, brand.id]
+      isSelected
+        ? prevFilters.filter((brandName) => brandName !== brand.name)
+        : [...prevFilters, brand.name]
     );
   };
 
@@ -35,7 +37,7 @@ export default function BrandFilter() {
       {brands.map((brand) => (
         <div
           className={`${styles.brandFilter} ${
-            selectedFilters.includes(brand.id) ? styles.selectedBrandFilter : ""
+            selectedFilters.includes(brand.name) ? styles.selectedBrandFilter : ""
           }`}
           onClick={() => handleBrandClick(brand)}
           key={brand.id}
