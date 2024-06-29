@@ -19,8 +19,6 @@ export const foodApi = {
       { arrayFormat: "repeat" }
     );
 
-    // return (await axiosInstance.get<ProductRs>(`food/product/?category-key=${foodCategoryKey}&`))
-    //   .data;
     return (await axiosInstance.get<ProductRs>(`food/product/?${queries}`)).data;
   },
   getNutritions: async (productIds: number[]) => {
