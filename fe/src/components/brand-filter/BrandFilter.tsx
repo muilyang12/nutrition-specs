@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useBrandFilterStore } from "@stores/brandFilterStore";
 import { FoodCategoryPageParams } from "@defines/params.define";
 import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
 import { foodApi } from "@apis/food";
@@ -18,7 +19,8 @@ export default function BrandFilter() {
     foodApi.getBrands(selectedFoodCategoryKey).then((brands) => setBrands(brands));
   }, []);
 
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const { selectedFilters, setSelectedFilters, addSelectedFilter, deleteSelectedFilter } =
+    useBrandFilterStore();
   useEffect(() => {
     setSelectedFilters(getQueryParams("brand"));
   }, []);
@@ -26,14 +28,13 @@ export default function BrandFilter() {
   const handleBrandClick = (brand: BrandRs) => {
     const isSelected = selectedFilters.includes(brand.name);
 
-    if (isSelected) deleteQueryParams([{ key: "brand", value: brand.name }]);
-    else appendQueryParams({ brand: brand.name });
-
-    setSelectedFilters((prevFilters) =>
-      isSelected
-        ? prevFilters.filter((brandName) => brandName !== brand.name)
-        : [...prevFilters, brand.name]
-    );
+    if (isSelected) {
+      deleteQueryParams([{ key: "brand", value: brand.name }]);
+      deleteSelectedFilter(brand.name);
+    } else {
+      appendQueryParams({ brand: brand.name });
+      addSelectedFilter(brand.name);
+    }
   };
 
   return (
