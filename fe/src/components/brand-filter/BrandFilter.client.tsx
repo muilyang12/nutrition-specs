@@ -1,23 +1,19 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useBrandFilterStore } from "@stores/brandFilterStore";
-import { FoodCategoryPageParams } from "@defines/params.define";
-import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
-import { foodApi } from "@apis/food";
 import { BrandRs } from "@apis/food.define";
+import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
+import { useBrandFilterStore } from "@stores/brandFilterStore";
+import { useEffect } from "react";
 import styles from "./BrandFilter.module.css";
 
-export default function BrandFilter() {
-  const params = useParams<FoodCategoryPageParams>();
-  const selectedFoodCategoryKey = params.foodCategory;
-  const { getQueryParams, appendQueryParams, deleteQueryParams } = useUrlSearchParams();
+interface Props {
+  brands: BrandRs[];
+}
 
-  const [brands, setBrands] = useState<BrandRs[]>([]);
-  useEffect(() => {
-    foodApi.getBrands(selectedFoodCategoryKey).then((brands) => setBrands(brands));
-  }, []);
+export default function BrandFilter(props: Props) {
+  const { brands } = props;
+
+  const { getQueryParams, appendQueryParams, deleteQueryParams } = useUrlSearchParams();
 
   const { selectedFilters, setSelectedFilters, addSelectedFilter, deleteSelectedFilter } =
     useBrandFilterStore();
