@@ -1,6 +1,6 @@
 import FoodCategorySelect from "@components/FoodCategorySelect";
 import BrandFilter from "@components/brand-filter/BrandFilter";
-import ProductList from "@components/ProductList";
+import ProductList from "@components/ProductList.server";
 
 interface Props {
   selectedFoodCategoryKey?: string;
