@@ -11,7 +11,7 @@ import styles from "./BrandFilter.module.css";
 export default function BrandFilter() {
   const params = useParams<FoodCategoryPageParams>();
   const selectedFoodCategoryKey = params.foodCategory;
-  const { appendQueryParams, deleteQueryParams } = useUrlSearchParams();
+  const { getQueryParams, appendQueryParams, deleteQueryParams } = useUrlSearchParams();
 
   const [brands, setBrands] = useState<BrandRs[]>([]);
   useEffect(() => {
@@ -19,6 +19,10 @@ export default function BrandFilter() {
   }, []);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  useEffect(() => {
+    setSelectedFilters(getQueryParams("brand"));
+  }, []);
+
   const handleBrandClick = (brand: BrandRs) => {
     const isSelected = selectedFilters.includes(brand.name);
 
