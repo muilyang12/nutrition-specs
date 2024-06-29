@@ -22,7 +22,12 @@ export const foodApi = {
     return (await axiosInstance.get<ProductRs>(`food/product/?${queries}`)).data;
   },
   getNutritions: async (productIds: number[]) => {
-    const queries = productIds.map((id) => `product=${id}`).join("&");
+    const queries = qs.stringify(
+      {
+        product: productIds,
+      },
+      { arrayFormat: "repeat" }
+    );
 
     return (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?${queries}`)).data;
   },
