@@ -1,3 +1,4 @@
+import qs from "qs";
 import { axiosInstance } from "./axiosInstance";
 import { FoodCategoryRs, NutritionRs, BrandRs, ProductRs } from "./food.define";
 
@@ -9,8 +10,19 @@ export const foodApi = {
       .data,
   getBrands: async (foodCategoryKey: string) =>
     (await axiosInstance.get<BrandRs[]>(`food/brand/?category-key=${foodCategoryKey}`)).data,
-  getProducts: async (foodCategoryKey: string) =>
-    (await axiosInstance.get<ProductRs>(`food/product/?category-key=${foodCategoryKey}`)).data,
+  getProducts: async (foodCategoryKey: string, brands?: string[]) => {
+    const queries = qs.stringify(
+      {
+        "category-key": foodCategoryKey,
+        brand: brands,
+      },
+      { arrayFormat: "repeat" }
+    );
+
+    // return (await axiosInstance.get<ProductRs>(`food/product/?category-key=${foodCategoryKey}&`))
+    //   .data;
+    return (await axiosInstance.get<ProductRs>(`food/product/?${queries}`)).data;
+  },
   getNutritions: async (productIds: number[]) => {
     const queries = productIds.map((id) => `product=${id}`).join("&");
 
