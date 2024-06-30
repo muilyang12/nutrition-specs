@@ -10,7 +10,7 @@ interface Props {
   initialProductsAndNutritions: ProductsAndNutritions;
 }
 
-export default async function ProductList(props: Props) {
+export default function ProductList(props: Props) {
   const { selectedFoodCategoryKey, initialProductsAndNutritions } = props;
 
   const [productsAndNutritions, setProductsAndNutritions] = useState(initialProductsAndNutritions);
