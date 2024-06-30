@@ -6,7 +6,7 @@ import { ProductsAndNutritions } from "./ProductList.define";
 import styles from "./ProductList.module.css";
 
 interface Props {
-  selectedFoodCategoryKey?: string;
+  selectedFoodCategoryKey: string;
   initialProductsAndNutritions: ProductsAndNutritions;
 }
 
