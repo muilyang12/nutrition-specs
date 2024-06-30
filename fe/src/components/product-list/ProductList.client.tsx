@@ -18,7 +18,11 @@ export default async function ProductList(props: Props) {
   return (
     <div className={styles.productListWrapper}>
       {productsAndNutritions.map(([product, nutrition]) => (
-        <ProductCard product={product} nutrition={nutrition} />
+        <ProductCard
+          product={product}
+          nutrition={nutrition}
+          key={`${product.id}-${nutrition.id}`}
+        />
       ))}
     </div>
   );
