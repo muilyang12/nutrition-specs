@@ -3,9 +3,18 @@ from . import models
 
 
 class FoodCategorySerializer(serializers.ModelSerializer):
+    category_name = serializers.SerializerMethodField()
+
     class Meta:
         model = models.FoodCategory
         fields = ["id", "category_name", "category_key", "parent_category"]
+
+    def get_category_name(self, obj):
+        return (
+            f"{obj.parent_category.category_name} - {obj.category_name}"
+            if obj.parent_category
+            else obj.category_name
+        )
 
 
 class BrandSerializer(serializers.ModelSerializer):
