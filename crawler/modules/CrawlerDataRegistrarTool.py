@@ -24,6 +24,8 @@ class CrawlerDataRegistrarTool:
 
         self.s3_client = boto3.client("s3")
 
+        self.current_brand_id = None
+
     def on_press(self, key):
         try:
             if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
@@ -35,10 +37,14 @@ class CrawlerDataRegistrarTool:
 
             # Ctrl + Shift + 2
             elif key.vk == 50 and self.shift_pressed:
-                self.register_product()
+                self.register_brand()
 
             # Ctrl + Shift + 3
             elif key.vk == 51 and self.shift_pressed:
+                self.register_product()
+
+            # Ctrl + Shift + 4
+            elif key.vk == 52 and self.shift_pressed:
                 self.register_nutrition()
 
             # Ctrl + Shift + R
@@ -62,8 +68,24 @@ class CrawlerDataRegistrarTool:
 
         self.app.categories = self.app.crawler_api.get_food_categories()
 
+    def register_brand(self):
+        print(self.app.current_category_id, self.app.brands)
+
+        if not self.app.current_category_id:
+            return
+
+        focused_item = self.app.ui.tree.focus()
+        values = self.app.ui.tree.item(focused_item, "values")
+
+        brand_name = values[self.app.ui.column_index["brand_name"]]
+
+        res = self.app.crawler_api.register_brand(
+            [self.app.current_category_id], brand_name
+        )
+        self.current_brand_id = res["id"]
+
     def register_product(self):
-        print(self.app.current_category_id)
+        print(self.app.current_category_id, self.app.brands)
 
         focused_item = self.app.ui.tree.focus()
         values = self.app.ui.tree.item(focused_item, "values")
