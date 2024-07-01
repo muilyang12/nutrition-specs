@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import { useBrandFilterStore } from "@stores/brandFilterStore";
 import ProductCard from "@components/product-card/ProductCard";
 import { foodApi } from "@apis/food";
-import { ProductsAndNutritions } from "./ProductList.define";
+import { ProductNutritionResult } from "@apis/food.define";
 import styles from "./ProductList.module.css";
 
 interface Props {
   selectedFoodCategoryKey: string;
-  initialProductsAndNutritions: ProductsAndNutritions;
+  initialProductsNutritions: ProductNutritionResult[];
 }
 
 export default function ProductList(props: Props) {
-  const { selectedFoodCategoryKey, initialProductsAndNutritions } = props;
+  const { selectedFoodCategoryKey, initialProductsNutritions } = props;
 
-  const [productsAndNutritions, setProductsAndNutritions] = useState(initialProductsAndNutritions);
+  const [productsAndNutritions, setProductsAndNutritions] = useState(initialProductsNutritions);
 
   const { selectedFilters } = useBrandFilterStore();
 
@@ -24,14 +24,11 @@ export default function ProductList(props: Props) {
       console.log(data.results);
     });
   }, [selectedFilters]);
+
   return (
     <div className={styles.productListWrapper}>
-      {productsAndNutritions.map(([product, nutrition]) => (
-        <ProductCard
-          product={product}
-          nutrition={nutrition}
-          key={`${product.id}-${nutrition.id}`}
-        />
+      {productsAndNutritions.map((productNutrition) => (
+        <ProductCard productNutrition={productNutrition} key={productNutrition.id} />
       ))}
     </div>
   );
