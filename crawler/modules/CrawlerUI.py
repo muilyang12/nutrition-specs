@@ -34,6 +34,9 @@ class CrawlerUI:
         self.brand_name_entry.grid(row=1, column=1, padx=10, pady=10)
 
         self.brand_button = tk.Button(self.app.window, text="Add Brand")
+        self.brand_button.grid(row=1, column=3, padx=10, pady=10)
+
+        self.brand_button = tk.Button(self.app.window, text="Get Brands")
         self.brand_button.grid(row=1, column=4, padx=10, pady=10)
 
         self.brand_combobox = ttk.Combobox(self.app.window, values=["QQQQQ", "WWWWW"])
