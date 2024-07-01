@@ -91,8 +91,8 @@ class CrawlerUI:
     def initialize_category_options(self):
         categories_res = self.app.crawler_api.get_food_categories()
         for category_res in categories_res:
-            category_name = (category_res["category_name"],)
-            category_key = (category_res["category_key"],)
+            category_name = category_res["category_name"]
+            category_key = category_res["category_key"]
             category_id = category_res["id"]
 
             self.add_category(category_name, category_key, category_id)
