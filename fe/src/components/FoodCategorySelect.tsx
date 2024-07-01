@@ -17,7 +17,7 @@ export default function FoodCategorySelect() {
 
   useEffect(() => {
     foodApi.getFoodCategories().then((result) => {
-      setOptions(result.map((category) => ({ ...category })));
+      setOptions(result.filter((category) => !category.parent_category));
     });
   }, []);
 
