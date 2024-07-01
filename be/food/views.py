@@ -95,6 +95,7 @@ class NutritionViewSet(viewsets.ModelViewSet):
 
 class ProductNutritionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = serializers.ProductNutritionSerializer
+    pagination_class = CustomPageNumberPagination
 
     def get_queryset(self):
         queryset = models.Product.objects.all()
@@ -123,6 +124,13 @@ class ProductNutritionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
             raise ValidationError(code=status.HTTP_400_BAD_REQUEST)
 
         queryset = self.get_queryset()
+        queryset_with_page = self.paginate_queryset(queryset)
+
+        if queryset_with_page:
+            serializer = self.get_serializer(queryset_with_page, many=True)
+
+            return self.get_paginated_response(serializer.data)
+
         serializer = self.get_serializer(queryset, many=True)
 
         return Response(serializer.data)
