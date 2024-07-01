@@ -25,7 +25,7 @@ class CrawlerApp:
         self.selected_product_values = None
 
         self.categories = self.crawler_api.get_food_categories()
-        self.brands = self.crawler_api.get_brands()
+        self.brands = None
         self.current_category = None
         self.current_category_id = None
         self.target_product_id = None

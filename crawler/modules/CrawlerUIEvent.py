@@ -48,6 +48,7 @@ class CrawlerUIEvent:
                 continue
 
             self.app.current_category_id = category["id"]
+            self.app.brands = self.app.crawler_api.get_brands(category["id"])
 
         if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
             return
