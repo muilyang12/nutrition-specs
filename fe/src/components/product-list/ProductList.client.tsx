@@ -20,8 +20,8 @@ export default function ProductList(props: Props) {
   const { selectedFilters } = useBrandFilterStore();
 
   useEffect(() => {
-    foodApi.getProducts(selectedFoodCategoryKey, selectedFilters).then((data) => {
-      console.log(data.results);
+    foodApi.getProductNutritions(selectedFoodCategoryKey, selectedFilters).then((data) => {
+      setProductsAndNutritions(data.results);
     });
   }, [selectedFilters]);
 
