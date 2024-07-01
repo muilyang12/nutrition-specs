@@ -9,6 +9,8 @@ from .CrawlerKeyEvent import CrawlerKeyEvent
 
 class CrawlerApp:
     def __init__(self):
+        self.category_mapper = {}
+
         self.window = tk.Tk()
         self.window.title("Crawler")
         self.window.geometry("1000x600")

@@ -7,6 +7,7 @@ class CrawlerUI:
         self.app = app
 
         self.create_widgets()
+        self.initialize_options()
 
     def create_widgets(self):
         self.name_label = tk.Label(self.app.window, text="Category Name")
@@ -83,3 +84,27 @@ class CrawlerUI:
                 self.tree.column(col, width=100, stretch=tk.YES)
 
         self.tree.grid(row=4, column=0, columnspan=7, padx=10, pady=10, sticky="nsew")
+
+    def initialize_options(self):
+        categories_res = self.app.crawler_api.get_food_categories()
+        for category_res in categories_res:
+            self.add_category(
+                category_name=category_res["category_name"],
+                category_key=category_res["category_key"],
+                category_id=category_res["id"],
+            )
+        self.refresh_category()
+
+    def add_category(self, category_name, category_key, category_id):
+        if not category_name in self.app.category_mapper:
+            self.app.category_mapper[category_name] = (
+                category_id,
+                category_name,
+                category_key,
+            )
+
+    def refresh_category(self):
+        self.category_listbox.delete(0, tk.END)
+
+        for category_name in self.app.category_mapper:
+            self.category_listbox.insert(tk.END, category_name)
