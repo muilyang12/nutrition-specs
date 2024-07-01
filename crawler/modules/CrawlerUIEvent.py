@@ -22,12 +22,27 @@ class CrawlerUIEvent:
     def __init__(self, app):
         self.app = app
 
+        self.app.ui.category_button.config(command=self.on_click_add_category)
         self.app.ui.search_button.config(command=self.on_click_search)
         self.app.ui.manual_collect_button.config(command=self.on_click_manual_collect)
         self.app.ui.semi_auto_collect_button.config(
             command=self.on_click_semi_auto_collect
         )
         self.app.ui.tree.bind("<Double-Button-1>", self.on_dbclick_treeview)
+
+    def on_click_add_category(self):
+        category_name = self.app.ui.name_entry.get().strip()
+        category_key = self.app.ui.key_entry.get().strip()
+
+        category_res = self.app.crawler_api.register_food_category(
+            category_key, category_name
+        )
+        category_id = category_res["id"]
+
+        self.app.ui.add_category(category_name, category_key, category_id)
+
+        self.app.ui.name_entry.delete(0, tk.END)
+        self.app.ui.key_entry.delete(0, tk.END)
 
     def on_click_search(self):
         thread = threading.Thread(target=self.on_click_search_core)
