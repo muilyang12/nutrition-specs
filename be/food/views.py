@@ -94,36 +94,29 @@ class NutritionViewSet(viewsets.ModelViewSet):
 
 
 class ProductNutritionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = models.Product.objects.all()
     serializer_class = serializers.ProductNutritionSerializer
     pagination_class = CustomPageNumberPagination
 
-    def get_queryset(self):
-        queryset = models.Product.objects.all()
-        category_id = self.request.query_params.get("food-category")
-        category_key = self.request.query_params.get("category-key")
+    def list(self, request, *args, **kwargs):
+        category_id = request.query_params.get("food-category")
+        category_key = request.query_params.get("category-key")
         brands = self.request.query_params.getlist("brand")
 
+        if not category_id and not category_key:
+            raise ValidationError(code=status.HTTP_400_BAD_REQUEST)
+
         if category_id:
-            queryset = queryset.filter(food_categories=category_id).distinct()
+            queryset = self.queryset.filter(food_categories=category_id).distinct()
 
         elif category_key:
-            queryset = queryset.filter(
+            queryset = self.queryset.filter(
                 food_categories__category_key=category_key
             ).distinct()
 
         if brands:
             queryset = queryset.filter(brand__name__in=brands).distinct()
 
-        return queryset
-
-    def list(self, request, *args, **kwargs):
-        category_id = request.query_params.get("food-category")
-        category_key = request.query_params.get("category-key")
-
-        if not category_id and not category_key:
-            raise ValidationError(code=status.HTTP_400_BAD_REQUEST)
-
-        queryset = self.get_queryset()
         queryset_with_page = self.paginate_queryset(queryset)
 
         if queryset_with_page:
