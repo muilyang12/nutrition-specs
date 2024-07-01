@@ -23,6 +23,8 @@ class CrawlerUIEvent:
         self.app = app
 
         self.app.ui.category_button.config(command=self.on_click_add_category)
+        self.app.ui.brand_get_button.config(command=self.on_click_get_brands)
+
         self.app.ui.search_button.config(command=self.on_click_search)
         self.app.ui.manual_collect_button.config(command=self.on_click_manual_collect)
         self.app.ui.semi_auto_collect_button.config(
@@ -43,6 +45,27 @@ class CrawlerUIEvent:
 
         self.app.ui.name_entry.delete(0, tk.END)
         self.app.ui.key_entry.delete(0, tk.END)
+
+    def on_click_get_brands(self):
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        if len(selected_categories) != 1:
+            print("Please select only one category.")
+
+            return
+
+        category_name = selected_categories[0]
+        category_id = self.app.categories_mapper[category_name][0]
+        brand_res = self.app.crawler_api.get_brands(category_id)
+
+        brands = []
+        for brand in brand_res:
+            brands.append(brand["name"])
+
+        self.app.ui.set_brand_options(brands)
 
     def on_click_search(self):
         thread = threading.Thread(target=self.on_click_search_core)

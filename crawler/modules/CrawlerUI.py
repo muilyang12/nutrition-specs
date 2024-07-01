@@ -33,11 +33,11 @@ class CrawlerUI:
         self.brand_name_entry = tk.Entry(self.app.window)
         self.brand_name_entry.grid(row=1, column=1, padx=10, pady=10)
 
-        self.brand_button = tk.Button(self.app.window, text="Add Brand")
-        self.brand_button.grid(row=1, column=3, padx=10, pady=10)
+        self.brand_add_button = tk.Button(self.app.window, text="Add Brand")
+        self.brand_add_button.grid(row=1, column=3, padx=10, pady=10)
 
-        self.brand_button = tk.Button(self.app.window, text="Get Brands")
-        self.brand_button.grid(row=1, column=4, padx=10, pady=10)
+        self.brand_get_button = tk.Button(self.app.window, text="Get Brands")
+        self.brand_get_button.grid(row=1, column=4, padx=10, pady=10)
 
         self.brand_combobox = ttk.Combobox(self.app.window, values=["QQQQQ", "WWWWW"])
         self.brand_combobox.grid(row=1, column=5, columnspan=2, padx=10, pady=10)
@@ -107,3 +107,5 @@ class CrawlerUI:
 
         self.category_listbox.insert(tk.END, category_name)
 
+    def set_brand_options(self, brands):
+        self.brand_combobox["value"] = brands
