@@ -100,6 +100,7 @@ class ProductNutritionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         queryset = models.Product.objects.all()
         category_id = self.request.query_params.get("food-category")
         category_key = self.request.query_params.get("category-key")
+        brands = self.request.query_params.getlist("brand")
 
         if category_id:
             queryset = queryset.filter(food_categories=category_id).distinct()
@@ -108,6 +109,9 @@ class ProductNutritionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
             queryset = queryset.filter(
                 food_categories__category_key=category_key
             ).distinct()
+
+        if brands:
+            queryset = queryset.filter(brand__name__in=brands).distinct()
 
         return queryset
 
