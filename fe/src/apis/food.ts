@@ -1,6 +1,6 @@
 import qs from "qs";
 import { axiosInstance } from "./axiosInstance";
-import { FoodCategoryRs, NutritionRs, BrandRs, ProductRs } from "./food.define";
+import { FoodCategoryRs, NutritionRs, BrandRs, ProductRs, ProductNutritionRs } from "./food.define";
 
 export const foodApi = {
   getFoodCategories: async () =>
@@ -30,5 +30,16 @@ export const foodApi = {
     );
 
     return (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?${queries}`)).data;
+  },
+  getProductNutritions: async (foodCategoryKey: string, brands?: string[]) => {
+    const queries = qs.stringify(
+      {
+        "category-key": foodCategoryKey,
+        brand: brands,
+      },
+      { arrayFormat: "repeat" }
+    );
+
+    return (await axiosInstance.get<ProductNutritionRs>(`food/product-nutrition/?${queries}`)).data;
   },
 };
