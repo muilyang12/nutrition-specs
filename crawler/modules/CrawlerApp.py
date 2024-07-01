@@ -17,7 +17,7 @@ class CrawlerApp:
 
         self.screenshot_tool = CrawlerScreenshotTool(app=self)
 
-        self.ui = CrawlerUI(self.window)
+        self.ui = CrawlerUI(app=self)
         self.ui_event = CrawlerUIEvent(app=self)
 
         self.key_event = CrawlerKeyEvent(app=self)
