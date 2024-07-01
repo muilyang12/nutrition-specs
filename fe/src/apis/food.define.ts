@@ -19,9 +19,9 @@ export interface BrandRs {
 
 export interface ProductResult {
   id: number;
-  food_categories: number[];
   brand_name: string;
   product_name: string;
+  coupang_url: string;
 }
 export type ProductRs = RsWithPagination<ProductResult>;
 
