@@ -108,6 +108,8 @@ class CrawlerUI:
         self.category_listbox.insert(tk.END, category_name)
 
     def refresh_brand_options(self):
+        self.app.categories_mapper = {}
+
         selected_indices = self.app.ui.category_listbox.curselection()
         selected_categories = [
             self.app.ui.category_listbox.get(i) for i in selected_indices
