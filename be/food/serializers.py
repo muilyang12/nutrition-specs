@@ -19,6 +19,9 @@ class FoodCategoryGetSerializer(serializers.ModelSerializer):
         if obj.parent_category:
             return f"{obj.parent_category.category_name} - {obj.category_name}"
 
+        else:
+            return obj.category_name
+
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
