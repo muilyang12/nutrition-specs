@@ -90,22 +90,25 @@ class CrawlerUI:
 
     def initialize_category_options(self):
         categories_res = self.app.crawler_api.get_food_categories()
+
         for category_res in categories_res:
             category_name = category_res["category_name"]
             category_key = category_res["category_key"]
             category_id = category_res["id"]
 
-            self.add_category(category_name, category_key, category_id)
-
-    def add_category(self, category_name, category_key, category_id):
-        if not category_name in self.app.categories_mapper:
             self.app.categories_mapper[category_name] = (
                 category_id,
                 category_name,
                 category_key,
             )
 
-        self.category_listbox.insert(tk.END, category_name)
+            self.category_listbox.insert(tk.END, category_name)
+
+    def refresh_category_options(self):
+        self.app.categories_mapper = {}
+        self.category_listbox.delete(0, tk.END)
+
+        self.initialize_category_options()
 
     def refresh_brand_options(self):
         self.app.categories_mapper = {}

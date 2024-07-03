@@ -37,15 +37,12 @@ class CrawlerUIEvent:
         category_name = self.app.ui.name_entry.get().strip()
         category_key = self.app.ui.key_entry.get().strip()
 
-        category_res = self.app.crawler_api.register_food_category(
-            category_key, category_name
-        )
-        category_id = category_res["id"]
-
-        self.app.ui.add_category(category_name, category_key, category_id)
+        self.app.crawler_api.register_food_category(category_key, category_name)
 
         self.app.ui.name_entry.delete(0, tk.END)
         self.app.ui.key_entry.delete(0, tk.END)
+
+        self.app.ui.refresh_category_options()
 
     def on_click_add_brand(self):
         selected_indices = self.app.ui.category_listbox.curselection()
