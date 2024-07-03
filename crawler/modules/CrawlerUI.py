@@ -107,5 +107,30 @@ class CrawlerUI:
 
         self.category_listbox.insert(tk.END, category_name)
 
-    def set_brand_options(self, brands):
+    def refresh_brand_options(self):
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        if len(selected_categories) != 1:
+            print("Please select only one category.")
+
+            return
+
+        category_name = selected_categories[0]
+        category_id = self.app.categories_mapper[category_name][0]
+        brand_res = self.app.crawler_api.get_brands(category_id)
+
+        brands = []
+        for brand in brand_res:
+            brand_name = brand["name"]
+            brand_id = brand["id"]
+
+            brands.append(brand_name)
+            self.app.categories_mapper[brand_name] = (
+                brand_name,
+                brand_id,
+            )
+
         self.brand_combobox["value"] = brands

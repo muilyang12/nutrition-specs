@@ -10,6 +10,7 @@ from .CrawlerKeyEvent import CrawlerKeyEvent
 class CrawlerApp:
     def __init__(self):
         self.categories_mapper = {}
+        self.brands_mapper = {}
 
         self.window = tk.Tk()
         self.window.title("Crawler")
