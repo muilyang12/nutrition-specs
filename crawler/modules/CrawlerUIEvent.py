@@ -37,7 +37,24 @@ class CrawlerUIEvent:
         category_name = self.app.ui.name_entry.get().strip()
         category_key = self.app.ui.key_entry.get().strip()
 
-        self.app.crawler_api.register_food_category(category_key, category_name)
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        if len(selected_categories) == 1:
+            parent_category_name = selected_categories[0]
+            parent_category_id, _, _ = self.app.categories_mapper[parent_category_name]
+        elif len(selected_categories) == 0:
+            parent_category_id = None
+        else:
+            print("Please select only one category or none.")
+
+            return
+
+        self.app.crawler_api.register_food_category(
+            category_key, category_name, parent_category_id
+        )
 
         self.app.ui.name_entry.delete(0, tk.END)
         self.app.ui.key_entry.delete(0, tk.END)

@@ -12,12 +12,13 @@ class CrawlerApi:
             f"{CrawlerApi.BE_DOMAIN}/food/brand?food-category={category_id}"
         ).json()
 
-    def register_food_category(self, category_key, category_name):
+    def register_food_category(self, category_key, category_name, parent_category):
         return requests.post(
             url=f"{CrawlerApi.BE_DOMAIN}/food/food-category/",
             data={
                 "category_key": category_key,
                 "category_name": category_name,
+                "parent_category": parent_category,
             },
         ).json()
 
