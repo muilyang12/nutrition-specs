@@ -9,7 +9,12 @@ from .pagination import CustomPageNumberPagination
 
 class FoodCategoryViewSet(viewsets.ModelViewSet):
     queryset = models.FoodCategory.objects.all()
-    serializer_class = serializers.FoodCategorySerializer
+
+    def get_serializer_class(self):
+        if self.action in ["list", "retrieve"]:
+            return serializers.FoodCategoryGetSerializer
+
+        return serializers.FoodCategorySerializer
 
     @action(
         detail=False, methods=["get"], url_path="category-key/(?P<category_key>[^/.]+)"
