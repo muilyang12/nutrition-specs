@@ -111,7 +111,7 @@ class CrawlerUI:
         self.initialize_category_options()
 
     def refresh_brand_options(self):
-        self.app.categories_mapper = {}
+        self.app.brands_mapper = {}
 
         selected_indices = self.app.ui.category_listbox.curselection()
         selected_categories = [
