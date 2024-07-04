@@ -105,6 +105,7 @@ class CrawlerUIEvent:
                 "",
                 tk.END,
                 values=(
+                    "",
                     product["brand_name"],
                     product["product_name"],
                     "Manual Collect",
@@ -168,9 +169,14 @@ class CrawlerUIEvent:
         product_name = values[self.app.ui.column_index["product_name"]]
         coupang_url = values[self.app.ui.column_index["url"]]
 
-        self.app.crawler_api.register_product(
+        product_res = self.app.crawler_api.register_product(
             category_ids, brand_id, product_name, coupang_url
         )
+        product_id = product_res["id"]
+
+        new_values = (product_id, *values[1:])
+
+        self.app.ui.tree.item(focused_item, values=new_values)
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)

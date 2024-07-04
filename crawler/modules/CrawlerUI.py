@@ -70,6 +70,7 @@ class CrawlerUI:
         # =========================
 
         self.columns = (
+            "product_id",
             "brand_name",
             "product_name",
             "start_manual_collect",
