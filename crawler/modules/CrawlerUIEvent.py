@@ -27,10 +27,14 @@ class CrawlerUIEvent:
         self.app.ui.brand_get_button.config(command=self.on_click_get_brands)
 
         self.app.ui.search_button.config(command=self.on_click_search)
-        self.app.ui.manual_collect_button.config(command=self.on_click_manual_collect)
-        self.app.ui.semi_auto_collect_button.config(
-            command=self.on_click_semi_auto_collect
-        )
+
+        # self.app.ui.manual_collect_button.config(command=self.on_click_manual_collect)
+        # self.app.ui.semi_auto_collect_button.config(
+        #     command=self.on_click_semi_auto_collect
+        # )
+
+        self.app.ui.add_product_button.config(command=self.on_click_add_product)
+
         self.app.ui.tree.bind("<Double-Button-1>", self.on_dbclick_treeview)
 
     def on_click_add_category(self):
@@ -152,6 +156,17 @@ class CrawlerUIEvent:
             product_name = values[self.app.ui.column_index["product_name"]]
 
             # save_nutrition_facts(dir_path=get_path("data", category_name, product_name))
+
+    def on_click_add_product(self):
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        if len(selected_categories) != 1:
+            print("Please select only one category.")
+
+            return
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)
