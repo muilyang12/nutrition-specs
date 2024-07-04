@@ -2,15 +2,15 @@
     width: 100%;
     border-collapse: collapse;
     margin: 10px 0 0 0;
-  }
+}
   
-  .table td {
+.table td {
     width: 25%;
     padding: 8px;
-  }
+}
   
-  .table td:nth-child(odd) {
+.table td:nth-child(odd) {
     background-color: var(--orange-extra-light);
     font-weight: 700;
-  }
+}
   
