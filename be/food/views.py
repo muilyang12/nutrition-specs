@@ -55,8 +55,13 @@ class BrandViewSet(viewsets.ModelViewSet):
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = models.Product.objects.all()
-    serializer_class = serializers.ProductSerializer
     pagination_class = CustomPageNumberPagination
+
+    def get_serializer_class(self):
+        if self.action in ["list", "retrieve"]:
+            return serializers.ProductGetSerializer
+
+        return serializers.ProductSerializer
 
     def list(self, request, *args, **kwargs):
         category_id = request.query_params.get("food-category")

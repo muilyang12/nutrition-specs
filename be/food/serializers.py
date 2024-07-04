@@ -30,6 +30,18 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Product
+        fields = [
+            "id",
+            "food_categories",
+            "brand",
+            "product_name",
+            "coupang_url",
+        ]
+
+
+class ProductGetSerializer(serializers.ModelSerializer):
     brand_name = serializers.SerializerMethodField()
 
     class Meta:
