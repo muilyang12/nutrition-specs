@@ -1,0 +1,16 @@
+.compareButton {
+    padding: 12px 10px;
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    
+    background-color: var(--orange-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+
+    font-size: 16px;
+    z-index: 1000;
+    cursor: pointer;
+}
