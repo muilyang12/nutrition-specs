@@ -90,33 +90,23 @@ class CrawlerUIEvent:
 
     def on_click_search_core(self):
         query = self.app.ui.query_entry.get().strip()
-        category_name = self.app.ui.name_entry.get().strip()
-        category_key = self.app.ui.key_entry.get().strip()
-
-        self.app.current_category = (category_key, category_name)
-        self.app.current_category_id = None
-        for category in self.app.categories:
-            if (
-                category_key != category["category_key"]
-                or category_name != category["category_name"]
-            ):
-                continue
-
-            self.app.current_category_id = category["id"]
-            self.app.brands = self.app.crawler_api.get_brands(category["id"])
-
-        if len(query) == 0 or len(category_name) == 0 or len(category_key) == 0:
-            return
 
         products = get_products(search_tring=query)
+
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        category_name = selected_categories[0]
 
         for product in products:
             self.app.ui.tree.insert(
                 "",
                 tk.END,
                 values=(
-                    category_name,
-                    category_key,
+                    "CN",
+                    "CK",
                     product["brand_name"],
                     product["product_name"],
                     "Manual Collect",
