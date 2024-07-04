@@ -10,6 +10,12 @@
 .left {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
     gap: 1px;
     flex: 2
 }
