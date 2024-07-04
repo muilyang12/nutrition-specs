@@ -1,8 +1,17 @@
 import requests
+import io
+
+import boto3
 
 
 class CrawlerApi:
     BE_DOMAIN = "http://127.0.0.1:8000"
+
+    BUCKET_NAME = "muilyang12-nutrition-comparison"
+    S3_DOMAIN = ""
+
+    def __init__(self):
+        self.s3_client = boto3.client("s3")
 
     def get_food_categories(self):
         return requests.get(f"{CrawlerApi.BE_DOMAIN}/food/food-category").json()
@@ -47,3 +56,15 @@ class CrawlerApi:
             url=f"{CrawlerApi.BE_DOMAIN}/food/nutrition/",
             data={"product": product_id, "data": data, "s3_url": s3_url},
         ).json()
+
+    def upload_nutrition_facts_image(self, s3_key, screenshot):
+        with io.BytesIO() as output:
+            screenshot.save(output, format="PNG")
+            output.seek(0)
+
+            self.s3_client.put_object(
+                Bucket=self.BUCKET_NAME,
+                Key=s3_key,
+                Body=output,
+                ContentType="image/png",
+            )
