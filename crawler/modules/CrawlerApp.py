@@ -26,14 +26,5 @@ class CrawlerApp:
 
         self.key_event = CrawlerKeyEvent(app=self)
 
-        self.selected_product_values = None
-
-        self.categories = self.crawler_api.get_food_categories()
-        self.brands = None
-        self.current_category = None
-        self.current_category_id = None
-        self.target_product_id = None
-        self.target_nutrition_s3 = None
-
     def start(self):
         self.window.mainloop()
