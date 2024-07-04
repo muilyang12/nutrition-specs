@@ -198,8 +198,14 @@ class CrawlerUIEvent:
 
             self.app.selected_product_values = values
 
-            category_name = values[self.app.ui.column_index["category_name"]]
             product_name = values[self.app.ui.column_index["product_name"]]
+
+            selected_indices = self.app.ui.category_listbox.curselection()
+            selected_categories = [
+                self.app.ui.category_listbox.get(i) for i in selected_indices
+            ]
+
+            category_name = selected_categories[0]
 
             opened_image_count = 0
             for file_name in os.listdir(get_path("data", category_name, product_name)):
