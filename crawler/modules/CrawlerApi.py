@@ -7,7 +7,7 @@ import boto3
 class CrawlerApi:
     BE_DOMAIN = "http://127.0.0.1:8000"
 
-    BUCKET_NAME = "muilyang12-nutrition-comparison"
+    BUCKET_NAME = "muilyang12-nutriinsights"
     S3_DOMAIN = ""
 
     def __init__(self):
