@@ -3,7 +3,6 @@ import webbrowser
 import os
 import time
 import tkinter as tk
-from tkinter import messagebox
 
 from PIL import Image
 
@@ -243,7 +242,7 @@ class CrawlerUIEvent:
                 img = Image.open(nutrition_image_path)
                 img.show()
             else:
-                messagebox.showerror(
+                tk.messagebox.showerror(
                     "Error",
                     f"nutrition-facts.jpg file for {product_name} does not exist.",
                 )
