@@ -5,14 +5,11 @@ from pynput import keyboard
 from PIL import ImageGrab
 import win32clipboard
 
-from .CrawlerDataRegistrarTool import CrawlerDataRegistrarTool
-
 
 class CrawlerScreenshotTool:
     def __init__(self, app):
         self.app = app
 
-        self.data_registrar = CrawlerDataRegistrarTool(app=self.app)
         self.clicked_coordinates = []
         self.result_screenshot = None
 
@@ -64,7 +61,7 @@ class CrawlerScreenshotTool:
         y_end = max(start[1], end[1]) * DEVICE_PIXEL_RATIO
 
         screenshot = ImageGrab.grab(bbox=(x_start, y_start, x_end, y_end))
-        self.data_registrar.upload_nutrition_facts_image(screenshot)
+        self.app.current_image = screenshot
 
         self.copy_to_clipboard(screenshot)
         screenshot.show()

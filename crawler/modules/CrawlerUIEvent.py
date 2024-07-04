@@ -1,10 +1,12 @@
 import threading
 import webbrowser
+import uuid
 import os
 import time
 import tkinter as tk
 
 from PIL import Image
+import win32clipboard
 
 from . import constants
 
@@ -182,7 +184,40 @@ class CrawlerUIEvent:
         self.app.ui.tree.item(focused_item, values=new_values)
 
     def on_click_add_nutri(self):
-        print()
+        win32clipboard.OpenClipboard()
+        try:
+            clipboard_data = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
+            clipboard_data = clipboard_data.decode("utf-8")
+        except TypeError:
+            clipboard_data = win32clipboard.GetClipboardData(
+                win32clipboard.CF_UNICODETEXT
+            )
+        except:
+            print("There is an issue with the clipboard data format.")
+        win32clipboard.CloseClipboard()
+
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        category_name = selected_categories[0]
+
+        s3_key = get_path(category_name, f"{uuid.uuid4()}.png")
+
+        self.app.crawler_api.upload_nutrition_facts_image(
+            s3_key=s3_key, screenshot=self.app.current_image
+        )
+
+        focused_item = self.app.ui.tree.focus()
+        values = self.app.ui.tree.item(focused_item, "values")
+        product_id = values[self.app.ui.column_index["product_id"]]
+
+        self.app.crawler_api.register_nutrition(
+            product_id=product_id,
+            data=clipboard_data,
+            s3_url=s3_key,
+        )
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)

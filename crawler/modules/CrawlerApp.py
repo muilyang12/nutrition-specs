@@ -11,6 +11,7 @@ class CrawlerApp:
     def __init__(self):
         self.categories_mapper = {}
         self.brands_mapper = {}
+        self.current_image = None
 
         self.window = tk.Tk()
         self.window.title("Crawler")
