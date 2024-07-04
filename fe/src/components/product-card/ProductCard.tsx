@@ -16,8 +16,10 @@ export default function ProductCard(props: Props) {
         <p className={styles.productName}>
           {productNutrition.brand_name} - {productNutrition.product_name}
         </p>
-        <div className={styles.nutritionTable}>
-          <p>{`${nutrition.data.serving_size}${nutrition.data.serving_unit} 당`}</p>
+        <div>
+          <p className={styles.productBriefInfo}>
+            {`${nutrition.data.serving_size}${nutrition.data.serving_unit} 당 ${nutrition.data.calories}kcal`}
+          </p>
           <ProductCardTable nutrition={nutrition} />
         </div>
       </div>
