@@ -151,10 +151,26 @@ class CrawlerUIEvent:
             self.app.ui.category_listbox.get(i) for i in selected_indices
         ]
 
-        if len(selected_categories) != 1:
-            print("Please select only one category.")
+        category_ids = []
+        for category_name in selected_categories:
+            category_id, _, _ = self.app.categories_mapper[category_name]
+            category_ids.append(category_id)
 
-            return
+        focused_item = self.app.ui.tree.focus()
+        values = self.app.ui.tree.item(focused_item, "values")
+
+        brand_name = values[self.app.ui.column_index["brand_name"]]
+
+        brand_id = None
+        if brand_name in self.app.brands_mapper:
+            _, brand_id = self.app.brands_mapper[brand_name]
+
+        product_name = values[self.app.ui.column_index["product_name"]]
+        coupang_url = values[self.app.ui.column_index["url"]]
+
+        self.app.crawler_api.register_product(
+            category_ids, brand_id, product_name, coupang_url
+        )
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)
