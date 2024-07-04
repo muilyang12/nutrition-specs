@@ -216,7 +216,7 @@ class CrawlerUIEvent:
         self.app.crawler_api.register_nutrition(
             product_id=product_id,
             data=clipboard_data,
-            s3_url=s3_key,
+            s3_key=s3_key,
         )
 
     def on_dbclick_treeview(self, event):
