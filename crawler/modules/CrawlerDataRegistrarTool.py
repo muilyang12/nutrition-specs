@@ -31,18 +31,6 @@ class CrawlerDataRegistrarTool:
             if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
                 self.shift_pressed = True
 
-            # Ctrl + Shift + 1
-            elif key.vk == 49 and self.shift_pressed:
-                self.register_category()
-
-            # Ctrl + Shift + 2
-            elif key.vk == 50 and self.shift_pressed:
-                self.register_brand()
-
-            # Ctrl + Shift + 3
-            elif key.vk == 51 and self.shift_pressed:
-                self.register_product()
-
             # Ctrl + Shift + 4
             elif key.vk == 52 and self.shift_pressed:
                 self.register_nutrition()
@@ -57,60 +45,6 @@ class CrawlerDataRegistrarTool:
     def on_release(self, key):
         if key == keyboard.Key.shift_l or key == keyboard.Key.shift_r:
             self.shift_pressed = False
-
-    def register_category(self):
-        if self.app.current_category_id:
-            return
-
-        category_key, category_name = self.app.current_category
-        res = self.app.crawler_api.register_food_category(category_key, category_name)
-        self.app.current_category_id = res["id"]
-
-        self.app.categories = self.app.crawler_api.get_food_categories()
-
-    def register_brand(self):
-        print(self.app.current_category_id, self.app.brands)
-
-        if not self.app.current_category_id:
-            return
-
-        focused_item = self.app.ui.tree.focus()
-        values = self.app.ui.tree.item(focused_item, "values")
-
-        brand_name = values[self.app.ui.column_index["brand_name"]]
-
-        res = self.app.crawler_api.register_brand(
-            [self.app.current_category_id], brand_name
-        )
-        self.current_brand_id = res["id"]
-
-    def register_product(self):
-        print(self.app.current_category_id, self.app.brands)
-
-        focused_item = self.app.ui.tree.focus()
-        values = self.app.ui.tree.item(focused_item, "values")
-
-        brand_name = values[self.app.ui.column_index["brand_name"]]
-        brand_id = None
-        for brand in self.app.brands:
-            if brand["name"] != brand_name:
-                continue
-
-            brand_id = brand["id"]
-
-        product_name = values[self.app.ui.column_index["product_name"]]
-        coupang_url = values[self.app.ui.column_index["url"]]
-
-        if not brand_id:
-            print("Not registered brand name.")
-
-        res = self.app.crawler_api.register_product(
-            food_category=self.app.current_category_id,
-            brand=brand_id,
-            product_name=product_name,
-            coupang_url=coupang_url,
-        )
-        self.app.target_product_id = res["id"]
 
     def register_nutrition(self):
         win32clipboard.OpenClipboard()
