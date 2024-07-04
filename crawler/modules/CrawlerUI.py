@@ -136,7 +136,7 @@ class CrawlerUI:
             brand_id = brand["id"]
 
             brands.append(brand_name)
-            self.app.categories_mapper[brand_name] = (
+            self.app.brands_mapper[brand_name] = (
                 brand_name,
                 brand_id,
             )
