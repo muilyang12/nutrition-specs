@@ -77,8 +77,6 @@ class CrawlerUIEvent:
 
         self.app.ui.brand_name_entry.delete(0, tk.END)
 
-        self.app.ui.refresh_brand_options()
-
     def on_click_get_brands(self):
         self.app.ui.refresh_brand_options()
 
