@@ -52,8 +52,13 @@ class CrawlerUI:
         self.search_button = tk.Button(self.app.window, text="Search")
         self.search_button.grid(row=2, column=2, columnspan=2, padx=10, pady=10)
 
+        # =========================
+
         self.add_product_button = tk.Button(self.app.window, text="Add Product")
-        self.add_product_button.grid(row=2, column=4, columnspan=2, padx=10, pady=10)
+        self.add_product_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+
+        self.add_nutri_button = tk.Button(self.app.window, text="Add Nutrition")
+        self.add_nutri_button.grid(row=3, column=2, columnspan=2, padx=10, pady=10)
 
         # =========================
 
@@ -88,7 +93,7 @@ class CrawlerUI:
             else:
                 self.tree.column(col, width=100, stretch=tk.YES)
 
-        self.tree.grid(row=3, column=0, columnspan=7, padx=10, pady=10, sticky="nsew")
+        self.tree.grid(row=4, column=0, columnspan=7, padx=10, pady=10, sticky="nsew")
 
     def initialize_category_options(self):
         categories_res = self.app.crawler_api.get_food_categories()

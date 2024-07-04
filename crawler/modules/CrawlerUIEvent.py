@@ -34,6 +34,7 @@ class CrawlerUIEvent:
         # )
 
         self.app.ui.add_product_button.config(command=self.on_click_add_product)
+        self.app.ui.add_nutri_button.config(command=self.on_click_add_nutri)
 
         self.app.ui.tree.bind("<Double-Button-1>", self.on_dbclick_treeview)
 
@@ -180,6 +181,9 @@ class CrawlerUIEvent:
         new_values = (product_id, *values[1:])
 
         self.app.ui.tree.item(focused_item, values=new_values)
+
+    def on_click_add_nutri(self):
+        print()
 
     def on_dbclick_treeview(self, event):
         item = self.app.ui.tree.identify("item", event.x, event.y)
