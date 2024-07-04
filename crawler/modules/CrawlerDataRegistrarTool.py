@@ -69,9 +69,16 @@ class CrawlerDataRegistrarTool:
         focused_item = self.app.ui.tree.focus()
         values = self.app.ui.tree.item(focused_item, "values")
 
-        category_name = values[self.app.ui.column_index["category_name"]]
+        product_id = values[self.app.ui.column_index["product_id"]]
 
-        s3_key = get_path(category_name, f"{self.app.target_product_id}.png")
+        selected_indices = self.app.ui.category_listbox.curselection()
+        selected_categories = [
+            self.app.ui.category_listbox.get(i) for i in selected_indices
+        ]
+
+        category_name = selected_categories[0]
+
+        s3_key = get_path(category_name, f"{product_id}.png")
 
         with io.BytesIO() as output:
             screenshot.save(output, format="PNG")

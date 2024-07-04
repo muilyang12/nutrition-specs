@@ -172,6 +172,9 @@ class CrawlerUIEvent:
         product_res = self.app.crawler_api.register_product(
             category_ids, brand_id, product_name, coupang_url
         )
+
+        print("product_res", product_res)
+
         product_id = product_res["id"]
 
         new_values = (product_id, *values[1:])
