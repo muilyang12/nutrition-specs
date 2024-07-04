@@ -13,7 +13,7 @@ export default function ProductCard(props: Props) {
   const { productNutrition } = props;
   const nutrition = productNutrition.nutritions[0];
 
-  const { isComparing } = useCompareStore();
+  const { isComparing, selectedProducts, toggleSelectedProduct } = useCompareStore();
 
   return (
     <div className={styles.productCardWraper}>
@@ -26,6 +26,8 @@ export default function ProductCard(props: Props) {
                 color: COLOR.ORANGE_DARK,
               },
             }}
+            onChange={() => toggleSelectedProduct(productNutrition.id)}
+            value={selectedProducts.includes(productNutrition.id)}
           />
         </div>
       )}
