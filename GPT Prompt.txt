@@ -23,6 +23,7 @@
 
 {
 	"serving_size": 100,
+	"calories": 215,
 	"serving_unit": "g",
 	"sodium": 25,
 	"total_carbohydrate": 25,
