@@ -18,7 +18,7 @@ export default function CompareButton() {
       { arrayFormat: "repeat" }
     );
 
-    router.push(`/comparing?${queries}`);
+    router.push(`/compare?${queries}`);
   };
 
   return (
