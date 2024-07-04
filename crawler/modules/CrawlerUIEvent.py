@@ -105,8 +105,6 @@ class CrawlerUIEvent:
                 "",
                 tk.END,
                 values=(
-                    "CN",
-                    "CK",
                     product["brand_name"],
                     product["product_name"],
                     "Manual Collect",
