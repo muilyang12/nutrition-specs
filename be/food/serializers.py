@@ -63,7 +63,7 @@ class NutritionSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "product",
-            "s3_url",
+            "s3_key",
             "data",
         ]
 
