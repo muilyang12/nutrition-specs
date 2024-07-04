@@ -27,7 +27,7 @@ export default function ProductList(props: Props) {
 
   return (
     <div className={styles.productListWrapper}>
-      {productsAndNutritions.map((productNutrition) => (
+      {productsAndNutritions?.map((productNutrition) => (
         <ProductCard productNutrition={productNutrition} key={productNutrition.id} />
       ))}
     </div>
