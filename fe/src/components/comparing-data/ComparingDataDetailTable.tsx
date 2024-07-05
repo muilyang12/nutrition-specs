@@ -15,8 +15,8 @@ export default function ComparingDataDetailTable() {
       <thead>
         <tr>
           <td></td>
-          {productsValues.map((_, index) => (
-            <td>{index + 1}</td>
+          {productsValues.map((product, index) => (
+            <td key={`detail-thead-cell-${product.id}`}>{index + 1}</td>
           ))}
         </tr>
       </thead>
@@ -24,13 +24,16 @@ export default function ComparingDataDetailTable() {
       <tbody>
         {Object.entries(NUTRITION_KEY_NAME_MAPPER).map(([key, value]) => {
           return (
-            <tr>
+            <tr key={`detail-tbody-row-${key}`}>
               <td>{value}</td>
               {productsValues.map((product) => {
                 const nutrition = product.nutritions[0];
 
                 return (
-                  <td style={{ width: `${67 / productsValues.length}%` }}>
+                  <td
+                    style={{ width: `${67 / productsValues.length}%` }}
+                    key={`detail-tbody-cell-${product.id}`}
+                  >
                     {nutrition.data[key as keyof NutritionData]}
                   </td>
                 );

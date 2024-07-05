@@ -46,7 +46,7 @@ export default function ComparingTargets() {
         <div className={styles.comparingItems}>
           {Object.values(comparingProducts).map((product, index) => {
             return (
-              <div className={styles.comparingItem}>
+              <div className={styles.comparingItem} key={`target-product-${product.id}`}>
                 <div className={styles.comparingItemLeft}>
                   <span>{index + 1}</span>
                 </div>

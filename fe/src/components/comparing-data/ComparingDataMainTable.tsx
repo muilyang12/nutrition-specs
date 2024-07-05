@@ -24,7 +24,7 @@ export default function ComparingDataMainTable() {
           const nutrition = product.nutritions[0];
 
           return (
-            <tr>
+            <tr key={`main-tbody-row-${product.id}`}>
               <td className={styles.tableIndexCol}>{index + 1}</td>
               <td>{`${nutrition.data.calories} kcal`}</td>
               <td>{`${nutrition.data.total_carbohydrate}g`}</td>
