@@ -1,6 +1,7 @@
 "use client";
 
 import ComparingDataMainTable from "./ComparingDataMainTable";
+import ComparingDataDetailTable from "./ComparingDataDetailTable";
 import styles from "./ComparingData.module.css";
 
 export default function ComparingData() {
@@ -17,6 +18,7 @@ export default function ComparingData() {
 
           <div className={styles.comparingDataPart}>
             <span className={styles.comparingDataPartTitle}>상세</span>
+            <ComparingDataDetailTable />
           </div>
         </div>
       </div>

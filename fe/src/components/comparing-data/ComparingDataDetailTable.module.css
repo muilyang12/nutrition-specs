@@ -1,0 +1,26 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead, .table tr td:nth-child(1) {
+    font-size: 16px;
+    font-weight: 1000;
+    line-height: 1.25;
+}
+
+.table tbody tr:nth-child(even), .table thead tr {
+    background-color: var(--orange-light);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--orange-extra-light);
+}
+
+.table tr td {
+    text-align: center;
+}
+
+.table tr td:nth-child(1) {
+    width: 33%;
+}
