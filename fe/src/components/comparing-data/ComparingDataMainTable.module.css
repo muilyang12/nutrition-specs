@@ -1,0 +1,31 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableIndexCol {
+    padding: 4px;
+}
+
+.table thead {
+    font-size: 16px;
+    font-weight: 1000;
+    line-height: 1.25;
+}
+
+.table tbody tr:nth-child(even), .table thead tr {
+    background-color: var(--orange-light);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--orange-extra-light);
+}
+
+.table td {
+    text-align: center;
+}
+
+.table td:not(.tableIndexCol) {
+    width: 20%;
+    padding: 4px 2px;
+}
