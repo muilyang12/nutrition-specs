@@ -1,6 +1,13 @@
 import qs from "qs";
 import { axiosInstance } from "./axiosInstance";
-import { FoodCategoryRs, NutritionRs, BrandRs, ProductRs, ProductNutritionRs } from "./food.define";
+import {
+  FoodCategoryRs,
+  NutritionRs,
+  BrandRs,
+  ProductRs,
+  ProductNutritionRs,
+  ProductNutritionResult,
+} from "./food.define";
 
 export const foodApi = {
   getFoodCategories: async () =>
@@ -42,4 +49,6 @@ export const foodApi = {
 
     return (await axiosInstance.get<ProductNutritionRs>(`food/product-nutrition/?${queries}`)).data;
   },
+  getProductNutrition: async (productId: number) =>
+    (await axiosInstance.get<ProductNutritionResult>(`food/product-nutrition/${productId}`)).data,
 };
