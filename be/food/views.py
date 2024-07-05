@@ -103,10 +103,15 @@ class NutritionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class ProductNutritionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class ProductNutritionViewSet(
+    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
+):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductNutritionSerializer
     pagination_class = CustomPageNumberPagination
+
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
         category_id = request.query_params.get("food-category")
