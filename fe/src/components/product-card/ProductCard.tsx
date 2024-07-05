@@ -27,7 +27,7 @@ export default function ProductCard(props: Props) {
               },
             }}
             onChange={() => toggleSelectedProduct(productNutrition.id)}
-            value={selectedProducts.includes(productNutrition.id)}
+            checked={selectedProducts.includes(productNutrition.id)}
           />
         </div>
       )}
