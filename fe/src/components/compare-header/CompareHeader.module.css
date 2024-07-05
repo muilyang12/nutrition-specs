@@ -1,0 +1,18 @@
+.compareHeaderWrapper {
+    height: 50px;
+    padding: 0 5px;
+
+    display: flex;
+    align-items: center;
+
+    background-color: var(--orange-dark);
+}
+
+.compareHeaderWrapper button {
+    padding: 5px;
+
+    background-color: var(--orange-dark);
+    color: var(--white);
+
+    border: none;
+}
