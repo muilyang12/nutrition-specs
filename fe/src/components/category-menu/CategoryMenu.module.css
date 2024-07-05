@@ -1,0 +1,36 @@
+.categoryMenuWrapper {
+    width: 100%;
+    padding: 4px 4px 1px 4px;
+    margin-bottom: 3px;
+
+    display: flex;
+    gap: 4px;
+    
+    border-bottom: 1px solid var(--gray);
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    scrollbar-width: none; /* Firefox */
+}
+
+.categoryMenuWrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.categoryMenuItem {
+    padding: 4px;
+
+    display: flex;
+
+    font-size: 18px;
+    font-weight: 1000;
+    line-height: 1.25;
+
+    cursor: pointer;
+}
+
+.selectedCategoryMenuItem {
+    color: var(--orange-dark);
+    border-bottom: 2px solid var(--orange-dark);
+}

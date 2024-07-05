@@ -1,4 +1,4 @@
-import FoodCategorySelect from "@components/FoodCategorySelect";
+import CategoryMenu from "@components/category-menu/CategoryMenu.server";
 import BrandFilter from "@components/brand-filter/BrandFilter.server";
 import ProductList from "@components/product-list/ProductList.server";
 import CompareButton from "@components/compare-button/CompareButton";
@@ -12,7 +12,7 @@ export default function FoodCategoryView(props: Props) {
 
   return (
     <>
-      <FoodCategorySelect />
+      <CategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
 
       <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
 
