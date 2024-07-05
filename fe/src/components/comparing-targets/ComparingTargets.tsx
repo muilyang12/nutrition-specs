@@ -41,7 +41,7 @@ export default function ComparingTargets() {
 
   return (
     <>
-      <div className={styles.comparingTargetWrapper}>
+      <div className={styles.comparingTargetsWrapper}>
         <span className={styles.comparingTitle}>Products</span>
         <div className={styles.comparingItems}>
           {Object.values(comparingProducts).map((product) => {

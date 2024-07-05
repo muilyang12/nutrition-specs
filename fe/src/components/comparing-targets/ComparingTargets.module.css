@@ -1,18 +1,21 @@
-.comparingTargetWrapper {
-    padding: 10px;
+.comparingTargetsWrapper {
+    padding: 14px 10px;
 
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .comparingTitle {
     font-size: 26px;
     font-weight: 1000;
     line-height: 1.25;
+
+    color: var(--orange-dark);
 }
 
 .comparingItems {
+
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -34,6 +37,4 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 1.25;
-
-    color: var(--gray);
 }
