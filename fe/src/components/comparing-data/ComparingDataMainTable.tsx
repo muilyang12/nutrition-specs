@@ -1,8 +1,8 @@
 "use client";
 
 import { NUTRITION_KEY_NAME_MAPPER } from "@defines/nutrition";
-import styles from "./ComparingDataMainTable.module.css";
 import { useComparingProductsStore } from "@stores/comparingProductsStore";
+import styles from "./ComparingDataMainTable.module.css";
 
 export default function ComparingDataMainTable() {
   const { comparingProducts } = useComparingProductsStore();
