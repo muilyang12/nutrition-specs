@@ -50,5 +50,5 @@ export const foodApi = {
     return (await axiosInstance.get<ProductNutritionRs>(`food/product-nutrition/?${queries}`)).data;
   },
   getProductNutrition: async (productId: number) =>
-    (await axiosInstance.get<ProductNutritionResult>(`food/product-nutrition/${productId}`)).data,
+    (await axiosInstance.get<ProductNutritionResult>(`food/product-nutrition/${productId}/`)).data,
 };
