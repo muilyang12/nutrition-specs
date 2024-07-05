@@ -44,11 +44,16 @@ export default function ComparingTargets() {
       <div className={styles.comparingTargetsWrapper}>
         <span className={styles.comparingTitle}>Products</span>
         <div className={styles.comparingItems}>
-          {Object.values(comparingProducts).map((product) => {
+          {Object.values(comparingProducts).map((product, index) => {
             return (
               <div className={styles.comparingItem}>
-                <span>{product.product_name}</span>
-                <span>{product.brand_name}</span>
+                <div className={styles.comparingItemLeft}>
+                  <span>{index + 1}</span>
+                </div>
+                <div className={styles.comparingItemRight}>
+                  <span>{product.product_name}</span>
+                  <span>{product.brand_name}</span>
+                </div>
               </div>
             );
           })}
