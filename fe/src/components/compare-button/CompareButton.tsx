@@ -10,7 +10,7 @@ import styles from "./CompareButton.module.css";
 export default function CompareButton() {
   const router = useRouter();
 
-  const { isComparing, toggleIsComparing, selectedProducts } = useCompareStore();
+  const { isComparing, toggleIsComparing, selectedProducts, resetState } = useCompareStore();
 
   const handleClickGotoButton = () => {
     const queries = qs.stringify(
@@ -21,6 +21,10 @@ export default function CompareButton() {
     );
 
     router.push(`/compare?${queries}`);
+
+    setTimeout(() => {
+      resetState();
+    }, 500);
   };
 
   return (

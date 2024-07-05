@@ -5,7 +5,14 @@ interface CompareStore {
   toggleIsComparing: () => void;
   selectedProducts: number[];
   toggleSelectedProduct: (newProductId: number) => void;
+
+  resetState: () => void;
 }
+
+const initialState = {
+  isComparing: false,
+  selectedProducts: [],
+};
 
 export const useCompareStore = create<CompareStore>()((set) => ({
   isComparing: false,
@@ -17,4 +24,5 @@ export const useCompareStore = create<CompareStore>()((set) => ({
         ? state.selectedProducts.filter((id) => id !== newProductId)
         : [...state.selectedProducts, newProductId],
     })),
+  resetState: () => set(initialState),
 }));
