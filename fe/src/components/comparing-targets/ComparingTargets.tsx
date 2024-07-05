@@ -5,11 +5,12 @@ import { useComparingProductsStore } from "@stores/comparingProductsStore";
 import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
 import { foodApi } from "@apis/food";
 import { ProductNutritionResult } from "@apis/food.define";
+import styles from "./ComparingTargets.module.css";
 
 export default function ComparingTargets() {
   const { getQueryParams, deleteQueryParams } = useUrlSearchParams();
 
-  const { setComparingProducts } = useComparingProductsStore();
+  const { comparingProducts, setComparingProducts } = useComparingProductsStore();
 
   useEffect(() => {
     const productIds = getQueryParams("product");
@@ -38,5 +39,21 @@ export default function ComparingTargets() {
     });
   }, []);
 
-  return <></>;
+  return (
+    <>
+      <div className={styles.comparingTargetWrapper}>
+        <span className={styles.comparingTitle}>Products</span>
+        <div className={styles.comparingItems}>
+          {Object.values(comparingProducts).map((product) => {
+            return (
+              <div className={styles.comparingItem}>
+                <span>{product.product_name}</span>
+                <span>{product.brand_name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
 }
