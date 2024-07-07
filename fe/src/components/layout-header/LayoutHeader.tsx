@@ -2,15 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import styles from "./CompareHeader.module.css";
+import styles from "./LayoutHeader.module.css";
 
-export default function CompareHeader() {
+export default function LayoutHeader() {
   const router = useRouter();
 
   const handleClickBackButton = () => router.back();
 
   return (
-    <div className={styles.compareHeaderWrapper}>
+    <div className={styles.layoutHeaderWrapper}>
       <button onClick={handleClickBackButton}>
         <ArrowBackIcon />
       </button>
