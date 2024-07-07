@@ -1,3 +1,4 @@
+import LayoutHeader from "@components/layout-header/LayoutHeader";
 import CategoryMenu from "@components/category-menu/CategoryMenu.server";
 import BrandFilter from "@components/brand-filter/BrandFilter.server";
 import ProductList from "@components/product-list/ProductList.server";
@@ -12,6 +13,8 @@ export default function FoodCategoryView(props: Props) {
 
   return (
     <>
+      <LayoutHeader />
+
       <CategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
 
       <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
