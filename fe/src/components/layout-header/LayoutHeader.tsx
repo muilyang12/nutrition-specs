@@ -14,6 +14,9 @@ export default function LayoutHeader() {
       <button onClick={handleClickBackButton}>
         <ArrowBackIcon />
       </button>
+      <div className={styles.layoutHeaderTitle}>
+        <span>Nutri Insights</span>
+      </div>
     </div>
   );
 }
