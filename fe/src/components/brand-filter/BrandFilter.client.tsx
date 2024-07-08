@@ -1,9 +1,9 @@
 "use client";
 
-import { BrandRs } from "@apis/food.define";
+import { useEffect } from "react";
 import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
 import { useBrandFilterStore } from "@stores/brandFilterStore";
-import { useEffect } from "react";
+import { BrandRs } from "@apis/food.define";
 import styles from "./BrandFilter.module.css";
 
 interface Props {
