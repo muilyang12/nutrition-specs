@@ -9,10 +9,10 @@ for FILE_PATH in "$SOURCE_DIR"/*; do
     
     if [[ "$FILE_NAME" == *.html ]]; then
         FILE_BASE_NAME="${FILE_NAME%.html}"
-        S3_PATH="$S3_BUCKET/$FILE_BASE_NAME"
+        
+        /mnt/c/Program\ Files/Amazon/AWSCLIV2/aws.exe s3 cp "$FILE_PATH" "$S3_BUCKET/$FILE_BASE_NAME" --content-type text/html
     else
-        S3_PATH="$S3_BUCKET/$FILE_NAME"
+        /mnt/c/Program\ Files/Amazon/AWSCLIV2/aws.exe s3 cp "$FILE_PATH" "$S3_BUCKET/$FILE_NAME"
     fi
 
-    /mnt/c/Program\ Files/Amazon/AWSCLIV2/aws.exe s3 cp "$FILE_PATH" "$S3_PATH"
 done
