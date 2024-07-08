@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import LayoutHeader from "@components/layout-header/LayoutHeader";
 import CategoryMenu from "@components/category-menu/CategoryMenu.server";
 import BrandFilter from "@components/brand-filter/BrandFilter.server";
@@ -17,7 +18,9 @@ export default function FoodCategoryView(props: Props) {
 
       <CategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
 
-      <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
+      <Suspense>
+        <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
+      </Suspense>
 
       <ProductList selectedFoodCategoryKey={selectedFoodCategoryKey} />
 
