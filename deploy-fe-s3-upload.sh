@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SOURCE_DIR="./fe/dist"
-S3_BUCKET="s3://muilyang12-nutrition-comparison-fe"
+S3_BUCKET="s3://muilyang12-nutriinsights-fe"
 
 echo "Uploading files in $SOURCE_DIR to $S3_BUCKET"
 for FILE_PATH in "$SOURCE_DIR"/*; do
