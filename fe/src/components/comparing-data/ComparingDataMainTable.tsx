@@ -1,7 +1,8 @@
 "use client";
 
-import { NUTRITION_KEY_NAME_MAPPER } from "@defines/nutrition";
 import { useComparingProductsStore } from "@stores/comparingProductsStore";
+import { NUTRITION_KEY_NAME_MAPPER } from "@defines/nutrition";
+import { getNutritionWithUnit } from "@utils/nutrition";
 import styles from "./ComparingDataMainTable.module.css";
 
 export default function ComparingDataMainTable() {
@@ -26,11 +27,13 @@ export default function ComparingDataMainTable() {
           return (
             <tr key={`main-tbody-row-${product.id}`}>
               <td className={styles.tableIndexCol}>{index + 1}</td>
-              <td>{`${nutrition.data.calories} kcal`}</td>
-              <td>{`${nutrition.data.total_carbohydrate}g`}</td>
-              <td>{`${nutrition.data.sugars}g`}</td>
-              <td>{`${nutrition.data.total_fat}g`}</td>
-              <td>{`${nutrition.data.protein}g`}</td>
+              <td>{getNutritionWithUnit("calories", nutrition.data.calories)}</td>
+              <td>
+                {getNutritionWithUnit("total_carbohydrate", nutrition.data.total_carbohydrate)}
+              </td>
+              <td>{getNutritionWithUnit("sugars", nutrition.data.sugars)}</td>
+              <td>{getNutritionWithUnit("total_fat", nutrition.data.total_fat)}</td>
+              <td>{getNutritionWithUnit("protein", nutrition.data.protein)}</td>
             </tr>
           );
         })}
