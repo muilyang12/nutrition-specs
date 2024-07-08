@@ -1,21 +1,8 @@
-export type NutritionKey =
-  | "calories"
-  | "sodium"
-  | "total_carbohydrate"
-  | "sugars"
-  | "allulose"
-  | "dietary_fiber"
-  | "total_fat"
-  | "trans_fat"
-  | "saturated_fat"
-  | "cholesterol"
-  | "protein"
-  | "calcium"
-  | "iron"
-  | "vitamin_A"
-  | "vitamin_C";
+import { NutritionData } from "@apis/food.define";
 
-export const NUTRITION_KEY_NAME_MAPPER: Record<NutritionKey, string> = {
+export type NutritionDataKey = keyof Omit<NutritionData, "serving_size" | "serving_unit">;
+
+export const NUTRITION_KEY_NAME_MAPPER: Record<NutritionDataKey, string> = {
   calories: "열량",
   sodium: "나트륨",
   total_carbohydrate: "탄수화물",
@@ -33,7 +20,7 @@ export const NUTRITION_KEY_NAME_MAPPER: Record<NutritionKey, string> = {
   vitamin_C: "비타민C",
 };
 
-export const NUTRITION_KEY_UNIT_MAPPER: Record<NutritionKey, string> = {
+export const NUTRITION_KEY_UNIT_MAPPER: Record<NutritionDataKey, string> = {
   calories: "kcal",
   sodium: "mg",
   total_carbohydrate: "g",
