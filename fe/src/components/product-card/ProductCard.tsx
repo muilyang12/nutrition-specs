@@ -33,7 +33,7 @@ export default function ProductCard(props: Props) {
       )}
       <div className={styles.right}>
         <p className={styles.productName}>
-          {productNutrition.brand_name} - {productNutrition.product_name}
+          {`${productNutrition.brand_name} - ${productNutrition.product_name}`}
         </p>
         <div>
           <p className={styles.productBriefInfo}>
