@@ -16,3 +16,5 @@ for FILE_PATH in "$SOURCE_DIR"/*; do
     fi
 
 done
+
+/mnt/c/Program\ Files/Amazon/AWSCLIV2/aws.exe s3 cp ./fe/dist/_next s3://muilyang12-nutriinsights-fe/_next --recursive
