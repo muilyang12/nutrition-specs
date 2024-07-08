@@ -1,8 +1,8 @@
 "use client";
 
 import { useComparingProductsStore } from "@stores/comparingProductsStore";
-import { NUTRITION_KEY_NAME_MAPPER } from "@defines/nutrition";
-import { NutritionData } from "@apis/food.define";
+import { NUTRITION_KEY_NAME_MAPPER, NutritionDataKey } from "@defines/nutrition";
+import { getNutritionWithUnit } from "@utils/nutrition";
 import styles from "./ComparingDataDetailTable.module.css";
 
 export default function ComparingDataDetailTable() {
@@ -34,7 +34,10 @@ export default function ComparingDataDetailTable() {
                     style={{ width: `${67 / productsValues.length}%` }}
                     key={`detail-tbody-cell-${product.id}`}
                   >
-                    {nutrition.data[key as keyof NutritionData]}
+                    {getNutritionWithUnit(
+                      key as NutritionDataKey,
+                      nutrition.data[key as NutritionDataKey]
+                    )}
                   </td>
                 );
               })}
