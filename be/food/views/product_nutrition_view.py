@@ -39,9 +39,11 @@ class ProductNutritionViewSet(
 
         if queryset_with_page:
             serializer = self.get_serializer(queryset_with_page, many=True)
+            response = self.get_paginated_response(serializer.data)
+        else:
+            serializer = self.get_serializer(queryset, many=True)
+            response = Response(serializer.data)
 
-            return self.get_paginated_response(serializer.data)
+        response["Cache-Control"] = "max-age=3600"
 
-        serializer = self.get_serializer(queryset, many=True)
-
-        return Response(serializer.data)
+        return response
