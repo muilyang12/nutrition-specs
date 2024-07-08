@@ -1,4 +1,21 @@
-export const NUTRITION_KEY_NAME_MAPPER = {
+export type NutritionKey =
+  | "calories"
+  | "sodium"
+  | "total_carbohydrate"
+  | "sugars"
+  | "allulose"
+  | "dietary_fiber"
+  | "total_fat"
+  | "trans_fat"
+  | "saturated_fat"
+  | "cholesterol"
+  | "protein"
+  | "calcium"
+  | "iron"
+  | "vitamin_A"
+  | "vitamin_C";
+
+export const NUTRITION_KEY_NAME_MAPPER: Record<NutritionKey, string> = {
   calories: "열량",
   sodium: "나트륨",
   total_carbohydrate: "탄수화물",
