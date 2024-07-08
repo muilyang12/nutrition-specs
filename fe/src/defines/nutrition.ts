@@ -32,3 +32,21 @@ export const NUTRITION_KEY_NAME_MAPPER: Record<NutritionKey, string> = {
   vitamin_A: "비타민A",
   vitamin_C: "비타민C",
 };
+
+export const NUTRITION_KEY_UNIT_MAPPER: Record<NutritionKey, string> = {
+  calories: "kcal",
+  sodium: "mg",
+  total_carbohydrate: "g",
+  sugars: "g",
+  allulose: "g",
+  dietary_fiber: "g",
+  total_fat: "g",
+  trans_fat: "g",
+  saturated_fat: "g",
+  cholesterol: "mg",
+  protein: "g",
+  calcium: "mg",
+  iron: "mg",
+  vitamin_A: "mg",
+  vitamin_C: "mg",
+};
