@@ -14,7 +14,11 @@ class ProductNutritionViewSet(
     pagination_class = CustomPageNumberPagination
 
     def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+        response = super().retrieve(request, *args, **kwargs)
+
+        response["Cache-Control"] = "max-age=3600"
+
+        return response
 
     def list(self, request, *args, **kwargs):
         category_id = request.query_params.get("food-category")
