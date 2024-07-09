@@ -5,12 +5,14 @@ import { useComparingProductsStore } from "@stores/comparingProductsStore";
 import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
 import { foodApi } from "@apis/food";
 import { ProductNutritionResult } from "@apis/food.define";
+import LoadingSpinner from "@components/loading-spinner/LoadingSpinner";
 import styles from "./ComparingTargets.module.css";
 
 export default function ComparingTargets() {
   const { getQueryParams, deleteQueryParams } = useUrlSearchParams();
 
   const { comparingProducts, setComparingProducts } = useComparingProductsStore();
+  const productNutritions = Object.values(comparingProducts);
 
   useEffect(() => {
     const productIds = getQueryParams("product");
@@ -43,21 +45,23 @@ export default function ComparingTargets() {
     <>
       <div className={styles.comparingTargetsWrapper}>
         <span className={styles.comparingTitle}>Products</span>
-        <div className={styles.comparingItems}>
-          {Object.values(comparingProducts).map((product, index) => {
-            return (
-              <div className={styles.comparingItem} key={`target-product-${product.id}`}>
-                <div className={styles.comparingItemLeft}>
-                  <span>{index + 1}</span>
+        <LoadingSpinner isLoadingDone={productNutritions.length > 0}>
+          <div className={styles.comparingItems}>
+            {productNutritions.map((product, index) => {
+              return (
+                <div className={styles.comparingItem} key={`target-product-${product.id}`}>
+                  <div className={styles.comparingItemLeft}>
+                    <span>{index + 1}</span>
+                  </div>
+                  <div className={styles.comparingItemRight}>
+                    <span>{product.product_name}</span>
+                    <span>{product.brand_name}</span>
+                  </div>
                 </div>
-                <div className={styles.comparingItemRight}>
-                  <span>{product.product_name}</span>
-                  <span>{product.brand_name}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </LoadingSpinner>
       </div>
     </>
   );
