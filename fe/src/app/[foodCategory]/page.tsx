@@ -26,9 +26,7 @@ export default async function FoodCategoryPage({ params }: PathParams) {
 export async function generateStaticParams() {
   const foodCategories = await foodApi.getAllFoodCategories();
 
-  return foodCategories
-    .filter((foodCategory) => !foodCategory.parent_category)
-    .map((category) => ({
-      foodCategory: category.category_key,
-    }));
+  return foodCategories.map((category) => ({
+    foodCategory: category.category_key,
+  }));
 }
