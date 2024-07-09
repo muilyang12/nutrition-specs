@@ -8,17 +8,15 @@ interface Props {
 export default async function CategoryMenu(props: Props) {
   const { selectedFoodCategoryKey } = props;
 
-  const categories = await foodApi.getAllFoodCategories();
+  const mainCategories = await foodApi.getMainFoodCategories();
 
-  if (!categories) return <></>;
-
-  const parentsCategories = categories.filter((category) => !category.parent_category);
+  if (!mainCategories) return <></>;
 
   return (
     <>
       <ClientCategoryMenu
         selectedFoodCategoryKey={selectedFoodCategoryKey}
-        categories={parentsCategories}
+        mainCategories={mainCategories}
       />
     </>
   );

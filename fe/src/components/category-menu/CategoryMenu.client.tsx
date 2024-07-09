@@ -6,11 +6,11 @@ import styles from "./CategoryMenu.module.css";
 
 interface Props {
   selectedFoodCategoryKey?: string;
-  categories: FoodCategoryRs[];
+  mainCategories: FoodCategoryRs[];
 }
 
 export default function CategoryMenu(props: Props) {
-  const { selectedFoodCategoryKey, categories } = props;
+  const { selectedFoodCategoryKey, mainCategories } = props;
 
   const router = useRouter();
 
@@ -20,7 +20,7 @@ export default function CategoryMenu(props: Props) {
 
   return (
     <div className={styles.categoryMenuWrapper}>
-      {categories.map((category) => (
+      {mainCategories.map((category) => (
         <div
           className={`${styles.categoryMenuItem} ${
             selectedFoodCategoryKey == category.category_key && styles.selectedCategoryMenuItem
