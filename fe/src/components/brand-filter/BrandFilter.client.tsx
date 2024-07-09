@@ -18,7 +18,10 @@ export default function BrandFilter(props: Props) {
   const { selectedFilters, setSelectedFilters, addSelectedFilter, deleteSelectedFilter } =
     useBrandFilterStore();
   useEffect(() => {
-    setSelectedFilters(getQueryParams("brand"));
+    const brands = getQueryParams("brand");
+    if (brands.length === 0) return;
+
+    setSelectedFilters(brands);
   }, []);
 
   const handleBrandClick = (brand: BrandRs) => {
