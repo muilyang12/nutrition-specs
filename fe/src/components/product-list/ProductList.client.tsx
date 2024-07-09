@@ -10,34 +10,54 @@ import styles from "./ProductList.module.css";
 interface Props {
   selectedFoodCategoryKey: string;
   initialProductsNutritions: ProductNutritionResult[];
+  maxPage: number;
 }
 
 export default function ProductList(props: Props) {
-  const { selectedFoodCategoryKey, initialProductsNutritions } = props;
+  const { selectedFoodCategoryKey, initialProductsNutritions, maxPage } = props;
 
   const [productsAndNutritions, setProductsAndNutritions] = useState(initialProductsNutritions);
 
   const { selectedFilters } = useBrandFilterStore();
 
   const apiTriggerRef = useRef<HTMLDivElement>(null);
+  const currentPageRef = useRef<number>(1);
+  const [isAbleToLoadNext, setIsAbleToLoadNext] = useState(maxPage > 1);
 
   useEffect(() => {
+    if (selectedFilters.length === 0) return;
+
     foodApi.getProductNutritions(selectedFoodCategoryKey, selectedFilters).then((data) => {
       setProductsAndNutritions(data.results);
     });
+    currentPageRef.current = 1;
   }, [selectedFilters]);
 
   useEffect(() => {
     if (!apiTriggerRef.current) return;
 
-    const intersectionObserver = new IntersectionObserver(function (entries) {
+    const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries[0].intersectionRatio <= 0) return;
 
-      console.log("Load new data.");
+      currentPageRef.current += 1;
+
+      if (currentPageRef.current > maxPage) {
+        setIsAbleToLoadNext(false);
+        intersectionObserver.disconnect();
+
+        return;
+      }
+
+      foodApi
+        .getProductNutritions(selectedFoodCategoryKey, selectedFilters, currentPageRef.current)
+        .then((data) => {
+          setProductsAndNutritions((prev) => [...prev, ...data.results]);
+        })
+        .catch(() => intersectionObserver.disconnect());
     });
 
     intersectionObserver.observe(apiTriggerRef.current);
-  }, []);
+  }, [selectedFilters]);
 
   return (
     <>
@@ -46,7 +66,7 @@ export default function ProductList(props: Props) {
           <ProductCard productNutrition={productNutrition} key={productNutrition.id} />
         ))}
       </div>
-      <div ref={apiTriggerRef} className={styles.apiTrigger} />
+      {isAbleToLoadNext && <div ref={apiTriggerRef} className={styles.apiTrigger} />}
     </>
   );
 }
