@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import classNames from "classnames";
 import qs from "qs";
 import { useCompareStore } from "@stores/compareStore";
 import styles from "./CompareButton.module.css";
@@ -39,7 +40,10 @@ export default function CompareButton() {
             <CloseIcon fontSize="small" />
           </button>
           <button
-            className={`${styles.gotoButton} ${selectedProducts.length < 2 ? styles.disabled : ""}`}
+            className={classNames(
+              styles.gotoButton,
+              selectedProducts.length < 2 && styles.disabled
+            )}
             onClick={handleClickGotoButton}
           >
             <ArrowForwardIcon fontSize="small" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import classNames from "classnames";
 import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
 import { useBrandFilterStore } from "@stores/brandFilterStore";
 import { BrandRs } from "@apis/food.define";
@@ -40,9 +41,10 @@ export default function BrandFilter(props: Props) {
     <div className={styles.brandFilterWraper}>
       {brands.map((brand) => (
         <div
-          className={`${styles.brandFilter} ${
-            selectedFilters.includes(brand.name) ? styles.selectedBrandFilter : ""
-          }`}
+          className={classNames(
+            styles.brandFilter,
+            selectedFilters.includes(brand.name) && styles.selectedBrandFilter
+          )}
           onClick={() => handleBrandClick(brand)}
           key={brand.id}
         >

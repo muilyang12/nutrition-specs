@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import classNames from "classnames";
 import { FoodCategoryRs } from "@apis/food.define";
 import styles from "./MainCategoryMenu.module.css";
 
@@ -22,9 +23,10 @@ export default function MainCategoryMenu(props: Props) {
     <div className={styles.mainCategoryMenuWrapper}>
       {mainCategories.map((category) => (
         <div
-          className={`${styles.mainCategoryMenuItem} ${
+          className={classNames(
+            styles.mainCategoryMenuItem,
             selectedFoodCategoryKey == category.category_key && styles.selectedMainCategoryMenuItem
-          }`}
+          )}
           onClick={handleClickMenuItem(category.category_key)}
           key={category.id}
         >
