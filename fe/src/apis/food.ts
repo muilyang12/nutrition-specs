@@ -12,6 +12,10 @@ import {
 export const foodApi = {
   getAllFoodCategories: async () =>
     (await axiosInstance.get<FoodCategoryRs[]>("food/food-category/")).data,
+  getMainFoodCategories: async () =>
+    (await axiosInstance.get<FoodCategoryRs[]>("food/food-category/main")).data,
+  getSubFoodCategories: async (mainCategoryKey: string) =>
+    (await axiosInstance.get<FoodCategoryRs[]>(`food/food-category/sub/${mainCategoryKey}`)).data,
   getFoodCategoryByCategoryKey: async (categoryKey: string) =>
     (await axiosInstance.get<FoodCategoryRs>(`food/food-category/category-key/${categoryKey}/`))
       .data,
