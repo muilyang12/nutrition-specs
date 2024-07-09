@@ -36,3 +36,19 @@ class FoodCategoryViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="sub/(?P<main_category_key>[^/.]+)",
+    )
+    def get_sub_categories(self, request, main_category_key):
+        try:
+            main_category = self.queryset.get(category_key=main_category_key)
+        except models.FoodCategory.DoesNotExist:
+            raise ValidationError(code=status.HTTP_404_NOT_FOUND)
+
+        sub_categories = main_category.subCategories.all()
+
+        serializer = self.get_serializer(sub_categories, many=True)
+
+        return Response(serializer.data)
