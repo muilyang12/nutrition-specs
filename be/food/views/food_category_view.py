@@ -27,3 +27,12 @@ class FoodCategoryViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(food_category)
 
         return Response(serializer.data)
+
+    @action(detail=False, methods=["get"], url_path="main")
+    def get_main_categories(self, request):
+        main_categories = self.queryset.filter(parent_category__isnull=True)
+
+        serializer = self.get_serializer(main_categories, many=True)
+
+        return Response(serializer.data)
+
