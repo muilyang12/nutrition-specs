@@ -14,13 +14,15 @@ export default function FoodCategoryView(props: Props) {
 
   return (
     <>
-      <LayoutHeader />
+      <header>
+        <LayoutHeader />
 
-      <CategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
+        <CategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
 
-      <Suspense>
-        <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
-      </Suspense>
+        <Suspense>
+          <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
+        </Suspense>
+      </header>
 
       <ProductList selectedFoodCategoryKey={selectedFoodCategoryKey} />
 

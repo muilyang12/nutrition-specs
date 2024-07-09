@@ -34,6 +34,12 @@ main {
 	background-color: var(--white);
 }
 
+header {
+	position: sticky;
+	top: 0;
+	left: 0;
+}
+
 /* 
     http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126

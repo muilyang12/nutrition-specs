@@ -4,6 +4,8 @@
 
     display: flex;
     gap: 4px;
+
+    background-color: var(--white);
 }
 
 .brandFilter {
