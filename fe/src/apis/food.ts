@@ -10,7 +10,7 @@ import {
 } from "./food.define";
 
 export const foodApi = {
-  getFoodCategories: async () =>
+  getAllFoodCategories: async () =>
     (await axiosInstance.get<FoodCategoryRs[]>("food/food-category/")).data,
   getFoodCategoryByCategoryKey: async (categoryKey: string) =>
     (await axiosInstance.get<FoodCategoryRs>(`food/food-category/category-key/${categoryKey}/`))

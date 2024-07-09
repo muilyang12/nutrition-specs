@@ -8,7 +8,7 @@ interface Props {
 export default async function CategoryMenu(props: Props) {
   const { selectedFoodCategoryKey } = props;
 
-  const categories = await foodApi.getFoodCategories();
+  const categories = await foodApi.getAllFoodCategories();
 
   if (!categories) return <></>;
 
