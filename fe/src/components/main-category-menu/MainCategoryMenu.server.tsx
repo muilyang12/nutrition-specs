@@ -15,7 +15,7 @@ export default async function MainCategoryMenu(props: Props) {
   return (
     <>
       <ClientMainCategoryMenu
-        selectedFoodCategoryKey={selectedFoodCategoryKey}
+        selectedMainCategoryKey={selectedFoodCategoryKey}
         mainCategories={mainCategories}
       />
     </>

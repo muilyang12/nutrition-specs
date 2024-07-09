@@ -6,12 +6,12 @@ import { FoodCategoryRs } from "@apis/food.define";
 import styles from "./MainCategoryMenu.module.css";
 
 interface Props {
-  selectedFoodCategoryKey?: string;
+  selectedMainCategoryKey?: string;
   mainCategories: FoodCategoryRs[];
 }
 
 export default function MainCategoryMenu(props: Props) {
-  const { selectedFoodCategoryKey, mainCategories } = props;
+  const { selectedMainCategoryKey, mainCategories } = props;
 
   const router = useRouter();
 
@@ -25,7 +25,7 @@ export default function MainCategoryMenu(props: Props) {
         <div
           className={classNames(
             styles.mainCategoryMenuItem,
-            selectedFoodCategoryKey == category.category_key && styles.selectedMainCategoryMenuItem
+            selectedMainCategoryKey == category.category_key && styles.selectedMainCategoryMenuItem
           )}
           onClick={handleClickMenuItem(category.category_key)}
           key={category.id}
