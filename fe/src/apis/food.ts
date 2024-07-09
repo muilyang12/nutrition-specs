@@ -38,11 +38,12 @@ export const foodApi = {
 
     return (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?${queries}`)).data;
   },
-  getProductNutritions: async (foodCategoryKey: string, brands?: string[]) => {
+  getProductNutritions: async (foodCategoryKey: string, brands?: string[], page?: number) => {
     const queries = qs.stringify(
       {
         "category-key": foodCategoryKey,
         brand: brands,
+        page: page,
       },
       { arrayFormat: "repeat" }
     );
