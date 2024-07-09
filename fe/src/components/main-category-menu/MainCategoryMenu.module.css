@@ -1,4 +1,4 @@
-.categoryMenuWrapper {
+.mainCategoryMenuWrapper {
     width: 100%;
     padding: 4px 4px 1px 4px;
 
@@ -14,11 +14,11 @@
     scrollbar-width: none; /* Firefox */
 }
 
-.categoryMenuWrapper::-webkit-scrollbar {
+.mainCategoryMenuWrapper::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
 
-.categoryMenuItem {
+.mainCategoryMenuItem {
     padding: 4px;
 
     display: flex;
@@ -30,7 +30,7 @@
     cursor: pointer;
 }
 
-.selectedCategoryMenuItem {
+.selectedMainCategoryMenuItem {
     color: var(--orange-dark);
     border-bottom: 2px solid var(--orange-dark);
 }

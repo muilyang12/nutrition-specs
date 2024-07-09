@@ -1,11 +1,11 @@
 import { foodApi } from "@apis/food";
-import ClientCategoryMenu from "./CategoryMenu.client";
+import ClientMainCategoryMenu from "./MainCategoryMenu.client";
 
 interface Props {
   selectedFoodCategoryKey?: string;
 }
 
-export default async function CategoryMenu(props: Props) {
+export default async function MainCategoryMenu(props: Props) {
   const { selectedFoodCategoryKey } = props;
 
   const mainCategories = await foodApi.getMainFoodCategories();
@@ -14,7 +14,7 @@ export default async function CategoryMenu(props: Props) {
 
   return (
     <>
-      <ClientCategoryMenu
+      <ClientMainCategoryMenu
         selectedFoodCategoryKey={selectedFoodCategoryKey}
         mainCategories={mainCategories}
       />

@@ -2,14 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { FoodCategoryRs } from "@apis/food.define";
-import styles from "./CategoryMenu.module.css";
+import styles from "./MainCategoryMenu.module.css";
 
 interface Props {
   selectedFoodCategoryKey?: string;
   mainCategories: FoodCategoryRs[];
 }
 
-export default function CategoryMenu(props: Props) {
+export default function MainCategoryMenu(props: Props) {
   const { selectedFoodCategoryKey, mainCategories } = props;
 
   const router = useRouter();
@@ -19,11 +19,11 @@ export default function CategoryMenu(props: Props) {
   };
 
   return (
-    <div className={styles.categoryMenuWrapper}>
+    <div className={styles.mainCategoryMenuWrapper}>
       {mainCategories.map((category) => (
         <div
-          className={`${styles.categoryMenuItem} ${
-            selectedFoodCategoryKey == category.category_key && styles.selectedCategoryMenuItem
+          className={`${styles.mainCategoryMenuItem} ${
+            selectedFoodCategoryKey == category.category_key && styles.selectedMainCategoryMenuItem
           }`}
           onClick={handleClickMenuItem(category.category_key)}
           key={category.id}
