@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: PathParams) {
   const foodCategory = await foodApi.getFoodCategoryByCategoryKey(params.foodCategory);
 
   return {
-    title: `NutriInsights - Comparing ${foodCategory.category_name}`,
+    title: `NutriSpec - Comparing ${foodCategory.category_name}`,
   };
 }
 

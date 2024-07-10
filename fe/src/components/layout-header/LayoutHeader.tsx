@@ -15,7 +15,7 @@ export default function LayoutHeader() {
         <ArrowBackIcon />
       </button>
       <div className={styles.layoutHeaderTitle}>
-        <span>Nutri Insights</span>
+        <span>Nutri Spec</span>
       </div>
     </div>
   );

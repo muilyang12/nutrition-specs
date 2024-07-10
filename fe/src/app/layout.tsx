@@ -4,7 +4,7 @@ import PrintServiceName from "@components/PrintServiceName";
 import "./global.css";
 
 export const metadata = {
-  title: "NutriInsights",
+  title: "NutriSpec",
   description: "Help me to get insights about nutrition facts of foods.",
 };
 
