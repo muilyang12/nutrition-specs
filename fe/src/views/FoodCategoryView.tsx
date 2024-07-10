@@ -1,7 +1,5 @@
-import { Suspense } from "react";
 import LayoutHeader from "@components/layout-header/LayoutHeader";
-import MainCategoryMenu from "@components/main-category-menu/MainCategoryMenu.server";
-import BrandFilter from "@components/brand-filter/BrandFilter.server";
+import CategoryMenu from "@components/category-menu/CategoryMenu.server";
 import ProductList from "@components/product-list/ProductList.server";
 import CompareButton from "@components/compare-button/CompareButton";
 
@@ -17,11 +15,7 @@ export default function FoodCategoryView(props: Props) {
       <header>
         <LayoutHeader />
 
-        <MainCategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
-
-        <Suspense>
-          <BrandFilter selectedFoodCategoryKey={selectedFoodCategoryKey} />
-        </Suspense>
+        <CategoryMenu selectedFoodCategoryKey={selectedFoodCategoryKey} />
       </header>
 
       <ProductList selectedFoodCategoryKey={selectedFoodCategoryKey} />

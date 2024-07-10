@@ -6,8 +6,8 @@ import { FoodCategoryRs } from "@apis/food.define";
 import styles from "./MainCategoryMenu.module.css";
 
 interface Props {
-  selectedMainCategoryKey?: string;
   mainCategories: FoodCategoryRs[];
+  selectedMainCategoryKey?: string;
 }
 
 export default function MainCategoryMenu(props: Props) {

@@ -1,5 +1,5 @@
 import LayoutHeader from "@components/layout-header/LayoutHeader";
-import MainCategoryMenu from "@components/main-category-menu/MainCategoryMenu.server";
+import CategoryMenu from "@components/category-menu/CategoryMenu.server";
 import ProductList from "@components/product-list/ProductList.server";
 
 export default function HomeView() {
@@ -7,7 +7,7 @@ export default function HomeView() {
     <>
       <LayoutHeader />
 
-      <MainCategoryMenu />
+      <CategoryMenu />
 
       <ProductList />
     </>

@@ -1,0 +1,23 @@
+.subCategoryWraper {
+    width: 100%;
+    padding: 10px 8px;
+
+    display: flex;
+    gap: 4px;
+
+    background-color: var(--white);
+}
+
+.subCategory {
+    padding: 4px 8px;
+    border-radius: 8px;
+
+    background: var(--orange-light);
+
+    cursor: pointer;
+}
+
+.selectedSubCategory {
+    background: var(--orange-dark);
+    color: white;
+}

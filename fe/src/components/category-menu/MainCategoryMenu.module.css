@@ -6,7 +6,7 @@
     gap: 4px;
     
     background-color: var(--white);
-    border-bottom: 1px solid var(--gray);
+    border-bottom: 2px solid var(--gray);
 
     overflow-x: auto;
     white-space: nowrap;
