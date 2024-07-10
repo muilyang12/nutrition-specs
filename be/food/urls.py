@@ -11,6 +11,7 @@ router.register("nutrition", views.NutritionViewSet)
 router.register(
     "product-nutrition", views.ProductNutritionViewSet, basename="product-nutrition"
 )
+router.register("mineral", views.MineralVitaminViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

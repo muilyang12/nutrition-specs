@@ -77,3 +77,12 @@ class Nutrition(models.Model):
         product_name = self.product.product_name if self.product else "None"
 
         return f"{brand_name} - {product_name}"
+
+
+class MineralVitamin(models.Model):
+    name = models.CharField(max_length=100)
+    eng_name = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.name
