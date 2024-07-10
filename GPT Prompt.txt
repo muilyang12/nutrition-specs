@@ -11,6 +11,7 @@
 1. 에리스리톨은 sugar_alcohols 키 값을 사용해서 응답해줘.
 2. 알룰로스는 allulose, 식이섬유는 dietary_fiber, 엽산은 folate, 아연은 zinc를 키 값으로 사용해서 응답해줘.
 3. serving_unit의 경우 SI 단위계에 맞는 표현을 사용해줘. "ml" 말고 "mL"을 사용해달라는 말이야.
+4. 표시되어 있지 않은 정보는 표시하지 않으면 좋겠어. 식이섬유 값이 없을 때 dietary_fiber: 0 이라고 쓰지 말라는 말이야.
 
 <Example>
 100g 당 215 kcal
