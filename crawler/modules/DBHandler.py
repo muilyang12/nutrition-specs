@@ -36,8 +36,4 @@ class DBHandler:
 
         rows = self.cursor.fetchall()
 
-        if rows:
-            for row in rows:
-                print(row)
-        else:
-            print(f"No data found in table '{table_name}'")
+        return rows
