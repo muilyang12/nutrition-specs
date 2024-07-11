@@ -9,9 +9,7 @@ router.register("brand", views.BrandViewSet)
 router.register("product", views.ProductViewSet)
 router.register("nutrition", views.NutritionViewSet)
 router.register("ingredient", views.IngredientViewSet)
-router.register(
-    "product-detail", views.ProductDatailViewSet, basename="product-nutrition"
-)
+router.register("product-detail", views.ProductDatailViewSet, basename="product-detail")
 router.register("mineral", views.MineralVitaminViewSet)
 
 urlpatterns = [
