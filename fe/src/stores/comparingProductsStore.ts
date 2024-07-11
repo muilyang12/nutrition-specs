@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import { ProductNutritionResult } from "@apis/food.define";
+import { ProductDetailResult } from "@apis/food.define";
 
 interface ComparingProducts {
-  comparingProducts: Record<string, ProductNutritionResult>;
-  setComparingProducts: (newProductNutritions: Record<string, ProductNutritionResult>) => void;
+  comparingProducts: Record<string, ProductDetailResult>;
+  setComparingProducts: (newProductNutritions: Record<string, ProductDetailResult>) => void;
 }
 
 export const useComparingProductsStore = create<ComparingProducts>()((set) => ({
   comparingProducts: {},
-  setComparingProducts: (newProductNutritions: Record<string, ProductNutritionResult>) =>
+  setComparingProducts: (newProductNutritions: Record<string, ProductDetailResult>) =>
     set(() => ({ comparingProducts: newProductNutritions })),
 }));

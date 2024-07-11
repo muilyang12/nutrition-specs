@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useComparingProductsStore } from "@stores/comparingProductsStore";
 import { useUrlSearchParams } from "@hooks/useUrlSearchParams";
 import { foodApi } from "@apis/food";
-import { ProductNutritionResult } from "@apis/food.define";
+import { ProductDetailResult } from "@apis/food.define";
 import LoadingSpinner from "@components/loading-spinner/LoadingSpinner";
 import styles from "./ComparingTargets.module.css";
 
@@ -22,14 +22,14 @@ export default function ComparingTargets() {
         const idNum = Number(id);
 
         if (Number.isInteger(idNum)) {
-          return foodApi.getProductNutrition(idNum);
+          return foodApi.getProductDetail(idNum);
         } else {
           deleteQueryParams([{ key: "product", value: id }]);
           return;
         }
       })
     ).then((result) => {
-      const newProductNutritions: Record<string, ProductNutritionResult> = {};
+      const newProductNutritions: Record<string, ProductDetailResult> = {};
 
       result.forEach((data, index) => {
         if (!data) return;

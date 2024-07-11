@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { useBrandFilterStore } from "@stores/brandFilterStore";
 import ProductCard from "@components/product-card/ProductCard";
 import { foodApi } from "@apis/food";
-import { ProductNutritionResult } from "@apis/food.define";
+import { ProductDetailResult } from "@apis/food.define";
 import styles from "./ProductList.module.css";
 
 interface Props {
   selectedFoodCategoryKey: string;
-  initialProductsNutritions: ProductNutritionResult[];
+  initialProductsNutritions: ProductDetailResult[];
   maxPage: number;
 }
 
@@ -27,7 +27,7 @@ export default function ProductList(props: Props) {
   useEffect(() => {
     if (selectedFilters.length === 0) return;
 
-    foodApi.getProductNutritions(selectedFoodCategoryKey, selectedFilters).then((data) => {
+    foodApi.getProductDetails(selectedFoodCategoryKey, selectedFilters).then((data) => {
       setProductsAndNutritions(data.results);
     });
     currentPageRef.current = 1;
@@ -49,7 +49,7 @@ export default function ProductList(props: Props) {
       }
 
       foodApi
-        .getProductNutritions(selectedFoodCategoryKey, selectedFilters, currentPageRef.current)
+        .getProductDetails(selectedFoodCategoryKey, selectedFilters, currentPageRef.current)
         .then((data) => {
           setProductsAndNutritions((prev) => [...prev, ...data.results]);
         })

@@ -5,8 +5,8 @@ import {
   NutritionRs,
   BrandRs,
   ProductRs,
-  ProductNutritionRs,
-  ProductNutritionResult,
+  ProductDetailRs,
+  ProductDetailResult,
 } from "./food.define";
 
 export const foodApi = {
@@ -42,7 +42,7 @@ export const foodApi = {
 
     return (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?${queries}`)).data;
   },
-  getProductNutritions: async (foodCategoryKey: string, brands?: string[], page?: number) => {
+  getProductDetails: async (foodCategoryKey: string, brands?: string[], page?: number) => {
     const queries = qs.stringify(
       {
         "category-key": foodCategoryKey,
@@ -52,8 +52,8 @@ export const foodApi = {
       { arrayFormat: "repeat" }
     );
 
-    return (await axiosInstance.get<ProductNutritionRs>(`food/product-nutrition/?${queries}`)).data;
+    return (await axiosInstance.get<ProductDetailRs>(`food/product-detail/?${queries}`)).data;
   },
-  getProductNutrition: async (productId: number) =>
-    (await axiosInstance.get<ProductNutritionResult>(`food/product-nutrition/${productId}/`)).data,
+  getProductDetail: async (productId: number) =>
+    (await axiosInstance.get<ProductDetailResult>(`food/product-detail/${productId}/`)).data,
 };

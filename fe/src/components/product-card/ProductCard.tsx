@@ -1,12 +1,12 @@
 import Checkbox from "@mui/material/Checkbox";
 import { useCompareStore } from "@stores/compareStore";
 import { COLOR } from "@defines/css";
-import { ProductNutritionResult } from "@apis/food.define";
+import { ProductDetailResult } from "@apis/food.define";
 import ProductCardTable from "./ProductCardTable";
 import styles from "./ProductCard.module.css";
 
 interface Props {
-  productNutrition: ProductNutritionResult;
+  productNutrition: ProductDetailResult;
 }
 
 export default function ProductCard(props: Props) {

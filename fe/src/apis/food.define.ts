@@ -53,7 +53,7 @@ export interface NutritionData {
   vitamin_C: number;
 }
 
-export interface ProductNutritionResult extends ProductResult {
+export interface ProductDetailResult extends ProductResult {
   nutritions: NutritionRs[];
 }
-export type ProductNutritionRs = RsWithPagination<ProductNutritionResult>;
+export type ProductDetailRs = RsWithPagination<ProductDetailResult>;

@@ -11,7 +11,7 @@ export default async function ProductList(props: Props) {
 
   if (!selectedFoodCategoryKey) return <>음식 카테고리를 선택해주세요.</>;
 
-  const { results: initialProductsNutritions, count } = await foodApi.getProductNutritions(
+  const { results: initialProductsNutritions, count } = await foodApi.getProductDetails(
     selectedFoodCategoryKey,
     initialSelectedBrands
   );
