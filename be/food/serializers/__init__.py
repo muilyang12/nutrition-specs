@@ -3,5 +3,5 @@ from .brand_serializer import BrandSerializer
 from .product_serializer import ProductSerializer, ProductGetSerializer
 from .nutrition_serializer import NutritionSerializer
 from .ingredient_serializer import IngredientSerializer
-from .product_nutrition_serializer import ProductNutritionSerializer
+from .product_datail_serializer import ProductDatailSerializer
 from .mineral_vitamin_serializer import MineralVitaminSerializer

@@ -6,11 +6,11 @@ from .. import models, serializers
 from ..pagination import CustomPageNumberPagination
 
 
-class ProductNutritionViewSet(
+class ProductDatailViewSet(
     mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
 ):
     queryset = models.Product.objects.all()
-    serializer_class = serializers.ProductNutritionSerializer
+    serializer_class = serializers.ProductDatailSerializer
     pagination_class = CustomPageNumberPagination
 
     def retrieve(self, request, *args, **kwargs):

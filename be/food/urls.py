@@ -10,7 +10,7 @@ router.register("product", views.ProductViewSet)
 router.register("nutrition", views.NutritionViewSet)
 router.register("ingredient", views.IngredientViewSet)
 router.register(
-    "product-nutrition", views.ProductNutritionViewSet, basename="product-nutrition"
+    "product-detail", views.ProductDatailViewSet, basename="product-nutrition"
 )
 router.register("mineral", views.MineralVitaminViewSet)
 
