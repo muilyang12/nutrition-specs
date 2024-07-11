@@ -41,4 +41,3 @@ class DBHandler:
                 print(row)
         else:
             print(f"No data found in table '{table_name}'")
-
