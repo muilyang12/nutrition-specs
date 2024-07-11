@@ -118,7 +118,11 @@ class CrawlerUIEvent:
 
             product_name = product["product_name"]
 
-            details = get_product_details(product=product)
+            details = get_product_details(
+                productId=product["productId"],
+                itemId=product["itemId"],
+                vendorItemId=product["vendorItemId"],
+            )
             save_text_data(
                 save_dir=get_path("data", category_name, product_name),
                 file_name="details.json",

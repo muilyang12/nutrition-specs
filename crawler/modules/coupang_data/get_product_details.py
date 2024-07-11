@@ -1,13 +1,7 @@
 from ..coupang_api import coupang_get_with_headers
 
 
-def get_product_details(product):
-    productId, itemId, vendorItemId = (
-        product["productId"],
-        product["itemId"],
-        product["vendorItemId"],
-    )
-
+def get_product_details(productId, itemId, vendorItemId):
     response = coupang_get_with_headers(
         f"https://www.coupang.com/vp/products/{productId}/items/{itemId}/vendoritems/{vendorItemId}"
     )
