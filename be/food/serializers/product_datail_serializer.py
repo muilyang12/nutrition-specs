@@ -6,7 +6,7 @@ from . import NutritionSerializer
 
 class ProductDatailSerializer(serializers.ModelSerializer):
     brand_name = serializers.SerializerMethodField()
-    nutritions = NutritionSerializer(many=True, read_only=True, source="nutrition_set")
+    nutritions = NutritionSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Product

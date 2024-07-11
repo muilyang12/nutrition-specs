@@ -4,7 +4,9 @@ from . import Product
 
 
 class Nutrition(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, null=True)
+    product = models.ForeignKey(
+        Product, on_delete=models.PROTECT, null=True, related_name="nutritions"
+    )
     s3_key = models.CharField(max_length=300, null=True, blank=True)
     data = models.JSONField(null=True, blank=True)
 
