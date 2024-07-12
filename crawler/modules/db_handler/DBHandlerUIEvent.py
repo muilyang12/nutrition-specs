@@ -2,8 +2,10 @@ import re
 import os
 import time
 import uuid
+from tkinter import messagebox
 
 from PIL import Image
+import win32clipboard
 
 from ..coupang_data import get_product_details, save_coupang_content_images
 from ..common import get_path
@@ -72,10 +74,37 @@ class DBHandlerUIEvent:
 
         category_name = self.app.ui.category_entry.get().strip()
 
+        win32clipboard.OpenClipboard()
+        try:
+            clipboard_data = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
+            clipboard_data = clipboard_data.decode("euc-kr")
+        except TypeError:
+            clipboard_data = win32clipboard.GetClipboardData(
+                win32clipboard.CF_UNICODETEXT
+            )
+        except:
+            print("There is an issue with the clipboard data format.")
+        win32clipboard.CloseClipboard()
+
+        ingredients = clipboard_data.split(",")
+
+        not_added_ingredients = []
+        added_ingredient_ids = []
+
+        for ingredient in ingredients:
+            ingredient = ingredient.strip()
+
+            if not ingredient in self.app.ingredients:
+                not_added_ingredients.append(ingredient)
+            else:
+                added_ingredient_ids.append(self.app.ingredients[ingredient])
+
+        messagebox.showinfo("Info", f"Not added ingredients: {not_added_ingredients}")
+
         s3_key = get_path(category_name, f"{uuid.uuid4()}.png")
 
         self.app.api.register_product_ingredient(
-            product_id=product_id, ingredients=[1, 2, 3], s3_key=s3_key
+            product_id=product_id, ingredients=added_ingredient_ids, s3_key=s3_key
         )
 
         self.app.api.upload_image_to_s3(
