@@ -22,6 +22,8 @@ class DBHandlerUIEvent:
             command=self.on_click_upload_ingredient_info
         )
 
+        self.initialize_ingreddients()
+
     def on_click_add_ingredients(self):
         focused_item = self.app.ui.tree.focus()
         values = self.app.ui.tree.item(focused_item, "values")
@@ -86,3 +88,11 @@ class DBHandlerUIEvent:
 
         self.app.api.register_ingredient(name, description)
 
+    def initialize_ingreddients(self):
+        ingredients = self.app.api.get_ingredients()
+
+        for data in ingredients:
+            id = data["id"]
+            name = data["name"]
+
+            self.app.ingredients[name] = id

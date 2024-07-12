@@ -8,6 +8,7 @@ from ..CrawlerApi import CrawlerApi
 
 class DBHandlerApp:
     def __init__(self):
+        self.ingredients = {}
         self.current_image = None
 
         self.window = tk.Tk()
