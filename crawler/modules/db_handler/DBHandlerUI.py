@@ -62,7 +62,7 @@ class DBHandlerUI:
             row=3, column=1, columnspan=2, padx=10, pady=10
         )
 
-        self.upload_ingredient_button = tk.Button(
+        self.upload_ingredient_info_button = tk.Button(
             self.app.window, text="Upload ingredient info"
         )
         self.upload_ingredient_info_button.grid(row=3, column=3, padx=10, pady=10)
