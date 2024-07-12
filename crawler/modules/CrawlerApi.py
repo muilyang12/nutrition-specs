@@ -57,6 +57,18 @@ class CrawlerApi:
             data={"product": product_id, "data": data, "s3_key": s3_key},
         ).json()
 
+    def register_ingredient(self, name, description):
+        return requests.post(
+            url=f"{CrawlerApi.BE_DOMAIN}/food/ingredient/",
+            data={"name": name, "description": description},
+        ).json()
+
+    def register_product_ingredient(self, product_id, ingredients, s3_key):
+        return requests.post(
+            url=f"{CrawlerApi.BE_DOMAIN}/food/product-ingredient/",
+            data={"product": product_id, "ingredients": ingredients, "s3_key": s3_key},
+        ).json()
+
     def upload_image_to_s3(self, s3_key, screenshot):
         with io.BytesIO() as output:
             screenshot.save(output, format="PNG")
