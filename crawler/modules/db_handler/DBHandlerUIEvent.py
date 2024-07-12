@@ -100,6 +100,7 @@ class DBHandlerUIEvent:
                 added_ingredient_ids.append(self.app.ingredients[ingredient])
 
         messagebox.showinfo("Info", f"Not added ingredients: {not_added_ingredients}")
+        print(f"Not added ingredients: {not_added_ingredients}")
 
         s3_key = get_path(category_name, f"{uuid.uuid4()}.png")
 
