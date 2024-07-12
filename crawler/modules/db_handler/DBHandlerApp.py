@@ -3,6 +3,7 @@ import tkinter as tk
 from .DBHandlerUI import DBHandlerUI
 from .DBHandlerUIEvent import DBHandlerUIEvent
 from ..CrawlerScreenshotTool import CrawlerScreenshotTool
+from ..CrawlerApi import CrawlerApi
 
 
 class DBHandlerApp:
@@ -14,6 +15,7 @@ class DBHandlerApp:
         self.window.geometry("1000x600")
 
         self.screenshot_tool = CrawlerScreenshotTool(app=self)
+        self.api = CrawlerApi()
 
         self.ui = DBHandlerUI(app=self)
         self.ui_event = DBHandlerUIEvent(app=self)
