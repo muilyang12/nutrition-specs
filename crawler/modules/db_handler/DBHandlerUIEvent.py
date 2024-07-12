@@ -18,6 +18,9 @@ class DBHandlerUIEvent:
         self.app.ui.upload_ingredients_button.config(
             command=self.on_click_upload_ingredients
         )
+        self.app.ui.upload_ingredient_info_button.config(
+            command=self.on_click_upload_ingredient_info
+        )
 
     def on_click_add_ingredients(self):
         focused_item = self.app.ui.tree.focus()
@@ -60,8 +63,26 @@ class DBHandlerUIEvent:
         return [product_id, item_id, vendor_item_id]
 
     def on_click_upload_ingredients(self):
+        focused_item = self.app.ui.tree.focus()
+        values = self.app.ui.tree.item(focused_item, "values")
+
+        product_id = values[0]
+
         category_name = self.app.ui.category_entry.get().strip()
 
         s3_key = get_path(category_name, f"{uuid.uuid4()}.png")
 
-        print(self.app.current_image, s3_key)
+        self.app.api.register_product_ingredient(
+            product_id=product_id, ingredients=[1, 2, 3], s3_key=s3_key
+        )
+
+        self.app.api.upload_image_to_s3(
+            s3_key=s3_key, screenshot=self.app.current_image
+        )
+
+    def on_click_upload_ingredient_info(self):
+        name = self.app.ui.ingredient_name_entry.get().strip()
+        description = self.app.ui.ingredient_descriptioon_entry.get().strip()
+
+        self.app.api.register_ingredient(name, description)
+

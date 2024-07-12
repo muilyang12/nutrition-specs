@@ -48,6 +48,25 @@ class DBHandlerUI:
         )
         self.upload_ingredients_button.grid(row=1, column=3, padx=10, pady=10)
 
+        self.ingredient_name_label = tk.Label(self.app.window, text="Ingredient Name")
+        self.ingredient_name_label.grid(row=2, column=0, padx=10, pady=10)
+        self.ingredient_name_entry = tk.Entry(self.app.window)
+        self.ingredient_name_entry.grid(row=2, column=1, padx=10, pady=10)
+
+        self.ingredient_descriptioon_label = tk.Label(
+            self.app.window, text="Description"
+        )
+        self.ingredient_descriptioon_label.grid(row=3, column=0, padx=10, pady=10)
+        self.ingredient_descriptioon_entry = tk.Entry(self.app.window, width=100)
+        self.ingredient_descriptioon_entry.grid(
+            row=3, column=1, columnspan=2, padx=10, pady=10
+        )
+
+        self.upload_ingredient_button = tk.Button(
+            self.app.window, text="Upload ingredient info"
+        )
+        self.upload_ingredient_info_button.grid(row=3, column=3, padx=10, pady=10)
+
     def load_values(self):
         table_data = self.dbHandle.get_table_data("food_product")
 
