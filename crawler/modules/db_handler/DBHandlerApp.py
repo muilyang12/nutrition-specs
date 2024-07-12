@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from .DBHandlerUI import DBHandlerUI
+from .DBHandlerUIEvent import DBHandlerUIEvent
 from ..CrawlerScreenshotTool import CrawlerScreenshotTool
 
 
@@ -15,6 +16,7 @@ class DBHandlerApp:
         self.screenshot_tool = CrawlerScreenshotTool(app=self)
 
         self.ui = DBHandlerUI(app=self)
+        self.ui_event = DBHandlerUIEvent(app=self)
 
     def start(self):
         self.window.mainloop()

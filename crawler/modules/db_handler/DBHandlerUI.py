@@ -33,6 +33,21 @@ class DBHandlerUI:
 
         self.tree.grid(row=0, column=0, columnspan=7, padx=10, pady=10, sticky="nsew")
 
+        self.category_label = tk.Label(self.app.window, text="Category Name")
+        self.category_label.grid(row=1, column=0, padx=10, pady=10)
+        self.category_entry = tk.Entry(self.app.window)
+        self.category_entry.grid(row=1, column=1, padx=10, pady=10)
+
+        self.add_ingredients_button = tk.Button(
+            self.app.window, text="Start getting ingredients"
+        )
+        self.add_ingredients_button.grid(row=1, column=2, padx=10, pady=10)
+
+        self.upload_ingredients_button = tk.Button(
+            self.app.window, text="Upload ingredients"
+        )
+        self.upload_ingredients_button.grid(row=1, column=3, padx=10, pady=10)
+
     def load_values(self):
         table_data = self.dbHandle.get_table_data("food_product")
 
