@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class DBHandler:
+class DBHandle:
     def __init__(self, db_path) -> None:
         self.db_path = db_path
 
