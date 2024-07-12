@@ -28,6 +28,16 @@ class DBHandler:
 
         return [table[0] for table in tables]
 
+    def get_column_names(self, table_name):
+        if not self.cursor:
+            raise Exception("Database not connected. Call connect() first.")
+
+        self.cursor.execute(f"PRAGMA table_info({table_name})")
+
+        columns = self.cursor.fetchall()
+
+        return columns
+
     def get_table_data(self, table_name):
         if not self.cursor:
             raise Exception("Database not connected. Call connect() first.")
