@@ -209,7 +209,7 @@ class CrawlerUIEvent:
 
         s3_key = get_path(category_name, f"{uuid.uuid4()}.png")
 
-        self.app.crawler_api.upload_nutrition_facts_image(
+        self.app.crawler_api.upload_image_to_s3(
             s3_key=s3_key, screenshot=self.app.current_image
         )
 

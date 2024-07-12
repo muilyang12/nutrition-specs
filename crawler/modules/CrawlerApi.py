@@ -57,7 +57,7 @@ class CrawlerApi:
             data={"product": product_id, "data": data, "s3_key": s3_key},
         ).json()
 
-    def upload_nutrition_facts_image(self, s3_key, screenshot):
+    def upload_image_to_s3(self, s3_key, screenshot):
         with io.BytesIO() as output:
             screenshot.save(output, format="PNG")
             output.seek(0)
