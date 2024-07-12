@@ -36,7 +36,7 @@ class DBHandle:
 
         columns = self.cursor.fetchall()
 
-        return columns
+        return [column[1] for column in columns]
 
     def get_table_data(self, table_name):
         if not self.cursor:
