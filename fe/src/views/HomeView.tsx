@@ -6,7 +6,7 @@ export default function HomeView() {
   return (
     <>
       <header>
-        <LayoutHeader />
+        <LayoutHeader isHome={true} />
 
         <CategoryMenu />
       </header>
