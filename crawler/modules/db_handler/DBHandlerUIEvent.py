@@ -2,6 +2,7 @@ import re
 import os
 import time
 import uuid
+import json
 from tkinter import messagebox
 
 from PIL import Image
@@ -86,18 +87,18 @@ class DBHandlerUIEvent:
             print("There is an issue with the clipboard data format.")
         win32clipboard.CloseClipboard()
 
-        ingredients = clipboard_data.split(",")
+        ingredient_categories = json.loads(clipboard_data)
 
         not_added_ingredients = []
-        added_ingredient_ids = []
 
-        for ingredient in ingredients:
-            ingredient = ingredient.strip()
+        for values in ingredient_categories.values():
+            for i in range(len(values)):
+                if not values[i] in self.app.ingredients:
+                    not_added_ingredients.append(values[i])
 
-            if not ingredient in self.app.ingredients:
-                not_added_ingredients.append(ingredient)
-            else:
-                added_ingredient_ids.append(self.app.ingredients[ingredient])
+                    continue
+
+                values[i] = self.app.ingredients[values[i]]
 
         messagebox.showinfo("Info", f"Not added ingredients: {not_added_ingredients}")
         print(f"Not added ingredients: {not_added_ingredients}")
@@ -105,7 +106,10 @@ class DBHandlerUIEvent:
         s3_key = get_path(category_name, f"{uuid.uuid4()}.png")
 
         self.app.api.register_product_ingredient(
-            product_id=product_id, ingredients=added_ingredient_ids, s3_key=s3_key
+            product_id=product_id,
+            ingredients=[],
+            ingredient_categories=ingredient_categories,
+            s3_key=s3_key,
         )
 
         self.app.api.upload_image_to_s3(

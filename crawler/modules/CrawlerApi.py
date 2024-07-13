@@ -66,10 +66,17 @@ class CrawlerApi:
             data={"name": name, "description": description},
         ).json()
 
-    def register_product_ingredient(self, product_id, ingredients, s3_key):
+    def register_product_ingredient(
+        self, product_id, ingredients, ingredient_categories, s3_key
+    ):
         return requests.post(
             url=f"{CrawlerApi.BE_DOMAIN}/food/product-ingredient/",
-            data={"product": product_id, "ingredients": ingredients, "s3_key": s3_key},
+            data={
+                "product": product_id,
+                "ingredients": ingredients,
+                "ingredient_categories": ingredient_categories,
+                "s3_key": s3_key,
+            },
         ).json()
 
     def upload_image_to_s3(self, s3_key, screenshot):
