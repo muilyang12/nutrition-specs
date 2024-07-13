@@ -5,11 +5,11 @@ import ProductList from "@components/product-list/ProductList.server";
 export default function HomeView() {
   return (
     <>
-      <LayoutHeader />
+      <header>
+        <LayoutHeader />
 
-      <CategoryMenu />
-
-      <ProductList />
+        <CategoryMenu />
+      </header>
     </>
   );
 }

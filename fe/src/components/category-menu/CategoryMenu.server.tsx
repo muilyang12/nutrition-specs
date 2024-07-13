@@ -9,17 +9,20 @@ interface Props {
 export default async function CategoryMenu(props: Props) {
   const { selectedFoodCategoryKey } = props;
 
-  if (!selectedFoodCategoryKey) return <></>;
-
   const mainCategories = await foodApi.getMainFoodCategories();
-  const currentCategory = await foodApi.getFoodCategoryByCategoryKey(selectedFoodCategoryKey);
+  const currentCategory =
+    selectedFoodCategoryKey &&
+    (await foodApi.getFoodCategoryByCategoryKey(selectedFoodCategoryKey));
 
-  if (!mainCategories || !currentCategory) return <></>;
+  if (!mainCategories) return <></>;
 
   let selectedMainCategoryKey: string | undefined;
   let selectedSubCategoryKey: string | undefined;
 
-  if (!currentCategory.parent_category) {
+  if (!currentCategory) {
+    selectedMainCategoryKey = undefined;
+    selectedSubCategoryKey = undefined;
+  } else if (!currentCategory.parent_category) {
     selectedMainCategoryKey = selectedFoodCategoryKey;
     selectedSubCategoryKey = undefined;
   } else {
@@ -29,9 +32,8 @@ export default async function CategoryMenu(props: Props) {
     selectedSubCategoryKey = selectedFoodCategoryKey;
   }
 
-  if (!selectedMainCategoryKey) return <></>;
-
-  const subCategories = await foodApi.getSubFoodCategories(selectedMainCategoryKey);
+  const subCategories =
+    selectedMainCategoryKey && (await foodApi.getSubFoodCategories(selectedMainCategoryKey));
 
   return (
     <>
@@ -39,10 +41,12 @@ export default async function CategoryMenu(props: Props) {
         mainCategories={mainCategories}
         selectedMainCategoryKey={selectedMainCategoryKey}
       />
-      <SubCategoryMenu
-        subCategories={subCategories}
-        selectedSubCategoryKey={selectedSubCategoryKey}
-      />
+      {subCategories && (
+        <SubCategoryMenu
+          subCategories={subCategories}
+          selectedSubCategoryKey={selectedSubCategoryKey}
+        />
+      )}
     </>
   );
 }
