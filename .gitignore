@@ -1,6 +1,7 @@
 # BE
 /be/**/*.pyc
 /be/db.sqlite3
+/be/.env
 
 # FE
 /fe/node_modules/**
