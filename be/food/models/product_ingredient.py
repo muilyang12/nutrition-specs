@@ -10,6 +10,7 @@ class ProductIngredient(models.Model):
     )
     s3_key = models.CharField(max_length=300, null=True, blank=True)
     ingredients = models.ManyToManyField(Ingredient)
+    ingredient_categories = models.JSONField(null=True, blank=True)
 
     class Meta:
         indexes = [

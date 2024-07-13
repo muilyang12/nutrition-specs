@@ -6,9 +6,4 @@ from .. import models
 class ProductIngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ProductIngredient
-        fields = [
-            "id",
-            "product",
-            "s3_key",
-            "ingredients",
-        ]
+        fields = ["id", "product", "s3_key", "ingredients", "ingredient_categories"]
