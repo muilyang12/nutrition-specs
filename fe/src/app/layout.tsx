@@ -1,5 +1,6 @@
 import { Noto_Sans_KR } from "next/font/google";
 import { ReactNode } from "react";
+import Modal from "@components/modal/Modal";
 import PrintServiceName from "@components/PrintServiceName";
 import "./global.css";
 
@@ -18,6 +19,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={notoSansKr.className}>
         <main>{children}</main>
+
+        <Modal />
 
         <PrintServiceName />
       </body>
