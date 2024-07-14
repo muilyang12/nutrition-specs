@@ -32,15 +32,21 @@ export default function ProductCard(props: Props) {
         </div>
       )}
       <div className={styles.right}>
-        <p className={styles.productName}>
-          {`${productNutrition.brand_name} - ${productNutrition.product_name}`}
-        </p>
-        <div>
-          <p className={styles.productBriefInfo}>
-            {`${nutrition.data.serving_size}${nutrition.data.serving_unit} 당 ${nutrition.data.calories}kcal`}
-          </p>
-          <ProductCardTable nutrition={nutrition} />
+        <div className={styles.details}>
+          <div>
+            <p className={styles.productName}>
+              {`${productNutrition.brand_name} - ${productNutrition.product_name}`}
+            </p>
+            <p className={styles.productBriefInfo}>
+              {`${nutrition.data.serving_size}${nutrition.data.serving_unit} 당 ${nutrition.data.calories}kcal`}
+            </p>
+          </div>
+          <div className={styles.imageDatails}>
+            <div>원재료명</div>
+            <div>영양성분표</div>
+          </div>
         </div>
+        <ProductCardTable nutrition={nutrition} />
       </div>
     </div>
   );
