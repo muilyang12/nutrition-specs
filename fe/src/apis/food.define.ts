@@ -33,6 +33,13 @@ export interface NutritionRs {
   data: NutritionData;
 }
 
+export interface IngredientRs {
+  id: number;
+  product: number;
+  ingredients: number[];
+  s3_key: string;
+}
+
 export interface NutritionData {
   serving_size: number;
   serving_unit: string;
@@ -55,5 +62,6 @@ export interface NutritionData {
 
 export interface ProductDetailResult extends ProductResult {
   nutritions: NutritionRs[];
+  ingredients: IngredientRs[];
 }
 export type ProductDetailRs = RsWithPagination<ProductDetailResult>;
