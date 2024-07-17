@@ -29,7 +29,7 @@ export type ProductRs = RsWithPagination<ProductResult>;
 export interface NutritionRs {
   id: number;
   product: number;
-  s3_url: string;
+  s3_key: string;
   data: NutritionData;
 }
 
