@@ -34,6 +34,7 @@ export interface NutritionRs {
 }
 
 export interface IngredientRs {
+export interface ProductIngredientRs {
   id: number;
   product: number;
   ingredients: number[];
@@ -62,6 +63,6 @@ export interface NutritionData {
 
 export interface ProductDetailResult extends ProductResult {
   nutritions: NutritionRs[];
-  ingredients: IngredientRs[];
+  ingredients: ProductIngredientRs[];
 }
 export type ProductDetailRs = RsWithPagination<ProductDetailResult>;
