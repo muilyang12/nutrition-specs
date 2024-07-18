@@ -22,6 +22,8 @@ export default function ProductCardIngredientModal(props: Props) {
 
     const newIngredientsData: Record<number, [string, string]> = {};
 
+    // 이 부분이 의도한 대로 작동하지 않네. 구아스트검 같은 친구에 대한 api가 계속 불려지고 있어.
+
     ingredientIds.forEach((ingredientId) => {
       if (ingredientId in ingredientRecord) {
         const [ingredientName, ingredientExplanation] = ingredientRecord[ingredientId];
@@ -50,6 +52,17 @@ export default function ProductCardIngredientModal(props: Props) {
         src={`https://static.nutrition-specs.com/${encodeURIComponent(s3Key)}`}
         alt={productName}
       />
+
+      <div className={styles.ingredientDetail}>
+        {Object.values(ingredientsData).map(([name, description], index) => {
+          return (
+            <div className={styles.ingredientDetailElem} key={`${name}-${index}`}>
+              <span className={styles.ingredientName}>{name}</span>
+              <span className={styles.ingredientExplanation}>{description}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
