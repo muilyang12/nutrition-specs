@@ -19,10 +19,10 @@ export const useCompareStore = create<CompareStore>()((set) => ({
   toggleIsComparing: () => set((state) => ({ isComparing: !state.isComparing })),
   selectedProducts: [],
   toggleSelectedProduct: (newProductId: number) =>
-    set((state) => ({
-      selectedProducts: state.selectedProducts.includes(newProductId)
-        ? state.selectedProducts.filter((id) => id !== newProductId)
-        : [...state.selectedProducts, newProductId],
+    set((prev) => ({
+      selectedProducts: prev.selectedProducts.includes(newProductId)
+        ? prev.selectedProducts.filter((id) => id !== newProductId)
+        : [...prev.selectedProducts, newProductId],
     })),
   resetState: () => set(initialState),
 }));

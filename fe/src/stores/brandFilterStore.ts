@@ -11,9 +11,9 @@ export const useBrandFilterStore = create<BrandFilterStore>()((set) => ({
   selectedFilters: [],
   setSelectedFilters: (newFilters: string[]) => set(() => ({ selectedFilters: newFilters })),
   addSelectedFilter: (newFilter: string) =>
-    set((state) => ({ selectedFilters: [...state.selectedFilters, newFilter] })),
+    set((prev) => ({ selectedFilters: [...prev.selectedFilters, newFilter] })),
   deleteSelectedFilter: (targetFilter: string) =>
-    set((state) => ({
-      selectedFilters: state.selectedFilters.filter((brandName) => brandName !== targetFilter),
+    set((prev) => ({
+      selectedFilters: prev.selectedFilters.filter((brandName) => brandName !== targetFilter),
     })),
 }));
