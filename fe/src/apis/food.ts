@@ -7,6 +7,7 @@ import {
   ProductRs,
   ProductDetailRs,
   ProductDetailResult,
+  IngredientRs,
 } from "./food.define";
 
 export const foodApi = {
@@ -41,6 +42,11 @@ export const foodApi = {
     );
 
     return (await axiosInstance.get<NutritionRs[]>(`food/nutrition/?${queries}`)).data;
+  },
+  getIngredients: async (ingredientIds: number[]) => {
+    const queries = qs.stringify({ ingredient: ingredientIds }, { arrayFormat: "repeat" });
+
+    return (await axiosInstance.get<IngredientRs[]>(`food/ingredient/?${queries}`)).data;
   },
   getProductDetails: async (foodCategoryKey: string, brands?: string[], page?: number) => {
     const queries = qs.stringify(

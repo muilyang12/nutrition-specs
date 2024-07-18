@@ -34,6 +34,11 @@ export interface NutritionRs {
 }
 
 export interface IngredientRs {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export interface ProductIngredientRs {
   id: number;
   product: number;
