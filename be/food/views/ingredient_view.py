@@ -18,4 +18,8 @@ class IngredientViewSet(viewsets.ModelViewSet):
         result = self.queryset.filter(id__in=ingredient_ids)
         serializer = self.get_serializer(result, many=True)
 
-        return Response(serializer.data)
+        response = Response(serializer.data)
+
+        response["Cache-Control"] = "max-age=3600"
+
+        return response
