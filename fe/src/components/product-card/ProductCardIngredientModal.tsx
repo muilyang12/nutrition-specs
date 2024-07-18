@@ -32,14 +32,15 @@ export default function ProductCardIngredientModal(props: Props) {
       }
     });
 
-    foodApi.getIngredients(newIngredientIds).then((newIngredients) => {
-      newIngredients.forEach((newIngredient) => {
-        const { id, name, description } = newIngredient;
+    if (newIngredientIds.length > 0)
+      foodApi.getIngredients(newIngredientIds).then((newIngredients) => {
+        newIngredients.forEach((newIngredient) => {
+          const { id, name, description } = newIngredient;
 
-        addIngredientRecord(id, name, description);
-        newIngredientsData[id] = [name, description];
+          addIngredientRecord(id, name, description);
+          newIngredientsData[id] = [name, description];
+        });
       });
-    });
 
     setIngredientsData(newIngredientsData);
   }, [ingredientIds]);
