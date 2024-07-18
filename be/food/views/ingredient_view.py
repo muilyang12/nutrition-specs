@@ -20,6 +20,6 @@ class IngredientViewSet(viewsets.ModelViewSet):
 
         response = Response(serializer.data)
 
-        response["Cache-Control"] = "max-age=3600"
+        response["Cache-Control"] = "max-age=86400"
 
         return response

@@ -16,7 +16,7 @@ class ProductDatailViewSet(
     def retrieve(self, request, *args, **kwargs):
         response = super().retrieve(request, *args, **kwargs)
 
-        response["Cache-Control"] = "max-age=3600"
+        response["Cache-Control"] = "max-age=86400"
 
         return response
 
@@ -48,6 +48,6 @@ class ProductDatailViewSet(
             serializer = self.get_serializer(queryset, many=True)
             response = Response(serializer.data)
 
-        response["Cache-Control"] = "max-age=3600"
+        response["Cache-Control"] = "max-age=86400"
 
         return response
