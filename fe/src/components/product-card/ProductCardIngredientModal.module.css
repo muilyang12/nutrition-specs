@@ -1,0 +1,11 @@
+.modalWrapper {
+    padding: 30px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modalWrapper > img {
+    width: 200px;
+}

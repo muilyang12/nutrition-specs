@@ -4,6 +4,7 @@ import { useCompareStore } from "@stores/compareStore";
 import { COLOR } from "@defines/css";
 import { ProductDetailResult } from "@apis/food.define";
 import ProductCardNutritionModal from "./ProductCardNutritionModal";
+import ProductCardIngredientModal from "./ProductCardIngredientModal";
 import ProductCardTable from "./ProductCardTable";
 import styles from "./ProductCard.module.css";
 
@@ -14,6 +15,7 @@ interface Props {
 export default function ProductCard(props: Props) {
   const { productNutrition } = props;
   const nutrition = productNutrition.nutritions[0];
+  const ingredient = productNutrition.ingredients[0];
 
   const { isComparing, selectedProducts, toggleSelectedProduct } = useCompareStore();
   const { openModal } = useModalStore();
@@ -27,6 +29,15 @@ export default function ProductCard(props: Props) {
     );
   };
 
+  const handleClickIngredient = () => {
+    openModal(
+      <ProductCardIngredientModal
+        productName={productNutrition.product_name}
+        s3Key={ingredient.s3_key}
+        ingredientIds={ingredient.ingredients}
+      />
+    );
+  };
 
   return (
     <div className={styles.productCardWraper}>
@@ -56,7 +67,7 @@ export default function ProductCard(props: Props) {
           </div>
           <div className={styles.imageDatails}>
             {nutrition?.s3_key && <div onClick={handleClickNutrition}>영양성분표</div>}
-            {ingredient?.s3_key && <div>원재료명</div>}
+            {ingredient?.s3_key && <div onClick={handleClickIngredient}>원재료명</div>}
           </div>
         </div>
         <ProductCardTable nutrition={nutrition} />
