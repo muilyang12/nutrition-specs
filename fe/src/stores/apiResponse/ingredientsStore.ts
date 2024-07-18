@@ -17,7 +17,9 @@ export const useIngredientsStore = create<IngredientsStore>()((set) => ({
     ingredientExplanation: string
   ) =>
     set((prev) => ({
-      ...prev,
-      [ingredientId]: [ingredientName, ingredientExplanation],
+      ingredientRecord: {
+        ...prev.ingredientRecord,
+        [ingredientId]: [ingredientName, ingredientExplanation],
+      },
     })),
 }));
