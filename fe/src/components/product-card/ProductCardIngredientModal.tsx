@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useIngredientsStore } from "@stores/apiResponse/ingredientsStore";
+import { foodApi } from "@apis/food";
 import styles from "./ProductCardIngredientModal.module.css";
 
 interface Props {
@@ -15,16 +16,32 @@ export default function ProductCardIngredientModal(props: Props) {
 
   const { ingredientRecord, addIngredientRecord } = useIngredientsStore();
 
-  const [ingredienData, setIngredienData] = useState<Record<string, string>>({});
+  const [ingredientsData, setIngredientsData] = useState<Record<number, [string, string]>>({});
   useEffect(() => {
+    const newIngredientIds: number[] = [];
+
+    const newIngredientsData: Record<number, [string, string]> = {};
+
     ingredientIds.forEach((ingredientId) => {
       if (ingredientId in ingredientRecord) {
         const [ingredientName, ingredientExplanation] = ingredientRecord[ingredientId];
-        setIngredienData((prev) => ({ ...prev, [ingredientName]: ingredientExplanation }));
+        newIngredientsData[ingredientId] = [ingredientName, ingredientExplanation];
       } else {
-        // API 호출부분 추가.
+        newIngredientIds.push(ingredientId);
+        newIngredientsData[ingredientId] = ["", ""];
       }
     });
+
+    foodApi.getIngredients(newIngredientIds).then((newIngredients) => {
+      newIngredients.forEach((newIngredient) => {
+        const { id, name, description } = newIngredient;
+
+        addIngredientRecord(id, name, description);
+        newIngredientsData[id] = [name, description];
+      });
+    });
+
+    setIngredientsData(newIngredientsData);
   }, [ingredientIds]);
 
   return (
