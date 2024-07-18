@@ -1,7 +1,9 @@
 import Checkbox from "@mui/material/Checkbox";
+import { useModalStore } from "@stores/modalStore";
 import { useCompareStore } from "@stores/compareStore";
 import { COLOR } from "@defines/css";
 import { ProductDetailResult } from "@apis/food.define";
+import ProductCardNutritionModal from "./ProductCardNutritionModal";
 import ProductCardTable from "./ProductCardTable";
 import styles from "./ProductCard.module.css";
 
@@ -14,6 +16,17 @@ export default function ProductCard(props: Props) {
   const nutrition = productNutrition.nutritions[0];
 
   const { isComparing, selectedProducts, toggleSelectedProduct } = useCompareStore();
+  const { openModal } = useModalStore();
+
+  const handleClickNutrition = () => {
+    openModal(
+      <ProductCardNutritionModal
+        productName={productNutrition.product_name}
+        s3Key={nutrition.s3_key}
+      />
+    );
+  };
+
 
   return (
     <div className={styles.productCardWraper}>
@@ -42,8 +55,8 @@ export default function ProductCard(props: Props) {
             </p>
           </div>
           <div className={styles.imageDatails}>
-            <div>원재료명</div>
-            <div>영양성분표</div>
+            {nutrition?.s3_key && <div onClick={handleClickNutrition}>영양성분표</div>}
+            {ingredient?.s3_key && <div>원재료명</div>}
           </div>
         </div>
         <ProductCardTable nutrition={nutrition} />
