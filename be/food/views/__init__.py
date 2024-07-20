@@ -6,3 +6,4 @@ from .ingredient_view import IngredientViewSet
 from .product_ingredient_view import ProductIngredientViewSet
 from .product_detail_view import ProductDatailViewSet
 from .mineral_vitamin_view import MineralVitaminViewSet
+from .search_view import SearchViewSet
