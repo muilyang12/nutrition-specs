@@ -6,14 +6,15 @@ Nutrition Specs is a web service for comparing nutritional information across mu
 
 ### Backend
 
-- Python 3
+- Python
 - Django
-- Django REST Framework for building the API
-- SQLite3 as the database
+- Django REST Framework
+- SQLite3
 
 ### Frontend
 
-- Next.js for server-rendered React applications
+- TypeScript
+- Next.js
 - Zustand for state management
 
 ### Deployment
@@ -24,10 +25,11 @@ Nutrition Specs is a web service for comparing nutritional information across mu
   - EC2: Server hosting
   - CloudFront: CDN for faster delivery
   - Route 53: Domain name management
+  - ECR: for storing Docker images
 
 ## Prerequisites
 
-- Python 3
+- Python
 - Node.js
 - Docker
 - AWS CLI
