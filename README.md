@@ -27,6 +27,12 @@ Nutrition Specs is a web service for comparing nutritional information across mu
   - Route 53: Domain name management
   - ECR: for storing Docker images
 
+## Architecture Diagram
+
+<div align="center">
+  <img src="./Architecture.png" alt="Nutrition Specs Architecture Diagram" width="500">
+</div>
+
 ## Prerequisites
 
 - Python
