@@ -4,11 +4,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  fe-build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code.
         uses: actions/checkout@v3
+
+      - name: Build BE Docker image.
+        run: docker build -t nutrition-specs-be:latest ./be
+
+      - name: Print Docker images.
+        run: docker image ls
+
+      - name: Run BE Docker images.
+        run: docker run -d -p 8000:8000 --name nutrition-specs-be nutrition-specs-be:latest
+
+      - name: Wait for the BE service to be ready.
+        run: |
+          for i in {1..10}; do
+            if nc -z localhost 8000; then
+              echo "BE service is ready."
+              break
+            fi
+              echo "Waiting for BE service to be ready."
+              sleep 3
+          done
 
       - name: Setup Node.js.
         uses: actions/setup-node@v3
