@@ -26,6 +26,7 @@ Nutrition Specs is a web service for comparing nutritional information across mu
   - CloudFront: CDN for faster delivery
   - Route 53: Domain name management
   - ECR: for storing Docker images
+- GitHub Actions for CI/CD
 
 ## Architecture Diagram
 
